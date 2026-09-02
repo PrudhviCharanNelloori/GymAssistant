@@ -1,0 +1,13 @@
+@use './shared/styles/tokens' as *;
+
+.app-shell {
+  min-height: 100dvh;
+  background: $color-bg-primary;
+  color: $color-text-primary;
+}
+
+.app-shell__content {
+  max-width: $max-content-width;
+  margin: 0 auto;
+  padding-bottom: calc(#{$bottom-nav-height} + env(safe-area-inset-bottom, 0px) + #{$space-4});
+}

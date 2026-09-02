@@ -1,0 +1,10 @@
+export enum Equipment {
+  BARBELL = 'BARBELL',
+  DUMBBELL = 'DUMBBELL',
+  CABLE = 'CABLE',
+  MACHINE = 'MACHINE',
+  BODYWEIGHT = 'BODYWEIGHT',
+  KETTLEBELL = 'KETTLEBELL',
+  BAND = 'BAND',
+  OTHER = 'OTHER',
+}

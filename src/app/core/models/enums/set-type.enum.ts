@@ -1,0 +1,8 @@
+export enum SetType {
+  NORMAL = 'NORMAL',
+  WARMUP = 'WARMUP',
+  DROP_SET = 'DROP_SET',
+  FAILURE = 'FAILURE',
+  AMRAP = 'AMRAP',
+  REST_PAUSE = 'REST_PAUSE',
+}

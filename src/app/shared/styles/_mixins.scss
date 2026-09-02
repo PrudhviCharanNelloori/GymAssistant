@@ -1,0 +1,40 @@
+@use 'tokens' as *;
+
+@mixin touch-target {
+  min-width: $touch-target-min;
+  min-height: $touch-target-min;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+@mixin safe-area-top {
+  padding-top: env(safe-area-inset-top, 0);
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin card {
+  background: $color-bg-elevated;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $space-4;
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid $color-border-focus;
+    outline-offset: 2px;
+  }
+}

@@ -1,0 +1,46 @@
+@use '../../shared/styles/tokens' as *;
+@use '../../shared/styles/typography' as *;
+@use '../../shared/styles/mixins' as *;
+
+.home {
+  padding: $space-6 $space-4;
+}
+
+.home__date {
+  @include text-caption;
+  margin: 0 0 $space-2;
+}
+
+.home__title {
+  @include text-heading;
+  margin: 0 0 $space-2;
+}
+
+.home__phase {
+  font-size: $font-size-sm;
+  color: $color-accent;
+  font-weight: $font-weight-medium;
+  margin: 0 0 $space-6;
+}
+
+.home__card {
+  @include card;
+}
+
+.home__card-label {
+  @include text-caption;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 $space-2;
+}
+
+.home__card-value {
+  @include text-display;
+  font-size: $font-size-2xl;
+  margin: 0 0 $space-2;
+}
+
+.home__card-hint {
+  @include text-caption;
+  margin: 0;
+}

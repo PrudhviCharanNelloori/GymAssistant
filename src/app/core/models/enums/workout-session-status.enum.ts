@@ -1,0 +1,7 @@
+export enum WorkoutSessionStatus {
+  PLANNED = 'PLANNED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  PAUSED = 'PAUSED',
+  COMPLETED = 'COMPLETED',
+  ABANDONED = 'ABANDONED',
+}
