@@ -12,35 +12,50 @@
 }
 
 .home__title {
-  @include text-heading;
-  margin: 0 0 $space-2;
-}
-
-.home__phase {
-  font-size: $font-size-sm;
-  color: $color-accent;
-  font-weight: $font-weight-medium;
+  @include text-greeting;
   margin: 0 0 $space-6;
 }
 
 .home__card {
-  @include card;
+  @include card-featured;
+}
+
+.home__card-dark {
+  @include card-featured-dark;
 }
 
 .home__card-label {
-  @include text-caption;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  @include text-label;
+  color: $color-text-on-dark-muted;
   margin: 0 0 $space-2;
 }
 
 .home__card-value {
-  @include text-display;
-  font-size: $font-size-2xl;
-  margin: 0 0 $space-2;
+  @include text-heading;
+  color: $color-text-inverse;
+  margin: 0 0 $space-4;
 }
 
 .home__card-hint {
   @include text-caption;
+  color: $color-text-on-dark-muted;
   margin: 0;
+}
+
+.home__card-action {
+  @include card-featured-action;
+}
+
+.home__start-btn {
+  @include button-primary;
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+.home__start-icon {
+  font-size: $font-size-sm;
+  line-height: 1;
 }

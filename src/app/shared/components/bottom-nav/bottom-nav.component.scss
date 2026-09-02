@@ -13,6 +13,7 @@
   height: $bottom-nav-height;
   background: $color-bg-secondary;
   border-top: 1px solid $color-border;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.04);
   z-index: $z-nav;
   @include safe-area-bottom;
 }
@@ -24,14 +25,15 @@
   flex-direction: column;
   gap: $space-1;
   text-decoration: none;
-  color: $color-text-secondary;
-  font-size: 0.625rem;
+  color: $color-text-muted;
+  font-size: $font-size-xs;
   font-weight: $font-weight-medium;
   transition: color 0.15s ease;
   @include focus-ring;
 
   &--active {
-    color: $color-accent;
+    color: $color-text-primary;
+    font-weight: $font-weight-semibold;
   }
 }
 

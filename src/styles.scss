@@ -1,4 +1,5 @@
 @use './app/shared/styles/tokens' as *;
+@use './app/shared/styles/typography' as *;
 
 *,
 *::before,
@@ -13,19 +14,94 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-normal;
   background: $color-bg-primary;
   color: $color-text-primary;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 :root {
+  // Backgrounds
+  --color-bg-primary: #{$color-bg-primary};
+  --color-bg-secondary: #{$color-bg-secondary};
+  --color-bg-elevated: #{$color-bg-elevated};
+  --color-bg-dark: #{$color-bg-dark};
+  --color-bg-muted: #{$color-bg-muted};
+  --color-bg-achievement: #{$color-bg-achievement};
+
+  // Text
+  --color-text-primary: #{$color-text-primary};
   --color-text-secondary: #{$color-text-secondary};
   --color-text-muted: #{$color-text-muted};
+  --color-text-inverse: #{$color-text-inverse};
+  --color-text-on-dark-muted: #{$color-text-on-dark-muted};
+
+  // Accent & semantic
   --color-accent: #{$color-accent};
+  --color-accent-hover: #{$color-accent-hover};
+  --color-accent-muted: #{$color-accent-muted};
+  --color-success: #{$color-success};
+  --color-warning: #{$color-warning};
+  --color-error: #{$color-error};
+  --color-streak: #{$color-streak};
+
+  // Borders
+  --color-border: #{$color-border};
+  --color-border-strong: #{$color-border-strong};
+  --color-border-focus: #{$color-border-focus};
+
+  // Spacing
+  --space-1: #{$space-1};
+  --space-2: #{$space-2};
+  --space-3: #{$space-3};
+  --space-4: #{$space-4};
+  --space-5: #{$space-5};
+  --space-6: #{$space-6};
+  --space-8: #{$space-8};
+  --space-10: #{$space-10};
+  --space-12: #{$space-12};
+  --space-16: #{$space-16};
+
+  // Radius
+  --radius-sm: #{$radius-sm};
+  --radius-md: #{$radius-md};
+  --radius-lg: #{$radius-lg};
+  --radius-xl: #{$radius-xl};
+  --radius-2xl: #{$radius-2xl};
+  --radius-full: #{$radius-full};
+
+  // Shadows
+  --shadow-sm: #{$shadow-sm};
+  --shadow-card: #{$shadow-card};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+
+  // Layout
+  --max-content-width: #{$max-content-width};
+  --bottom-nav-height: #{$bottom-nav-height};
+  --touch-target-min: #{$touch-target-min};
+
+  // Typography
+  --font-family-base: #{$font-family-base};
+  --font-size-xs: #{$font-size-xs};
+  --font-size-sm: #{$font-size-sm};
+  --font-size-base: #{$font-size-base};
+  --font-size-lg: #{$font-size-lg};
+  --font-size-xl: #{$font-size-xl};
+  --font-size-2xl: #{$font-size-2xl};
+  --font-size-3xl: #{$font-size-3xl};
+  --font-size-4xl: #{$font-size-4xl};
+  --font-size-5xl: #{$font-size-5xl};
+  --font-weight-normal: #{$font-weight-normal};
+  --font-weight-medium: #{$font-weight-medium};
+  --font-weight-semibold: #{$font-weight-semibold};
+  --font-weight-bold: #{$font-weight-bold};
+  --letter-spacing-label: #{$letter-spacing-label};
 }
 
 a {
