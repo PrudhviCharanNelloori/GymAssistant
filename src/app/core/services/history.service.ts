@@ -1,8 +1,8 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import type { Exercise, SetResult, WorkoutSession } from '../models';
-import { TrackingMetric } from '../models';
 import { WorkoutSessionRepository } from '../storage';
 import {
+  bestSetLabel,
   formatExerciseSessionSummary,
   formatSessionDate,
   formatSetResult,
@@ -176,40 +176,4 @@ export class HistoryService {
   private exerciseName(exerciseId: string): string {
     return this.exercises.exercises().find((exercise) => exercise.id === exerciseId)?.name ?? 'Exercise';
   }
-}
-
-function bestSetLabel(sets: SetResult[]): string {
-  if (sets.length === 0) {
-    return '—';
-  }
-
-  let best = sets[0];
-  let bestScore = setScore(best);
-
-  for (const set of sets.slice(1)) {
-    const score = setScore(set);
-    if (score > bestScore) {
-      best = set;
-      bestScore = score;
-    }
-  }
-
-  return formatSetResult(best);
-}
-
-function setScore(set: SetResult): number {
-  const weight =
-    set.actualMetrics.find((metric) => metric.metric === TrackingMetric.WEIGHT)?.value ?? 0;
-  const reps =
-    set.actualMetrics.find((metric) => metric.metric === TrackingMetric.REPS)?.value ?? 0;
-  const duration =
-    set.actualMetrics.find((metric) => metric.metric === TrackingMetric.DURATION)?.value ?? 0;
-
-  if (weight > 0 && reps > 0) {
-    return weight * reps;
-  }
-  if (reps > 0) {
-    return reps;
-  }
-  return duration;
 }

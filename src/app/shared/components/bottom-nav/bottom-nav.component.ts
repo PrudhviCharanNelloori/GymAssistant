@@ -32,7 +32,7 @@ export class BottomNavComponent {
     { label: 'Home', route: '/home', icon: '⌂' },
     { label: 'Workouts', route: '/workouts', icon: '☰' },
     { label: 'Exercises', route: '/exercises', icon: '◎' },
-    { label: 'History', route: '/history', icon: '◷' },
+    { label: 'Progress', route: '/progress', icon: '▲' },
     { label: 'Settings', route: '/settings', icon: '⚙' },
   ];
 }

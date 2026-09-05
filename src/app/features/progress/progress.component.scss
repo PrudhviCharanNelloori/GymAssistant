@@ -1,0 +1,428 @@
+@use '../../shared/styles/tokens' as *;
+@use '../../shared/styles/typography' as *;
+@use '../../shared/styles/mixins' as *;
+
+.progress {
+  padding: $space-6 $space-4;
+}
+
+.progress__header {
+  margin-bottom: $space-5;
+}
+
+.progress__eyebrow {
+  @include text-label;
+  margin: 0 0 $space-1;
+}
+
+.progress__title {
+  @include text-greeting;
+  margin: 0;
+}
+
+.progress__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-3;
+  margin-bottom: $space-5;
+}
+
+.progress__stat {
+  @include card-compact;
+  text-align: center;
+  padding: $space-4 $space-2;
+}
+
+.progress__stat--streak .progress__stat-value {
+  color: $color-streak;
+}
+
+.progress__stat-value {
+  margin: 0 0 $space-1;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+}
+
+.progress__stat-label {
+  @include text-caption;
+  margin: 0;
+  font-size: $font-size-xs;
+}
+
+.progress__card {
+  @include card;
+  margin-bottom: $space-6;
+}
+
+.progress__card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: $space-3;
+  margin-bottom: $space-4;
+}
+
+.progress__card-meta {
+  @include text-caption;
+  margin: 0;
+  text-align: right;
+}
+
+.progress__section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: $space-3;
+}
+
+.progress__section-title {
+  @include text-label;
+  margin: 0;
+}
+
+.progress__link {
+  @include text-caption;
+  color: $color-text-primary;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+}
+
+.progress__week {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: $space-2;
+  margin-bottom: $space-5;
+}
+
+.progress__week-day {
+  display: grid;
+  justify-items: center;
+  gap: $space-2;
+}
+
+.progress__week-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: $radius-full;
+  background: $color-bg-muted;
+}
+
+.progress__week-day--done .progress__week-dot {
+  background: $color-streak;
+}
+
+.progress__week-day--today .progress__week-dot {
+  box-shadow: inset 0 0 0 2px $color-text-primary;
+}
+
+.progress__week-label {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+}
+
+.progress__bars {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: $space-2;
+  align-items: end;
+  min-height: 96px;
+}
+
+.progress__bar-col {
+  display: grid;
+  gap: $space-2;
+  justify-items: center;
+}
+
+.progress__bar-track {
+  width: 100%;
+  max-width: 28px;
+  height: 80px;
+  display: flex;
+  align-items: flex-end;
+  border-radius: $radius-sm;
+  background: $color-bg-muted;
+  overflow: hidden;
+}
+
+.progress__bar-fill {
+  width: 100%;
+  min-height: 4px;
+  background: $color-text-primary;
+  border-radius: $radius-sm $radius-sm 0 0;
+}
+
+.progress__bar-fill--empty {
+  background: transparent;
+  min-height: 0;
+}
+
+.progress__bar-label {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+}
+
+.progress__cal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-3;
+  margin-bottom: $space-4;
+}
+
+.progress__cal-title-wrap {
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+}
+
+.progress__cal-month {
+  margin: $space-1 0 0;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+}
+
+.progress__cal-nav {
+  @include flex-center;
+  @include touch-target;
+  @include focus-ring;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: $radius-full;
+  background: $color-bg-muted;
+  color: $color-text-primary;
+  font: inherit;
+  font-size: $font-size-xl;
+  line-height: 1;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+.progress__cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: $space-1;
+  margin-bottom: $space-2;
+  text-align: center;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  font-weight: $font-weight-semibold;
+}
+
+.progress__cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: $space-1;
+}
+
+.progress__cal-cell {
+  @include flex-center;
+  aspect-ratio: 1;
+  border-radius: $radius-md;
+  background: $color-bg-muted;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+}
+
+.progress__cal-cell--empty {
+  background: transparent;
+  pointer-events: none;
+}
+
+.progress__cal-cell--done {
+  background: $color-streak;
+  color: $color-text-inverse;
+}
+
+.progress__cal-cell--today {
+  box-shadow: inset 0 0 0 2px $color-text-primary;
+}
+
+.progress__cal-cell--future:not(.progress__cal-cell--empty) {
+  opacity: 0.45;
+}
+
+.progress__cal-meta {
+  @include text-caption;
+  margin: $space-4 0 0;
+  text-align: center;
+}
+
+.progress__list {
+  list-style: none;
+  margin: 0 0 $space-6;
+  padding: 0;
+  background: $color-bg-secondary;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+}
+
+.progress__row {
+  @include focus-ring;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  min-height: 72px;
+  padding: $space-4;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid $color-border;
+}
+
+.progress__row-wrap--last .progress__row {
+  border-bottom: 0;
+}
+
+.progress__row-text {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.progress__row-name {
+  @include truncate;
+  font-weight: $font-weight-semibold;
+}
+
+.progress__row-meta {
+  @include text-caption;
+}
+
+.progress__row-value {
+  flex-shrink: 0;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+}
+
+.progress__chevron {
+  color: $color-text-muted;
+  font-size: $font-size-xl;
+}
+
+.progress__chips {
+  display: flex;
+  gap: $space-2;
+  overflow-x: auto;
+  padding-bottom: $space-2;
+  margin-bottom: $space-3;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.progress__chip {
+  @include touch-target;
+  @include focus-ring;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: $radius-full;
+  background: $color-bg-muted;
+  color: $color-text-secondary;
+  font: inherit;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  padding: $space-2 $space-4;
+  cursor: pointer;
+}
+
+.progress__chip--active {
+  background: $color-bg-dark;
+  color: $color-text-inverse;
+}
+
+.progress__chart-card {
+  @include card;
+  margin-bottom: $space-4;
+}
+
+.progress__chart-head {
+  margin-bottom: $space-4;
+}
+
+.progress__chart-title {
+  margin: 0 0 $space-1;
+  font-weight: $font-weight-semibold;
+}
+
+.progress__chart-meta {
+  @include text-caption;
+  margin: 0;
+}
+
+.progress__chart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.progress__chart-line {
+  stroke: $color-text-primary;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.progress__chart-dot {
+  fill: $color-text-primary;
+}
+
+.progress__chart-legend {
+  display: grid;
+  gap: $space-2;
+  margin-top: $space-4;
+}
+
+.progress__legend-item {
+  display: flex;
+  justify-content: space-between;
+  gap: $space-3;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+
+  strong {
+    color: $color-text-primary;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.progress__status,
+.progress__hint {
+  @include text-caption;
+  margin: 0 0 $space-4;
+}
+
+.progress__empty {
+  @include card;
+  text-align: center;
+  display: grid;
+  gap: $space-3;
+  justify-items: center;
+}
+
+.progress__empty-title {
+  margin: 0;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+}
+
+.progress__empty-text {
+  @include text-caption;
+  margin: 0;
+}
+
+.progress__empty-cta {
+  @include button-solid;
+  width: auto;
+  text-decoration: none;
+  padding-inline: $space-6;
+}

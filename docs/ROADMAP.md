@@ -50,7 +50,7 @@
 - Workout detail view
 - Exercise history per exercise
 
-## Phase 7 — Progress
+## Phase 7 — Progress ✅
 
 - Workout count, streaks, volume
 - Personal records

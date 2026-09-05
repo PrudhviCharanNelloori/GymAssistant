@@ -1,0 +1,208 @@
+<section class="progress">
+  <header class="progress__header">
+    <p class="progress__eyebrow">Insights</p>
+    <h1 class="progress__title">Progress</h1>
+  </header>
+
+  @if (loading()) {
+    <p class="progress__status">Loading progress…</p>
+  } @else if (overview(); as data) {
+    @if (data.volume.workoutCount === 0) {
+      <div class="progress__empty">
+        <p class="progress__empty-title">No progress yet</p>
+        <p class="progress__empty-text">Complete a workout to unlock streaks, volume, and PRs.</p>
+        <a routerLink="/home" class="progress__empty-cta">Go to home</a>
+      </div>
+    } @else {
+      <div class="progress__stats">
+        <div class="progress__stat">
+          <p class="progress__stat-value">{{ data.volume.workoutCount }}</p>
+          <p class="progress__stat-label">Workouts</p>
+        </div>
+        <div class="progress__stat progress__stat--streak">
+          <p class="progress__stat-value">{{ data.streaks.current }}</p>
+          <p class="progress__stat-label">Streak</p>
+        </div>
+        <div class="progress__stat">
+          <p class="progress__stat-value">{{ data.volume.totalKg.toLocaleString() }}</p>
+          <p class="progress__stat-label">kg total</p>
+        </div>
+      </div>
+
+      <div class="progress__card">
+        <div class="progress__card-head">
+          <h2 class="progress__section-title">This week</h2>
+          <p class="progress__card-meta">{{ data.volume.thisWeekKg.toLocaleString() }} kg · best {{ data.streaks.longest }}d</p>
+        </div>
+
+        <div class="progress__week" aria-label="Last 7 days">
+          @for (day of data.weekDays; track day.dayKey) {
+            <div
+              class="progress__week-day"
+              [class.progress__week-day--done]="day.completed"
+              [class.progress__week-day--today]="day.isToday"
+            >
+              <span class="progress__week-dot" aria-hidden="true"></span>
+              <span class="progress__week-label">{{ day.label }}</span>
+            </div>
+          }
+        </div>
+
+        <div class="progress__bars" aria-label="Weekly volume">
+          @for (point of data.weeklyVolume; track point.dayKey) {
+            <div class="progress__bar-col">
+              <div class="progress__bar-track">
+                <div
+                  class="progress__bar-fill"
+                  [style.height.%]="barHeight(point)"
+                  [class.progress__bar-fill--empty]="point.volumeKg === 0"
+                ></div>
+              </div>
+              <span class="progress__bar-label">{{ point.label }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="progress__card">
+        <div class="progress__cal-head">
+          <button
+            type="button"
+            class="progress__cal-nav"
+            aria-label="Previous month"
+            (click)="previousMonth()"
+          >
+            ‹
+          </button>
+          <div class="progress__cal-title-wrap">
+            <h2 class="progress__section-title">Streak calendar</h2>
+            <p class="progress__cal-month">{{ monthCalendar().title }}</p>
+          </div>
+          <button
+            type="button"
+            class="progress__cal-nav"
+            aria-label="Next month"
+            [disabled]="monthOffset() >= 0"
+            (click)="nextMonth()"
+          >
+            ›
+          </button>
+        </div>
+
+        <div class="progress__cal-weekdays" aria-hidden="true">
+          @for (label of monthCalendar().weekdayLabels; track $index) {
+            <span>{{ label }}</span>
+          }
+        </div>
+
+        <div class="progress__cal-grid" [attr.aria-label]="monthCalendar().title + ' streak calendar'">
+          @for (cell of monthCalendar().cells; track $index) {
+            <div
+              class="progress__cal-cell"
+              [class.progress__cal-cell--empty]="!cell.inMonth"
+              [class.progress__cal-cell--done]="cell.completed"
+              [class.progress__cal-cell--today]="cell.isToday"
+              [class.progress__cal-cell--future]="cell.isFuture"
+            >
+              @if (cell.dayOfMonth !== null) {
+                <span>{{ cell.dayOfMonth }}</span>
+              }
+            </div>
+          }
+        </div>
+
+        <p class="progress__cal-meta">
+          {{ monthCalendar().workoutDaysInMonth }} workout day{{
+            monthCalendar().workoutDaysInMonth === 1 ? '' : 's'
+          }}
+          this month · {{ data.streaks.current }} day streak
+        </p>
+      </div>
+
+      <div class="progress__section-head">
+        <h2 class="progress__section-title">Personal records</h2>
+        <a routerLink="/history" class="progress__link">History</a>
+      </div>
+
+      @if (data.personalRecords.length === 0) {
+        <p class="progress__hint">No scored sets yet.</p>
+      } @else {
+        <ul class="progress__list">
+          @for (pr of data.personalRecords.slice(0, 8); track pr.exerciseId; let last = $last) {
+            <li [class.progress__row-wrap--last]="last">
+              <a class="progress__row" [routerLink]="['/history/exercises', pr.exerciseId]">
+                <span class="progress__row-text">
+                  <span class="progress__row-name">{{ pr.exerciseName }}</span>
+                  <span class="progress__row-meta">
+                    {{ pr.achievedAt.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) }}
+                  </span>
+                </span>
+                <span class="progress__row-value">{{ pr.label }}</span>
+                <span class="progress__chevron" aria-hidden="true">›</span>
+              </a>
+            </li>
+          }
+        </ul>
+      }
+
+      <div class="progress__section-head">
+        <h2 class="progress__section-title">Exercise progression</h2>
+      </div>
+
+      @if (data.trackedExercises.length === 0) {
+        <p class="progress__hint">Log sets to see progression charts.</p>
+      } @else {
+        <div class="progress__chips" role="list">
+          @for (exercise of data.trackedExercises.slice(0, 8); track exercise.id) {
+            <button
+              type="button"
+              class="progress__chip"
+              role="listitem"
+              [class.progress__chip--active]="selectedId() === exercise.id"
+              (click)="selectExercise(exercise.id)"
+            >
+              {{ exercise.name }}
+            </button>
+          }
+        </div>
+
+        <div class="progress__chart-card">
+          <div class="progress__chart-head">
+            <p class="progress__chart-title">{{ selectedName() }}</p>
+            @if (progression().length) {
+              <p class="progress__chart-meta">
+                Best {{ progression()[progression().length - 1].bestLabel }}
+              </p>
+            }
+          </div>
+
+          @if (chart(); as line) {
+            @if (line.empty) {
+              <p class="progress__hint">Not enough data for a chart.</p>
+            } @else {
+              <svg
+                class="progress__chart"
+                viewBox="0 0 280 120"
+                role="img"
+                [attr.aria-label]="'Progression for ' + selectedName()"
+              >
+                <path class="progress__chart-line" [attr.d]="line.path" fill="none" />
+                @for (dot of line.dots; track dot.label + dot.value) {
+                  <circle class="progress__chart-dot" [attr.cx]="dot.x" [attr.cy]="dot.y" r="4" />
+                }
+              </svg>
+              <div class="progress__chart-legend">
+                @for (point of progression(); track point.sessionId) {
+                  <div class="progress__legend-item">
+                    <span>{{ point.dateLabel }}</span>
+                    <strong>{{ point.bestLabel }}</strong>
+                  </div>
+                }
+              </div>
+            }
+          }
+        </div>
+      }
+    }
+  }
+</section>

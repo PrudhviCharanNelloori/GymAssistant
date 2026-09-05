@@ -6,6 +6,14 @@
   padding: $space-6 $space-4;
 }
 
+.home__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $space-4;
+  margin-bottom: $space-6;
+}
+
 .home__date {
   @include text-caption;
   margin: 0 0 $space-2;
@@ -13,7 +21,29 @@
 
 .home__title {
   @include text-greeting;
-  margin: 0 0 $space-6;
+  margin: 0;
+}
+
+.home__streak {
+  @include focus-ring;
+  flex-shrink: 0;
+  display: grid;
+  justify-items: end;
+  text-decoration: none;
+  color: inherit;
+  padding: $space-1 0;
+}
+
+.home__streak-value {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: $color-streak;
+  line-height: 1;
+}
+
+.home__streak-label {
+  @include text-caption;
+  font-size: $font-size-xs;
 }
 
 .home__card {
