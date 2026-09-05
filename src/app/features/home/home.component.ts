@@ -1,32 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import type { Workout } from '../../core/models';
+import { WorkoutProgramService, WorkoutService } from '../../core/services';
 
 @Component({
   selector: 'app-home',
-  template: `
-    <section class="home">
-      <p class="home__date">{{ today }}</p>
-      <h1 class="home__title">Good morning</h1>
-      <div class="home__card">
-        <div class="home__card-dark">
-          <p class="home__card-label">Today's Workout</p>
-          <p class="home__card-value">Not configured yet</p>
-          <p class="home__card-hint">Workout programs will be available in Phase 4</p>
-        </div>
-        <div class="home__card-action">
-          <button type="button" class="home__start-btn" disabled>
-            <span class="home__start-icon" aria-hidden="true">▶</span>
-            Start Workout
-          </button>
-        </div>
-      </div>
-    </section>
-  `,
+  imports: [RouterLink],
+  templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  private readonly programService = inject(WorkoutProgramService);
+  private readonly workoutService = inject(WorkoutService);
+
   readonly today = new Date().toLocaleDateString(undefined, {
     weekday: 'long',
     month: 'long',
     day: 'numeric',
   });
+
+  readonly todaysWorkout = signal<Workout | null>(null);
+  readonly loading = signal(true);
+
+  async ngOnInit(): Promise<void> {
+    await this.programService.load();
+    const workout = await this.programService.getTodaysWorkout();
+    this.todaysWorkout.set(workout ?? null);
+    this.loading.set(false);
+  }
+
+  summary(workout: Workout) {
+    return this.workoutService.summary(workout);
+  }
 }

@@ -1,0 +1,48 @@
+<section class="program">
+  <header class="program__header">
+    <a routerLink="/workouts" class="program__back" aria-label="Back">←</a>
+    <p class="program__eyebrow">Schedule</p>
+    <h1 class="program__title">Weekly program</h1>
+  </header>
+
+  @if (loading()) {
+    <p class="program__status">Loading…</p>
+  } @else {
+    <label class="program__field">
+      <span class="program__label">Program name</span>
+      <input
+        type="text"
+        [value]="nameDraft()"
+        (input)="onNameInput($event)"
+        (blur)="saveName()"
+        maxlength="60"
+      />
+    </label>
+
+    @if (workouts().length === 0) {
+      <div class="program__empty">
+        <p class="program__empty-title">Create a workout first</p>
+        <p class="program__empty-text">Then assign it to days in your week.</p>
+        <a routerLink="/workouts" class="program__empty-cta">Go to workouts</a>
+      </div>
+    } @else {
+      <div class="program__days">
+        @for (day of days; track day) {
+          <label class="program__day">
+            <span class="program__day-name">{{ dayLabel[day] }}</span>
+            <select
+              [value]="workoutIdFor(day)"
+              [disabled]="savingDay() === day"
+              (change)="onDayAssign(day, $event)"
+            >
+              <option value="">Rest day</option>
+              @for (workout of workouts(); track workout.id) {
+                <option [value]="workout.id">{{ workout.name }}</option>
+              }
+            </select>
+          </label>
+        }
+      </div>
+    }
+  }
+</section>

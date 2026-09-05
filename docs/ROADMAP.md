@@ -26,7 +26,7 @@
 - Custom exercise creation
 - Exercise details screen
 
-## Phase 4 — Workout Builder
+## Phase 4 — Workout Builder ✅
 
 - Create/edit workouts
 - Add/remove/reorder exercises

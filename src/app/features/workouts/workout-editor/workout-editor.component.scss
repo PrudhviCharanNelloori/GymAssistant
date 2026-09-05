@@ -1,0 +1,299 @@
+@use '../../../shared/styles/tokens' as *;
+@use '../../../shared/styles/typography' as *;
+@use '../../../shared/styles/mixins' as *;
+
+.editor {
+  padding: $space-6 $space-4;
+}
+
+.editor__header {
+  margin-bottom: $space-5;
+}
+
+.editor__back {
+  @include flex-center;
+  @include touch-target;
+  @include focus-ring;
+  width: 44px;
+  height: 44px;
+  margin: 0 0 $space-3 -#{$space-2};
+  border-radius: $radius-full;
+  color: inherit;
+  text-decoration: none;
+  font-size: $font-size-xl;
+}
+
+.editor__eyebrow {
+  @include text-label;
+  margin: 0 0 $space-1;
+}
+
+.editor__title {
+  @include text-heading;
+  margin: 0;
+}
+
+.editor__stats {
+  @include text-caption;
+  margin: $space-2 0 0;
+}
+
+.editor__field {
+  display: grid;
+  gap: $space-2;
+  margin-bottom: $space-4;
+
+  input,
+  textarea {
+    @include input-field;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 72px;
+  }
+}
+
+.editor__label {
+  @include text-label;
+}
+
+.editor__section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-3;
+  margin: $space-2 0 $space-3;
+}
+
+.editor__section-title {
+  @include text-label;
+  margin: 0;
+}
+
+.editor__section-actions {
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+}
+
+.editor__mode,
+.editor__add-link {
+  @include button-ghost;
+  min-height: 36px;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+  color: $color-text-primary;
+}
+
+.editor__mode--active {
+  background: $color-bg-dark;
+  color: $color-text-inverse;
+}
+
+.editor__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: $color-bg-secondary;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+
+  &--rearrange {
+    overflow: visible;
+  }
+}
+
+.editor__row {
+  @include focus-ring;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  min-height: 76px;
+  padding: $space-4;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid $color-border;
+}
+
+.editor__row-wrap--last .editor__row,
+.editor__row-wrap--last .editor__rearrange-row {
+  border-bottom: 0;
+}
+
+.editor__row-index {
+  flex-shrink: 0;
+  width: 1.25rem;
+  color: $color-text-muted;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  text-align: center;
+}
+
+.editor__row-body {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.editor__row-name {
+  @include truncate;
+  margin: 0;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+}
+
+.editor__row-meta {
+  @include truncate;
+  margin: 0;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+}
+
+.editor__chevron {
+  flex-shrink: 0;
+  color: $color-text-muted;
+  font-size: $font-size-xl;
+  line-height: 1;
+}
+
+.editor__drag-item {
+  background: $color-bg-secondary;
+  touch-action: none;
+
+  &.cdk-drag-animating {
+    transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.editor__list--rearrange.cdk-drop-list-dragging .editor__drag-item:not(.cdk-drag-placeholder) {
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.editor__rearrange-row {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  min-height: 76px;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $color-border;
+  background: $color-bg-secondary;
+}
+
+.editor__drag-handle {
+  @include flex-center;
+  @include touch-target;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: $radius-md;
+  background: $color-bg-muted;
+  color: $color-text-secondary;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: grab;
+  touch-action: none;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.editor__rearrange-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.editor__remove {
+  @include button-ghost;
+  flex-shrink: 0;
+  min-height: 40px;
+  color: $color-error;
+  padding: 0 $space-2;
+}
+
+.editor__drag-placeholder {
+  min-height: 76px;
+  background: $color-bg-muted;
+  border-bottom: 1px solid $color-border;
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+  background: $color-bg-secondary;
+
+  .editor__rearrange-row {
+    border-bottom: 0;
+    border-radius: $radius-lg;
+  }
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.editor__hint {
+  @include text-caption;
+  margin: $space-3 0 $space-5;
+}
+
+.editor__empty {
+  @include card;
+  text-align: center;
+  display: grid;
+  gap: $space-2;
+  justify-items: center;
+  margin-bottom: $space-5;
+}
+
+.editor__empty-title {
+  margin: 0;
+  font-weight: $font-weight-bold;
+}
+
+.editor__empty-text {
+  @include text-caption;
+  margin: 0 0 $space-2;
+}
+
+.editor__empty-cta {
+  @include button-solid;
+  width: auto;
+  text-decoration: none;
+  padding-inline: $space-5;
+}
+
+.editor__footer {
+  display: grid;
+  gap: $space-3;
+}
+
+.editor__save {
+  @include button-solid;
+  width: 100%;
+}
+
+.editor__delete {
+  @include button-ghost;
+  width: 100%;
+  color: $color-error;
+}
+
+.editor__error {
+  color: $color-error;
+  text-align: center;
+  font-size: $font-size-sm;
+  margin: 0 0 $space-3;
+}
+
+.editor__status {
+  @include text-caption;
+  text-align: center;
+  padding: $space-8 $space-4;
+}

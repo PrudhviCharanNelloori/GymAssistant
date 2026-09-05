@@ -7,6 +7,49 @@ export const routes: Routes = [
     loadComponent: () => import('./features/home/home.component').then((m) => m.HomeComponent),
   },
   {
+    path: 'workouts',
+    loadComponent: () =>
+      import('./features/workouts/workouts.component').then((m) => m.WorkoutsComponent),
+  },
+  {
+    path: 'workouts/new',
+    loadComponent: () =>
+      import('./features/workouts/workout-editor/workout-editor.component').then(
+        (m) => m.WorkoutEditorComponent,
+      ),
+  },
+  {
+    path: 'workouts/:id/add',
+    loadComponent: () =>
+      import('./features/workouts/workout-exercise-picker/workout-exercise-picker.component').then(
+        (m) => m.WorkoutExercisePickerComponent,
+      ),
+  },
+  {
+    path: 'workouts/:id/exercises/:exerciseId',
+    loadComponent: () =>
+      import('./features/workouts/workout-exercise-config/workout-exercise-config.component').then(
+        (m) => m.WorkoutExerciseConfigComponent,
+      ),
+  },
+  {
+    path: 'workouts/:id',
+    loadComponent: () =>
+      import('./features/workouts/workout-editor/workout-editor.component').then(
+        (m) => m.WorkoutEditorComponent,
+      ),
+  },
+  {
+    path: 'program',
+    loadComponent: () =>
+      import('./features/workouts/program/program.component').then((m) => m.ProgramComponent),
+  },
+  {
+    path: 'workout-builder',
+    redirectTo: 'workouts',
+    pathMatch: 'full',
+  },
+  {
     path: 'exercises',
     loadComponent: () =>
       import('./features/exercises/exercises.component').then((m) => m.ExercisesComponent),
@@ -51,13 +94,6 @@ export const routes: Routes = [
     path: 'workout',
     loadComponent: () =>
       import('./features/workout/workout.component').then((m) => m.WorkoutComponent),
-  },
-  {
-    path: 'workout-builder',
-    loadComponent: () =>
-      import('./features/workout-builder/workout-builder.component').then(
-        (m) => m.WorkoutBuilderComponent,
-      ),
   },
   { path: '**', redirectTo: 'home' },
 ];

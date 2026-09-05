@@ -48,6 +48,7 @@
 
 .home__start-btn {
   @include button-primary;
+  text-decoration: none;
 
   &:disabled {
     opacity: 0.45;
@@ -58,4 +59,45 @@
 .home__start-icon {
   font-size: $font-size-sm;
   line-height: 1;
+}
+
+.home__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-3;
+  margin-top: $space-4;
+}
+
+.home__stat-value {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-inverse;
+  margin: 0;
+}
+
+.home__stat-label {
+  margin: 0;
+  font-size: $font-size-sm;
+  color: $color-text-on-dark-muted;
+}
+
+.home__link-card {
+  @include card-compact;
+  @include focus-ring;
+  margin-top: $space-4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: inherit;
+}
+
+.home__link-label {
+  @include text-label;
+  margin: 0 0 $space-1;
+}
+
+.home__link-value {
+  font-weight: $font-weight-semibold;
+  margin: 0;
 }

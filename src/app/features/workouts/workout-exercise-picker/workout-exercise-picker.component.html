@@ -1,0 +1,71 @@
+<section class="picker">
+  <header class="picker__header">
+    <button type="button" class="picker__back" (click)="done()" aria-label="Done">←</button>
+    <div>
+      <p class="picker__eyebrow">Add to workout</p>
+      <h1 class="picker__title">Exercises</h1>
+    </div>
+    <button type="button" class="picker__done" (click)="done()">Done</button>
+  </header>
+
+  <label class="picker__search">
+    <span class="visually-hidden">Search</span>
+    <input
+      type="search"
+      placeholder="Search"
+      [value]="searchQuery()"
+      (input)="onSearch($event)"
+    />
+  </label>
+
+  <div class="picker__muscles" role="toolbar" aria-label="Muscle filters">
+    <button
+      type="button"
+      class="picker__chip"
+      [class.picker__chip--active]="muscleFilter() === null"
+      (click)="selectMuscle(null)"
+    >
+      All
+    </button>
+    @for (muscle of muscleGroups; track muscle) {
+      <button
+        type="button"
+        class="picker__chip"
+        [class.picker__chip--active]="muscleFilter() === muscle"
+        (click)="selectMuscle(muscle)"
+      >
+        {{ muscleShort[muscle] }}
+      </button>
+    }
+  </div>
+
+  @if (loading()) {
+    <p class="picker__status">Loading…</p>
+  } @else {
+    <ul class="picker__list">
+      @for (exercise of exercises(); track exercise.id; let last = $last) {
+        <li [class.picker__row-wrap--last]="last">
+          <button
+            type="button"
+            class="picker__row"
+            [class.picker__row--added]="isSelected(exercise.id)"
+            [disabled]="isSelected(exercise.id) || addingId() === exercise.id"
+            (click)="addExercise(exercise.id)"
+          >
+            <span class="picker__row-text">
+              <span class="picker__row-name">{{ exercise.name }}</span>
+              <span class="picker__row-meta">{{ muscleShort[exercise.primaryMuscleGroup] }}</span>
+            </span>
+            @if (isSelected(exercise.id)) {
+              <span class="picker__badge">Added</span>
+            } @else if (addingId() === exercise.id) {
+              <span class="picker__action picker__action--busy">…</span>
+            } @else {
+              <span class="picker__action" aria-hidden="true">+</span>
+            }
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</section>

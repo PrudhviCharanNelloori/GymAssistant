@@ -1,0 +1,99 @@
+@use '../../../shared/styles/tokens' as *;
+@use '../../../shared/styles/typography' as *;
+@use '../../../shared/styles/mixins' as *;
+
+.program {
+  padding: $space-6 $space-4;
+}
+
+.program__header {
+  margin-bottom: $space-5;
+}
+
+.program__back {
+  @include flex-center;
+  @include touch-target;
+  @include focus-ring;
+  width: 44px;
+  height: 44px;
+  margin: 0 0 $space-3 -#{$space-2};
+  border-radius: $radius-full;
+  color: inherit;
+  text-decoration: none;
+  font-size: $font-size-xl;
+}
+
+.program__eyebrow {
+  @include text-label;
+  margin: 0 0 $space-1;
+}
+
+.program__title {
+  @include text-heading;
+  margin: 0;
+}
+
+.program__field {
+  display: grid;
+  gap: $space-2;
+  margin-bottom: $space-5;
+
+  input {
+    @include input-field;
+  }
+}
+
+.program__label {
+  @include text-label;
+}
+
+.program__days {
+  display: grid;
+  gap: $space-3;
+}
+
+.program__day {
+  @include card-compact;
+  display: grid;
+  gap: $space-2;
+
+  select {
+    @include input-field;
+  }
+}
+
+.program__day-name {
+  font-weight: $font-weight-semibold;
+}
+
+.program__empty {
+  @include card;
+  text-align: center;
+  display: grid;
+  gap: $space-3;
+  justify-items: center;
+}
+
+.program__empty-title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  margin: 0;
+}
+
+.program__empty-text {
+  @include text-caption;
+  margin: 0;
+}
+
+.program__empty-cta {
+  @include button-solid;
+  width: auto;
+  text-decoration: none;
+  padding-inline: $space-6;
+}
+
+.program__status {
+  @include text-caption;
+  text-align: center;
+  padding: $space-8;
+}

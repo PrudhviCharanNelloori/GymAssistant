@@ -1,0 +1,201 @@
+@use '../../../shared/styles/tokens' as *;
+@use '../../../shared/styles/typography' as *;
+@use '../../../shared/styles/mixins' as *;
+
+.picker {
+  padding: $space-6 $space-4;
+}
+
+.picker__header {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  margin-bottom: $space-5;
+}
+
+.picker__back,
+.picker__done {
+  @include flex-center;
+  @include touch-target;
+  @include focus-ring;
+  border: 0;
+  background: transparent;
+  color: $color-text-primary;
+  font-weight: $font-weight-semibold;
+}
+
+.picker__back {
+  width: 44px;
+  height: 44px;
+  margin-left: -#{$space-2};
+  border-radius: $radius-full;
+  font-size: $font-size-xl;
+}
+
+.picker__done {
+  margin-left: auto;
+}
+
+.picker__eyebrow {
+  @include text-label;
+  margin: 0 0 $space-1;
+}
+
+.picker__title {
+  @include text-heading;
+  margin: 0;
+}
+
+.picker__search {
+  display: block;
+  margin-bottom: $space-4;
+
+  input {
+    @include input-field;
+    border: 0;
+    background: $color-bg-muted;
+    border-radius: $radius-full;
+  }
+}
+
+.picker__muscles {
+  display: flex;
+  gap: $space-2;
+  overflow-x: auto;
+  margin: 0 (-#{$space-4}) $space-4;
+  padding: 0 $space-4;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.picker__chip {
+  @include flex-center;
+  min-height: 36px;
+  border: 0;
+  border-radius: $radius-full;
+  background: transparent;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  padding: 0 $space-3;
+  white-space: nowrap;
+
+  &--active {
+    background: $color-bg-dark;
+    color: $color-text-inverse;
+  }
+}
+
+.picker__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: $color-bg-secondary;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+}
+
+.picker__row {
+  @include focus-ring;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  min-height: 64px;
+  padding: $space-3 $space-4;
+  border: 0;
+  border-bottom: 1px solid $color-border;
+  background: transparent;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &--added {
+    opacity: 1;
+  }
+
+  &:disabled:not(.picker__row--added) {
+    opacity: 0.55;
+  }
+}
+
+.picker__row-wrap--last .picker__row {
+  border-bottom: 0;
+}
+
+.picker__row-text {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.picker__row-name {
+  @include truncate;
+  font-weight: $font-weight-semibold;
+}
+
+.picker__row-meta {
+  @include truncate;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+}
+
+.picker__action {
+  @include flex-center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-full;
+  background: $color-bg-dark;
+  color: $color-text-inverse;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-medium;
+  line-height: 1;
+
+  &--busy {
+    background: $color-bg-muted;
+    color: $color-text-secondary;
+  }
+}
+
+.picker__badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  border-radius: $radius-full;
+  background: $color-bg-muted;
+  color: $color-text-secondary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  padding: $space-1 $space-3;
+  white-space: nowrap;
+}
+
+.picker__status {
+  @include text-caption;
+  text-align: center;
+  padding: $space-8;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

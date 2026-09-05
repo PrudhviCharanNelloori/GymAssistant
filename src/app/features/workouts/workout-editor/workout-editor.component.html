@@ -1,0 +1,139 @@
+<section class="editor">
+  <header class="editor__header">
+    <a routerLink="/workouts" class="editor__back" aria-label="Back">←</a>
+    <p class="editor__eyebrow">Edit</p>
+    <h1 class="editor__title">{{ name() || 'Workout' }}</h1>
+    <p class="editor__stats">
+      {{ stats().exerciseCount }} exercises · {{ stats().setCount }} sets · ~{{ stats().minutes }} min
+    </p>
+  </header>
+
+  @if (loading()) {
+    <p class="editor__status">Loading…</p>
+  } @else if (error() && !workoutId()) {
+    <div class="editor__status">
+      <p>{{ error() }}</p>
+      <a routerLink="/workouts">Back</a>
+    </div>
+  } @else {
+    <label class="editor__field">
+      <span class="editor__label">Name</span>
+      <input
+        type="text"
+        [value]="name()"
+        (input)="onNameInput($event)"
+        placeholder="e.g. Push Day"
+        maxlength="60"
+      />
+    </label>
+
+    <label class="editor__field">
+      <span class="editor__label">Notes</span>
+      <textarea
+        rows="2"
+        [value]="description()"
+        (input)="onDescriptionInput($event)"
+        placeholder="Optional"
+      ></textarea>
+    </label>
+
+    <div class="editor__section-head">
+      <h2 class="editor__section-title">Exercises</h2>
+      <div class="editor__section-actions">
+        @if (exercises().length > 1) {
+          <button
+            type="button"
+            class="editor__mode"
+            [class.editor__mode--active]="rearranging()"
+            (click)="toggleRearrange()"
+          >
+            {{ rearranging() ? 'Done' : 'Reorder' }}
+          </button>
+        }
+        @if (workoutId(); as id) {
+          <a class="editor__add-link" [routerLink]="['/workouts', id, 'add']">Add</a>
+        }
+      </div>
+    </div>
+
+    @if (exercises().length === 0) {
+      <div class="editor__empty">
+        <p class="editor__empty-title">No exercises yet</p>
+        <p class="editor__empty-text">Add movements, then tap one to set targets.</p>
+        @if (workoutId(); as id) {
+          <a [routerLink]="['/workouts', id, 'add']" class="editor__empty-cta">Add exercise</a>
+        }
+      </div>
+    } @else if (rearranging()) {
+      <ul
+        class="editor__list editor__list--rearrange"
+        cdkDropList
+        [cdkDropListData]="exercises()"
+        (cdkDropListDropped)="dropExercise($event)"
+      >
+        @for (item of exercises(); track item.id; let i = $index; let last = $last) {
+          <li
+            class="editor__drag-item"
+            cdkDrag
+            [class.editor__row-wrap--last]="last"
+          >
+            <div class="editor__rearrange-row">
+              <button
+                type="button"
+                class="editor__drag-handle"
+                cdkDragHandle
+                aria-label="Drag to reorder"
+              >
+                <span aria-hidden="true">⠿</span>
+              </button>
+              <div class="editor__rearrange-text">
+                <p class="editor__row-name">{{ i + 1 }}. {{ exerciseName(item.exerciseId) }}</p>
+                <p class="editor__row-meta">{{ exerciseMeta(item) }}</p>
+              </div>
+              <button
+                type="button"
+                class="editor__remove"
+                (click)="removeExercise(item.id)"
+                aria-label="Remove"
+              >
+                Remove
+              </button>
+            </div>
+            <div class="editor__drag-placeholder" *cdkDragPlaceholder></div>
+          </li>
+        }
+      </ul>
+      <p class="editor__hint">Drag the handle to reorder. Tap Done, then Save workout.</p>
+    } @else {
+      <ul class="editor__list">
+        @for (item of exercises(); track item.id; let i = $index; let last = $last) {
+          <li [class.editor__row-wrap--last]="last">
+            <a
+              class="editor__row"
+              [routerLink]="['/workouts', workoutId(), 'exercises', item.id]"
+            >
+              <span class="editor__row-index" aria-hidden="true">{{ i + 1 }}</span>
+              <span class="editor__row-body">
+                <span class="editor__row-name">{{ exerciseName(item.exerciseId) }}</span>
+                <span class="editor__row-meta">{{ exerciseMeta(item) }}</span>
+              </span>
+              <span class="editor__chevron" aria-hidden="true">›</span>
+            </a>
+          </li>
+        }
+      </ul>
+      <p class="editor__hint">Tap an exercise to edit sets, weight, and rest.</p>
+    }
+
+    @if (error()) {
+      <p class="editor__error">{{ error() }}</p>
+    }
+
+    <div class="editor__footer">
+      <button type="button" class="editor__save" [disabled]="saving() || !name().trim()" (click)="save()">
+        {{ saving() ? 'Saving…' : 'Save workout' }}
+      </button>
+      <button type="button" class="editor__delete" (click)="deleteWorkout()">Delete workout</button>
+    </div>
+  }
+</section>

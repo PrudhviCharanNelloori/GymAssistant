@@ -1,0 +1,73 @@
+<section class="config">
+  <header class="config__header">
+    <a [routerLink]="['/workouts', workoutId()]" class="config__back" aria-label="Back">←</a>
+    <p class="config__eyebrow">Configure</p>
+    <h1 class="config__title">{{ title() }}</h1>
+  </header>
+
+  @if (loading()) {
+    <p class="config__status">Loading…</p>
+  } @else if (error() && sets().length === 0) {
+    <p class="config__status">{{ error() }}</p>
+  } @else {
+    <label class="config__field">
+      <span class="config__label">Rest between sets (sec)</span>
+      <input type="number" min="0" step="15" [value]="restSeconds()" (input)="onRestInput($event)" />
+    </label>
+
+    <label class="config__field">
+      <span class="config__label">Notes</span>
+      <textarea rows="2" [value]="notes()" (input)="onNotesInput($event)" placeholder="Cues, tempo, etc."></textarea>
+    </label>
+
+    <div class="config__section-head">
+      <h2 class="config__section-title">Sets</h2>
+      <button type="button" class="config__add" (click)="addSet()">Add set</button>
+    </div>
+
+    <div class="config__sets">
+      @for (set of sets(); track set.id) {
+        <article class="config__set">
+          <div class="config__set-head">
+            <p class="config__set-title">Set {{ set.setNumber }}</p>
+            <button type="button" class="config__remove" (click)="removeSet(set.id)" [disabled]="sets().length <= 1">
+              Remove
+            </button>
+          </div>
+
+          <label class="config__field config__field--compact">
+            <span class="config__label">Type</span>
+            <select [value]="set.setType" (change)="onSetTypeChange(set.id, $event)">
+              @for (type of setTypes; track type) {
+                <option [value]="type">{{ formatLabel(type) }}</option>
+              }
+            </select>
+          </label>
+
+          <div class="config__metrics">
+            @for (metric of trackedMetrics(); track metric) {
+              <label class="config__metric">
+                <span class="config__label">{{ formatLabel(metric) }}</span>
+                <input
+                  type="number"
+                  min="0"
+                  step="any"
+                  [value]="metricValue(set, metric)"
+                  (input)="onMetricInput(set.id, metric, $event)"
+                />
+              </label>
+            }
+          </div>
+        </article>
+      }
+    </div>
+
+    @if (error()) {
+      <p class="config__error">{{ error() }}</p>
+    }
+
+    <button type="button" class="config__save" [disabled]="saving()" (click)="save()">
+      {{ saving() ? 'Saving…' : 'Save' }}
+    </button>
+  }
+</section>

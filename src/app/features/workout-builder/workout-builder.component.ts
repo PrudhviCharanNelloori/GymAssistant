@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
-import { PlaceholderPageComponent } from '../../shared/components/placeholder-page/placeholder-page.component';
+import { RouterLink } from '@angular/router';
 
+/** @deprecated Use /workouts — kept for lazy-load safety if referenced. */
 @Component({
   selector: 'app-workout-builder',
-  imports: [PlaceholderPageComponent],
-  template: `<app-placeholder-page title="Workout Builder" subtitle="Create and edit workouts" />`,
+  imports: [RouterLink],
+  template: `
+    <section style="padding: 1.5rem; text-align: center">
+      <p>Moved to Workouts.</p>
+      <a routerLink="/workouts">Open workouts</a>
+    </section>
+  `,
 })
 export class WorkoutBuilderComponent {}

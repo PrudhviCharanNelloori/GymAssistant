@@ -1,0 +1,76 @@
+<section class="workouts">
+  <header class="workouts__header">
+    <div>
+      <p class="workouts__eyebrow">Plan</p>
+      <h1 class="workouts__title">Workouts</h1>
+    </div>
+    <button
+      type="button"
+      class="workouts__add"
+      [disabled]="creating()"
+      (click)="createWorkout()"
+      aria-label="Create workout"
+    >
+      +
+    </button>
+  </header>
+
+  @if (loading()) {
+    <p class="workouts__status">Loading…</p>
+  } @else {
+    <a routerLink="/program" class="workouts__program">
+      <div>
+        <p class="workouts__program-label">Weekly program</p>
+        <p class="workouts__program-name">{{ program()?.name || 'My Program' }}</p>
+      </div>
+      <span class="workouts__chevron" aria-hidden="true">›</span>
+    </a>
+
+    <div class="workouts__week" aria-label="Week overview">
+      @for (day of days; track day) {
+        <div class="workouts__day">
+          <span class="workouts__day-name">{{ dayShort[day] }}</span>
+          <span class="workouts__day-value">{{ dayLabel(day) }}</span>
+        </div>
+      }
+    </div>
+
+    <div class="workouts__section-head">
+      <h2 class="workouts__section-title">Your workouts</h2>
+      <span class="workouts__section-count">{{ workouts().length }}</span>
+    </div>
+
+    @if (workouts().length === 0) {
+      <div class="workouts__empty">
+        <p class="workouts__empty-title">No workouts yet</p>
+        <p class="workouts__empty-text">Build a workout, then assign it to your weekly program.</p>
+        <button
+          type="button"
+          class="workouts__empty-cta"
+          [disabled]="creating()"
+          (click)="createWorkout()"
+        >
+          {{ creating() ? 'Creating…' : 'Create workout' }}
+        </button>
+      </div>
+    } @else {
+      <ul class="workouts__list">
+        @for (workout of workouts(); track workout.id; let last = $last) {
+          <li [class.workouts__row-wrap--last]="last">
+            <a class="workouts__row" [routerLink]="['/workouts', workout.id]">
+              <span class="workouts__row-text">
+                <span class="workouts__row-name">{{ workout.name }}</span>
+                @if (summary(workout.id); as stats) {
+                  <span class="workouts__row-meta">
+                    {{ stats.exerciseCount }} exercises · {{ stats.setCount }} sets · ~{{ stats.minutes }} min
+                  </span>
+                }
+              </span>
+              <span class="workouts__chevron" aria-hidden="true">›</span>
+            </a>
+          </li>
+        }
+      </ul>
+    }
+  }
+</section>

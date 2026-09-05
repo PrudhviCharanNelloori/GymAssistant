@@ -1,0 +1,55 @@
+<section class="home">
+  <p class="home__date">{{ today }}</p>
+  <h1 class="home__title">Good morning</h1>
+
+  <div class="home__card">
+    <div class="home__card-dark">
+      <p class="home__card-label">Today's Workout</p>
+      @if (loading()) {
+        <p class="home__card-value">Loading…</p>
+      } @else if (todaysWorkout(); as workout) {
+        <p class="home__card-value">{{ workout.name }}</p>
+        @if (summary(workout); as stats) {
+          <div class="home__stats">
+            <div>
+              <p class="home__stat-value">{{ stats.exerciseCount }}</p>
+              <p class="home__stat-label">exercises</p>
+            </div>
+            <div>
+              <p class="home__stat-value">{{ stats.setCount }}</p>
+              <p class="home__stat-label">sets</p>
+            </div>
+            <div>
+              <p class="home__stat-value">~{{ stats.minutes }}</p>
+              <p class="home__stat-label">min</p>
+            </div>
+          </div>
+        }
+      } @else {
+        <p class="home__card-value">Rest day</p>
+        <p class="home__card-hint">Assign a workout in your weekly program</p>
+      }
+    </div>
+    <div class="home__card-action">
+      @if (todaysWorkout(); as workout) {
+        <a class="home__start-btn" [routerLink]="['/workouts', workout.id]">
+          <span class="home__start-icon" aria-hidden="true">›</span>
+          View workout
+        </a>
+      } @else {
+        <a class="home__start-btn" routerLink="/program">
+          <span class="home__start-icon" aria-hidden="true">›</span>
+          Set up program
+        </a>
+      }
+    </div>
+  </div>
+
+  <a routerLink="/workouts" class="home__link-card">
+    <div>
+      <p class="home__link-label">Workouts</p>
+      <p class="home__link-value">Build & schedule</p>
+    </div>
+    <span aria-hidden="true">›</span>
+  </a>
+</section>
