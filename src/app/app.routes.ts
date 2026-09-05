@@ -12,6 +12,27 @@ export const routes: Routes = [
       import('./features/exercises/exercises.component').then((m) => m.ExercisesComponent),
   },
   {
+    path: 'exercises/new',
+    loadComponent: () =>
+      import('./features/exercises/exercise-form/exercise-form.component').then(
+        (m) => m.ExerciseFormComponent,
+      ),
+  },
+  {
+    path: 'exercises/:id/edit',
+    loadComponent: () =>
+      import('./features/exercises/exercise-form/exercise-form.component').then(
+        (m) => m.ExerciseFormComponent,
+      ),
+  },
+  {
+    path: 'exercises/:id',
+    loadComponent: () =>
+      import('./features/exercises/exercise-detail/exercise-detail.component').then(
+        (m) => m.ExerciseDetailComponent,
+      ),
+  },
+  {
     path: 'history',
     loadComponent: () =>
       import('./features/history/history.component').then((m) => m.HistoryComponent),

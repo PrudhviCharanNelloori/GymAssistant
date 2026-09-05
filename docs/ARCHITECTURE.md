@@ -14,10 +14,11 @@
 src/app/
 ├── core/
 │   ├── models/       # Domain interfaces and enums
-│   ├── services/     # Business logic
-│   ├── storage/      # IndexedDB via Dexie
+│   ├── services/     # Business logic (bootstrap, later session/timer)
+│   ├── storage/      # IndexedDB via Dexie + repositories
+│   │   └── repositories/
 │   ├── state/        # Active workout state
-│   └── utils/
+│   └── utils/        # Shared helpers (IDs, etc.)
 ├── shared/
 │   ├── components/   # Reusable UI components
 │   ├── directives/
@@ -42,11 +43,18 @@ src/app/
 |-------|---------------|
 | Components | Display UI, capture interaction, trigger actions |
 | Services | Business operations, calculations, session management |
-| Storage | IndexedDB access, persistence, queries, transactions |
+| Storage | IndexedDB access via repositories (`Repository<T>` abstraction), queries, transactions |
 | State | Active workout, current exercise/set, timer state |
 | Models | Domain contracts only |
 
 Components must not contain complex business logic.
+
+## Persistence
+
+- Dexie `AppDatabase` is the IndexedDB entry point
+- Entity repositories: User, Exercise, Workout, WorkoutProgram, WorkoutSession
+- `BootstrapService` creates the default single user (`default-user`) on first launch
+- Stable string IDs via `createId()` for future sync
 
 ## Routing
 

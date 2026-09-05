@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import Dexie, { type Table } from 'dexie';
 import type {
   Exercise,
@@ -19,8 +20,9 @@ export const TABLE_NAMES = {
 } as const;
 
 /**
- * IndexedDB schema stub. CRUD services will be implemented in Phase 2.
+ * IndexedDB schema via Dexie. Provided as a root singleton for repositories.
  */
+@Injectable({ providedIn: 'root' })
 export class AppDatabase extends Dexie {
   users!: Table<User, string>;
   exercises!: Table<Exercise, string>;
@@ -40,5 +42,3 @@ export class AppDatabase extends Dexie {
     });
   }
 }
-
-export const db = new AppDatabase();

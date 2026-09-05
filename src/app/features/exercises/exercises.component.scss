@@ -1,0 +1,311 @@
+@use '../../shared/styles/tokens' as *;
+@use '../../shared/styles/typography' as *;
+@use '../../shared/styles/mixins' as *;
+
+.exercises {
+  padding: $space-6 $space-4 $space-4;
+}
+
+.exercises__header {
+  display: flex;
+  justify-content: space-between;
+  gap: $space-4;
+  margin-bottom: $space-5;
+}
+
+.exercises__eyebrow {
+  @include text-label;
+  margin: 0 0 $space-1;
+}
+
+.exercises__title {
+  @include text-greeting;
+  margin: 0;
+}
+
+.exercises__count {
+  @include text-caption;
+  margin: $space-2 0 0;
+}
+
+.exercises__add {
+  @include flex-center;
+  @include touch-target;
+  @include focus-ring;
+  width: 44px;
+  height: 44px;
+  margin-top: $space-1;
+  border-radius: $radius-full;
+  background: $color-bg-dark;
+  color: $color-text-inverse;
+  text-decoration: none;
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.exercises__toolbar {
+  display: flex;
+  gap: $space-2;
+  margin-bottom: $space-4;
+}
+
+.exercises__search {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+
+  input {
+    @include input-field;
+    border: 0;
+    background: $color-bg-muted;
+    border-radius: $radius-full;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+.exercises__search-icon {
+  position: absolute;
+  left: $space-4;
+  color: $color-text-muted;
+  pointer-events: none;
+}
+
+.exercises__search-clear {
+  @include flex-center;
+  position: absolute;
+  right: $space-2;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: $radius-full;
+  background: transparent;
+  color: $color-text-secondary;
+  font-size: $font-size-xl;
+}
+
+.exercises__filter-btn {
+  @include flex-center;
+  @include touch-target;
+  @include focus-ring;
+  gap: $space-1;
+  border: 0;
+  border-radius: $radius-full;
+  background: $color-bg-secondary;
+  box-shadow: $shadow-card;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  padding: 0 $space-4;
+
+  &--active {
+    background: $color-bg-dark;
+    color: $color-text-inverse;
+  }
+}
+
+.exercises__filter-count {
+  @include flex-center;
+  min-width: 18px;
+  height: 18px;
+  border-radius: $radius-full;
+  background: $color-text-inverse;
+  color: $color-text-primary;
+  font-size: 0.625rem;
+  padding: 0 5px;
+}
+
+.exercises__muscles {
+  display: flex;
+  gap: $space-2;
+  overflow-x: auto;
+  margin: 0 (-#{$space-4}) $space-4;
+  padding: 0 $space-4 $space-1;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.exercises__chip {
+  @include flex-center;
+  @include focus-ring;
+  min-height: 36px;
+  border: 0;
+  border-radius: $radius-full;
+  background: transparent;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  padding: 0 $space-3;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &--soft {
+    border: 1px solid $color-border;
+    background: $color-bg-secondary;
+  }
+
+  &--active {
+    background: $color-bg-dark;
+    border-color: $color-bg-dark;
+    color: $color-text-inverse;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.exercises__panel {
+  @include card-compact;
+  margin-bottom: $space-4;
+  display: grid;
+  gap: $space-4;
+}
+
+.exercises__panel-label {
+  @include text-label;
+  margin: 0 0 $space-2;
+}
+
+.exercises__panel-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.exercises__meta {
+  display: flex;
+  justify-content: flex-end;
+  margin: -#{$space-2} 0 $space-3;
+}
+
+.exercises__clear,
+.exercises__empty-clear {
+  @include button-ghost;
+  color: $color-text-secondary;
+  min-height: 36px;
+}
+
+.exercises__content {
+  display: grid;
+  gap: $space-5;
+}
+
+.exercises__group-title {
+  @include text-label;
+  margin: 0 0 $space-2 $space-1;
+}
+
+.exercises__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: $color-bg-secondary;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+}
+
+.exercises__row {
+  @include focus-ring;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  min-height: 72px;
+  padding: $space-3 $space-4;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid $color-border;
+}
+
+.exercises__row--last .exercises__row {
+  border-bottom: 0;
+}
+
+.exercises__mono {
+  @include flex-center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-md;
+  background: $color-bg-muted;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+
+  &--custom {
+    background: $color-bg-achievement;
+  }
+}
+
+.exercises__row-text {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.exercises__row-name {
+  @include truncate;
+  font-weight: $font-weight-semibold;
+}
+
+.exercises__row-meta {
+  @include truncate;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+}
+
+.exercises__badge {
+  border-radius: $radius-full;
+  background: $color-bg-achievement;
+  color: $color-text-secondary;
+  font-size: 0.625rem;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  padding: $space-1 $space-2;
+}
+
+.exercises__status {
+  @include text-caption;
+  text-align: center;
+  padding: $space-10 $space-4;
+}
+
+.exercises__empty {
+  @include card;
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: $space-3;
+}
+
+.exercises__empty-title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  margin: 0;
+}
+
+.exercises__empty-text {
+  @include text-caption;
+  margin: 0;
+}
+
+.exercises__empty-cta {
+  @include button-solid;
+  width: auto;
+  text-decoration: none;
+  padding-inline: $space-6;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

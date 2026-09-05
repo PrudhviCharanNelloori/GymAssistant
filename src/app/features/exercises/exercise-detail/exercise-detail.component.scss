@@ -1,0 +1,142 @@
+@use '../../../shared/styles/tokens' as *;
+@use '../../../shared/styles/typography' as *;
+@use '../../../shared/styles/mixins' as *;
+
+.detail {
+  padding: $space-6 $space-4;
+}
+
+.detail__header {
+  margin-bottom: $space-5;
+}
+
+.detail__back {
+  @include flex-center;
+  @include touch-target;
+  @include focus-ring;
+  width: 44px;
+  height: 44px;
+  margin: 0 0 $space-3 -#{$space-2};
+  border-radius: $radius-full;
+  color: $color-text-primary;
+  text-decoration: none;
+  font-size: $font-size-xl;
+}
+
+.detail__eyebrow {
+  @include text-label;
+  margin: 0;
+}
+
+.detail__hero {
+  margin-bottom: $space-5;
+}
+
+.detail__title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+}
+
+.detail__title {
+  @include text-greeting;
+  margin: 0;
+  flex: 1;
+}
+
+.detail__badge {
+  flex-shrink: 0;
+  margin-top: $space-2;
+  border-radius: $radius-full;
+  background: $color-bg-muted;
+  color: $color-text-secondary;
+  font-size: 0.625rem;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  padding: $space-1 $space-2;
+}
+
+.detail__subtitle {
+  @include text-caption;
+  margin: $space-2 0 0;
+}
+
+.detail__card {
+  @include card;
+  margin-bottom: $space-3;
+}
+
+.detail__label {
+  @include text-label;
+  margin: 0 0 $space-1;
+
+  &:not(:first-child) {
+    margin-top: $space-4;
+  }
+}
+
+.detail__value {
+  font-weight: $font-weight-semibold;
+  margin: 0;
+}
+
+.detail__body {
+  margin: 0;
+  line-height: $line-height-relaxed;
+}
+
+.detail__steps {
+  margin: 0;
+  padding-left: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+
+  li {
+    line-height: $line-height-relaxed;
+  }
+}
+
+.detail__actions {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  margin-top: $space-5;
+}
+
+.detail__edit {
+  @include button-solid;
+  text-decoration: none;
+}
+
+.detail__delete {
+  @include button-ghost;
+  width: 100%;
+  color: $color-error;
+}
+
+.detail__status,
+.detail__empty {
+  @include text-caption;
+  text-align: center;
+  padding: $space-8 $space-4;
+}
+
+.detail__empty-title {
+  color: $color-text-primary;
+  font-weight: $font-weight-semibold;
+  margin: 0 0 $space-3;
+}
+
+.detail__link {
+  color: $color-text-primary;
+  font-weight: $font-weight-semibold;
+}
+
+.detail__error {
+  color: $color-error;
+  font-size: $font-size-sm;
+  text-align: center;
+  margin: $space-3 0 0;
+}

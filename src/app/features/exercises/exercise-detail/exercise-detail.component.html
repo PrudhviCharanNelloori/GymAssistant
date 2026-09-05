@@ -1,0 +1,85 @@
+<section class="detail">
+  <header class="detail__header">
+    <a routerLink="/exercises" class="detail__back" aria-label="Back to exercises">←</a>
+    <p class="detail__eyebrow">Exercise</p>
+  </header>
+
+  @if (loading()) {
+    <p class="detail__status">Loading…</p>
+  } @else if (error() && !exercise()) {
+    <div class="detail__empty">
+      <p class="detail__empty-title">{{ error() }}</p>
+      <a routerLink="/exercises" class="detail__link">Back to library</a>
+    </div>
+  } @else if (exercise(); as item) {
+    <div class="detail__hero">
+      <div class="detail__title-row">
+        <h1 class="detail__title">{{ item.name }}</h1>
+        @if (item.isCustom) {
+          <span class="detail__badge">Custom</span>
+        }
+      </div>
+      <p class="detail__subtitle">{{ formatLabel(item.primaryMuscleGroup) }}</p>
+    </div>
+
+    <div class="detail__card">
+      <p class="detail__label">Primary muscle</p>
+      <p class="detail__value">{{ formatLabel(item.primaryMuscleGroup) }}</p>
+
+      @if (item.secondaryMuscleGroups.length) {
+        <p class="detail__label">Secondary</p>
+        <p class="detail__value">
+          {{ formatLabels(item.secondaryMuscleGroups) }}
+        </p>
+      }
+
+      <p class="detail__label">Equipment</p>
+      <p class="detail__value">
+        @if (item.equipment.length) {
+          {{ formatLabels(item.equipment) }}
+        } @else {
+          None
+        }
+      </p>
+
+      <p class="detail__label">Tracking</p>
+      <p class="detail__value">{{ formatLabels(item.trackingMetrics) }}</p>
+    </div>
+
+    @if (item.description) {
+      <div class="detail__card">
+        <p class="detail__label">About</p>
+        <p class="detail__body">{{ item.description }}</p>
+      </div>
+    }
+
+    @if (item.instructions?.length) {
+      <div class="detail__card">
+        <p class="detail__label">How to</p>
+        <ol class="detail__steps">
+          @for (step of item.instructions; track $index) {
+            <li>{{ step }}</li>
+          }
+        </ol>
+      </div>
+    }
+
+    @if (error()) {
+      <p class="detail__error">{{ error() }}</p>
+    }
+
+    @if (item.isCustom) {
+      <div class="detail__actions">
+        <a class="detail__edit" [routerLink]="['/exercises', item.id, 'edit']">Edit</a>
+        <button
+          type="button"
+          class="detail__delete"
+          [disabled]="deleting()"
+          (click)="deleteExercise()"
+        >
+          {{ deleting() ? 'Deleting…' : 'Delete' }}
+        </button>
+      </div>
+    }
+  }
+</section>

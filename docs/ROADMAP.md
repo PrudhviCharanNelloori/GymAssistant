@@ -11,14 +11,14 @@
 - PWA support (service worker, manifest)
 - Dexie database schema stub
 
-## Phase 2 — Domain and Persistence
+## Phase 2 — Domain and Persistence ✅
 
 - Implement Dexie CRUD services for all entities
 - Default single-user bootstrap
 - Storage abstraction layer
 - Unit tests for storage layer
 
-## Phase 3 — Exercise Library
+## Phase 3 — Exercise Library ✅
 
 - Seed built-in exercises
 - Exercise list with search and filter

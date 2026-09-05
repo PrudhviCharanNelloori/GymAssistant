@@ -1,6 +1,13 @@
 @use 'tokens' as *;
 @use 'typography' as *;
 
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid $color-border-focus;
+    outline-offset: 2px;
+  }
+}
+
 @mixin touch-target {
   min-width: $touch-target-min;
   min-height: $touch-target-min;
@@ -71,9 +78,77 @@
   text-transform: uppercase;
 }
 
-@mixin focus-ring {
-  &:focus-visible {
-    outline: 2px solid $color-border-focus;
-    outline-offset: 2px;
+@mixin button-solid {
+  @include flex-center;
+  @include touch-target;
+  @include focus-ring;
+  gap: $space-2;
+  border: 0;
+  border-radius: $radius-lg;
+  background: $color-bg-dark;
+  color: $color-text-inverse;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  padding: $space-3 $space-4;
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+@mixin button-ghost {
+  @include flex-center;
+  @include touch-target;
+  @include focus-ring;
+  border: 0;
+  border-radius: $radius-lg;
+  background: transparent;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  padding: $space-2 $space-3;
+}
+
+@mixin input-field {
+  @include focus-ring;
+  width: 100%;
+  min-height: $touch-target-min;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  background: $color-bg-secondary;
+  color: $color-text-primary;
+  font: inherit;
+  padding: $space-3 $space-4;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+}
+
+@mixin filter-chip {
+  @include touch-target;
+  @include focus-ring;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $color-border;
+  border-radius: $radius-full;
+  background: $color-bg-secondary;
+  color: $color-text-secondary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+  padding: 0 $space-4;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &--active {
+    background: $color-bg-dark;
+    border-color: $color-bg-dark;
+    color: $color-text-inverse;
   }
 }

@@ -1,0 +1,88 @@
+<section class="form">
+  <header class="form__header">
+    <a
+      class="form__back"
+      [routerLink]="isEdit() && exerciseId() ? ['/exercises', exerciseId()] : '/exercises'"
+      aria-label="Back"
+      >←</a
+    >
+    <p class="form__eyebrow">{{ isEdit() ? 'Edit' : 'Create' }}</p>
+    <h1 class="form__title">{{ isEdit() ? 'Edit exercise' : 'Custom exercise' }}</h1>
+  </header>
+
+  @if (loading()) {
+    <p class="form__status">Loading…</p>
+  } @else if (error() && isEdit() && !name()) {
+    <div class="form__status">
+      <p>{{ error() }}</p>
+      <a routerLink="/exercises">Back to library</a>
+    </div>
+  } @else {
+    <form class="form__body" (submit)="$event.preventDefault(); save()">
+      <label class="form__field">
+        <span class="form__label">Name</span>
+        <input
+          type="text"
+          [value]="name()"
+          (input)="onNameInput($event)"
+          placeholder="e.g. Landmine Press"
+          required
+          maxlength="80"
+        />
+      </label>
+
+      <label class="form__field">
+        <span class="form__label">Primary muscle</span>
+        <select [value]="primaryMuscleGroup()" (change)="onMuscleChange($event)">
+          @for (muscle of muscleGroups; track muscle) {
+            <option [value]="muscle">{{ formatLabel(muscle) }}</option>
+          }
+        </select>
+      </label>
+
+      <fieldset class="form__field">
+        <legend class="form__label">Equipment</legend>
+        <div class="form__chips">
+          @for (equipment of equipmentOptions; track equipment) {
+            <button
+              type="button"
+              class="form__chip"
+              [class.form__chip--active]="isEquipmentSelected(equipment)"
+              (click)="toggleEquipment(equipment)"
+            >
+              {{ formatLabel(equipment) }}
+            </button>
+          }
+        </div>
+      </fieldset>
+
+      <label class="form__field">
+        <span class="form__label">Description</span>
+        <textarea
+          rows="3"
+          [value]="description()"
+          (input)="onDescriptionInput($event)"
+          placeholder="Optional short description"
+        ></textarea>
+      </label>
+
+      <label class="form__field">
+        <span class="form__label">Instructions</span>
+        <textarea
+          rows="4"
+          [value]="instructionsText()"
+          (input)="onInstructionsInput($event)"
+          placeholder="One step per line"
+        ></textarea>
+      </label>
+
+      @if (error()) {
+        <p class="form__error">{{ error() }}</p>
+      }
+
+      <button type="submit" class="form__submit" [disabled]="!canSave()">
+        {{ saving() ? 'Saving…' : isEdit() ? 'Save changes' : 'Create exercise' }}
+      </button>
+    </form>
+  }
+</section>

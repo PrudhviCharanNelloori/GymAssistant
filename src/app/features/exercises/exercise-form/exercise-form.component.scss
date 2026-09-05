@@ -1,0 +1,106 @@
+@use '../../../shared/styles/tokens' as *;
+@use '../../../shared/styles/typography' as *;
+@use '../../../shared/styles/mixins' as *;
+
+.form {
+  padding: $space-6 $space-4;
+}
+
+.form__header {
+  margin-bottom: $space-6;
+}
+
+.form__back {
+  @include flex-center;
+  @include touch-target;
+  @include focus-ring;
+  width: 44px;
+  height: 44px;
+  margin: 0 0 $space-3 -#{$space-2};
+  border-radius: $radius-full;
+  color: $color-text-primary;
+  text-decoration: none;
+  font-size: $font-size-xl;
+}
+
+.form__eyebrow {
+  @include text-label;
+  margin: 0 0 $space-1;
+}
+
+.form__title {
+  @include text-heading;
+  margin: 0;
+}
+
+.form__body {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-inline-size: 0;
+
+  input,
+  select,
+  textarea {
+    @include input-field;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 96px;
+  }
+}
+
+.form__label {
+  @include text-label;
+}
+
+.form__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.form__chip {
+  @include filter-chip;
+
+  &--active {
+    background: $color-bg-dark;
+    border-color: $color-bg-dark;
+    color: $color-text-inverse;
+  }
+}
+
+.form__submit {
+  @include button-solid;
+  width: 100%;
+}
+
+.form__error {
+  color: $color-error;
+  font-size: $font-size-sm;
+  margin: 0;
+  text-align: center;
+}
+
+.form__status {
+  @include text-caption;
+  text-align: center;
+  padding: $space-8 $space-4;
+
+  a {
+    display: inline-block;
+    margin-top: $space-3;
+    color: $color-text-primary;
+    font-weight: $font-weight-semibold;
+  }
+}

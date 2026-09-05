@@ -1,0 +1,153 @@
+<section class="exercises">
+  <header class="exercises__header">
+    <div class="exercises__heading">
+      <p class="exercises__eyebrow">Library</p>
+      <h1 class="exercises__title">Exercises</h1>
+      @if (!loading()) {
+        <p class="exercises__count">
+          {{ hasFilters() ? filteredCount() + ' of ' + totalCount() : totalCount() + ' exercises' }}
+        </p>
+      }
+    </div>
+    <a routerLink="/exercises/new" class="exercises__add" aria-label="Add custom exercise">
+      <span aria-hidden="true">+</span>
+    </a>
+  </header>
+
+  <div class="exercises__toolbar">
+    <label class="exercises__search">
+      <span class="visually-hidden">Search exercises</span>
+      <span class="exercises__search-icon" aria-hidden="true">⌕</span>
+      <input
+        type="search"
+        placeholder="Search"
+        [value]="searchQuery()"
+        (input)="onSearch($event)"
+        autocomplete="off"
+      />
+      @if (searchQuery()) {
+        <button type="button" class="exercises__search-clear" (click)="clearSearch()" aria-label="Clear search">
+          ×
+        </button>
+      }
+    </label>
+
+    <button
+      type="button"
+      class="exercises__filter-btn"
+      [class.exercises__filter-btn--active]="filtersOpen() || advancedFilterCount() > 0"
+      (click)="toggleFiltersPanel()"
+      [attr.aria-expanded]="filtersOpen()"
+    >
+      Filter
+      @if (advancedFilterCount() > 0) {
+        <span class="exercises__filter-count">{{ advancedFilterCount() }}</span>
+      }
+    </button>
+  </div>
+
+  <div class="exercises__muscles" role="toolbar" aria-label="Muscle group filters">
+    <button
+      type="button"
+      class="exercises__chip"
+      [class.exercises__chip--active]="muscleFilter() === null"
+      (click)="selectMuscle(null)"
+    >
+      All
+    </button>
+    @for (muscle of muscleGroups; track muscle) {
+      <button
+        type="button"
+        class="exercises__chip"
+        [class.exercises__chip--active]="muscleFilter() === muscle"
+        (click)="selectMuscle(muscle)"
+      >
+        {{ muscleLabel(muscle) }}
+      </button>
+    }
+  </div>
+
+  @if (filtersOpen()) {
+    <div class="exercises__panel">
+      <div class="exercises__panel-row">
+        <p class="exercises__panel-label">Equipment</p>
+        <div class="exercises__panel-chips">
+          @for (equipment of equipmentOptions; track equipment) {
+            <button
+              type="button"
+              class="exercises__chip exercises__chip--soft"
+              [class.exercises__chip--active]="equipmentFilter() === equipment"
+              (click)="toggleEquipment(equipment)"
+            >
+              {{ equipmentLabel(equipment) }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="exercises__panel-row">
+        <p class="exercises__panel-label">Source</p>
+        <div class="exercises__panel-chips">
+          <button
+            type="button"
+            class="exercises__chip exercises__chip--soft"
+            [class.exercises__chip--active]="customOnlyFilter() === true"
+            (click)="toggleCustomOnly()"
+          >
+            Custom only
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (hasFilters()) {
+    <div class="exercises__meta">
+      <button type="button" class="exercises__clear" (click)="clearFilters()">Clear filters</button>
+    </div>
+  }
+
+  @if (loading()) {
+    <p class="exercises__status">Loading library…</p>
+  } @else if (exercises().length === 0) {
+    <div class="exercises__empty">
+      <p class="exercises__empty-title">No matches</p>
+      <p class="exercises__empty-text">Try another search or clear filters.</p>
+      <button type="button" class="exercises__empty-clear" (click)="clearFilters()">Clear filters</button>
+      <a routerLink="/exercises/new" class="exercises__empty-cta">Create custom</a>
+    </div>
+  } @else {
+    <div class="exercises__content">
+      @for (group of groups(); track group.label) {
+        <section class="exercises__group">
+          @if (!searchQuery()) {
+            <h2 class="exercises__group-title">{{ group.label }}</h2>
+          }
+
+          <ul class="exercises__list">
+            @for (exercise of group.exercises; track exercise.id; let last = $last) {
+              <li [class.exercises__row--last]="last">
+                <a class="exercises__row" [routerLink]="['/exercises', exercise.id]">
+                  <span
+                    class="exercises__mono"
+                    [class.exercises__mono--custom]="exercise.isCustom"
+                    aria-hidden="true"
+                  >
+                    {{ monogram(exercise) }}
+                  </span>
+                  <span class="exercises__row-text">
+                    <span class="exercises__row-name">{{ exercise.name }}</span>
+                    <span class="exercises__row-meta">{{ metaLine(exercise) }}</span>
+                  </span>
+                  @if (exercise.isCustom) {
+                    <span class="exercises__badge">Custom</span>
+                  }
+                </a>
+              </li>
+            }
+          </ul>
+        </section>
+      }
+    </div>
+  }
+</section>
