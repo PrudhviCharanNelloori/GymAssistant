@@ -11,3 +11,7 @@
   margin: 0 auto;
   padding-bottom: calc(#{$bottom-nav-height} + env(safe-area-inset-bottom, 0px) + #{$space-4});
 }
+
+.app-shell--session .app-shell__content {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}

@@ -1,0 +1,97 @@
+<section class="active">
+  @if (loading()) {
+    <p class="active__status">Loading workout…</p>
+  } @else if (view(); as current) {
+    <header class="active__header">
+      <div>
+        <p class="active__eyebrow">{{ current.workoutName }}</p>
+        <h1 class="active__title">{{ current.exercise?.name || 'Exercise' }}</h1>
+        <p class="active__progress">{{ progressLabel() }}</p>
+      </div>
+      <button type="button" class="active__menu" (click)="togglePause()">
+        {{ isPaused() ? 'Resume' : 'Pause' }}
+      </button>
+    </header>
+
+    <div class="active__prev">
+      <p class="active__label">Previous</p>
+      <p class="active__prev-value">{{ previousLine() }}</p>
+    </div>
+
+    <div class="active__card">
+      <p class="active__set-label">
+        Set {{ current.setIndex + 1 }}
+        <span>· {{ formatLabel(current.setResult?.setType || 'NORMAL') }}</span>
+      </p>
+
+      <div class="active__metrics">
+        @for (metric of trackedMetrics(); track metric) {
+          <div class="active__metric">
+            <p class="active__metric-label">
+              {{ formatLabel(metric) }}
+              @if (targetValue(metric) !== null) {
+                <span>target {{ targetValue(metric) }}</span>
+              }
+            </p>
+            <div class="active__stepper">
+              <button type="button" (click)="adjust(metric, -1)" [disabled]="isPaused()" aria-label="Decrease">
+                −
+              </button>
+              <input
+                type="number"
+                inputmode="decimal"
+                [value]="metricValue(metric)"
+                (input)="onMetricInput(metric, $event)"
+                [disabled]="isPaused()"
+              />
+              <button type="button" (click)="adjust(metric, 1)" [disabled]="isPaused()" aria-label="Increase">
+                +
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    @if (error()) {
+      <p class="active__error">{{ error() }}</p>
+    }
+
+    <div class="active__actions">
+      <button
+        type="button"
+        class="active__complete"
+        [disabled]="busy() || isPaused()"
+        (click)="completeSet()"
+      >
+        {{ busy() ? 'Saving…' : 'Complete set' }}
+      </button>
+      <div class="active__secondary">
+        <button type="button" (click)="skipSet()" [disabled]="busy() || isPaused()">Skip set</button>
+        <button type="button" (click)="skipExercise()" [disabled]="busy() || isPaused()">
+          Skip exercise
+        </button>
+        <button type="button" class="active__abandon" (click)="abandon()">Abandon</button>
+      </div>
+    </div>
+
+    @if (restTimer.isActive()) {
+      <div class="active__rest" role="dialog" aria-label="Rest timer">
+        <div class="active__rest-sheet">
+          <p class="active__rest-label">Rest</p>
+          <p class="active__rest-time">{{ restTimer.display() }}</p>
+          <div class="active__rest-controls">
+            <button type="button" (click)="restTimer.addSeconds(-15)">−15s</button>
+            <button type="button" (click)="restTimer.isRunning() ? restTimer.pause() : restTimer.resume()">
+              {{ restTimer.isRunning() ? 'Pause' : 'Resume' }}
+            </button>
+            <button type="button" (click)="restTimer.addSeconds(15)">+15s</button>
+          </div>
+          <button type="button" class="active__rest-skip" (click)="dismissRest()">Skip rest</button>
+        </div>
+      </div>
+    }
+  } @else {
+    <p class="active__status">No active workout</p>
+  }
+</section>

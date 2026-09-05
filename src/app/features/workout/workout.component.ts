@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
-import { PlaceholderPageComponent } from '../../shared/components/placeholder-page/placeholder-page.component';
+import { RouterLink } from '@angular/router';
 
+/** Legacy placeholder route — redirects users via links to the live session flow. */
 @Component({
   selector: 'app-workout',
-  imports: [PlaceholderPageComponent],
-  template: `<app-placeholder-page title="Active Workout" subtitle="Workout execution" />`,
+  imports: [RouterLink],
+  template: `
+    <section style="padding: 1.5rem; text-align: center">
+      <p>Start today’s workout from Home.</p>
+      <a routerLink="/home">Go home</a>
+    </section>
+  `,
 })
 export class WorkoutComponent {}

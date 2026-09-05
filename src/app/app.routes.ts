@@ -91,9 +91,21 @@ export const routes: Routes = [
       import('./features/settings/settings.component').then((m) => m.SettingsComponent),
   },
   {
-    path: 'workout',
+    path: 'session/active',
     loadComponent: () =>
-      import('./features/workout/workout.component').then((m) => m.WorkoutComponent),
+      import('./features/workout/active-workout.component').then((m) => m.ActiveWorkoutComponent),
+  },
+  {
+    path: 'session/complete',
+    loadComponent: () =>
+      import('./features/workout/workout-complete.component').then(
+        (m) => m.WorkoutCompleteComponent,
+      ),
+  },
+  {
+    path: 'workout',
+    redirectTo: 'home',
+    pathMatch: 'full',
   },
   { path: '**', redirectTo: 'home' },
 ];

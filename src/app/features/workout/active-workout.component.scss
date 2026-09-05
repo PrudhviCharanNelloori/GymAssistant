@@ -1,0 +1,220 @@
+@use '../../shared/styles/tokens' as *;
+@use '../../shared/styles/typography' as *;
+@use '../../shared/styles/mixins' as *;
+
+.active {
+  min-height: 100dvh;
+  padding: $space-6 $space-4 $space-8;
+  background: $color-bg-primary;
+}
+
+.active__header {
+  display: flex;
+  justify-content: space-between;
+  gap: $space-4;
+  margin-bottom: $space-5;
+}
+
+.active__eyebrow {
+  @include text-label;
+  margin: 0 0 $space-1;
+}
+
+.active__title {
+  @include text-greeting;
+  margin: 0;
+  font-size: $font-size-2xl;
+}
+
+.active__progress {
+  @include text-caption;
+  margin: $space-2 0 0;
+}
+
+.active__menu {
+  @include button-ghost;
+  align-self: flex-start;
+  background: $color-bg-secondary;
+  box-shadow: $shadow-card;
+  border-radius: $radius-full;
+  padding: 0 $space-4;
+}
+
+.active__prev {
+  @include card-compact;
+  margin-bottom: $space-4;
+}
+
+.active__label {
+  @include text-label;
+  margin: 0 0 $space-1;
+}
+
+.active__prev-value {
+  margin: 0;
+  font-weight: $font-weight-semibold;
+}
+
+.active__card {
+  @include card;
+  margin-bottom: $space-5;
+}
+
+.active__set-label {
+  margin: 0 0 $space-5;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+
+  span {
+    color: $color-text-secondary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+  }
+}
+
+.active__metrics {
+  display: grid;
+  gap: $space-5;
+}
+
+.active__metric-label {
+  @include text-label;
+  display: flex;
+  justify-content: space-between;
+  gap: $space-2;
+  margin: 0 0 $space-3;
+
+  span {
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: $font-weight-medium;
+  }
+}
+
+.active__stepper {
+  display: grid;
+  grid-template-columns: 56px 1fr 56px;
+  gap: $space-3;
+  align-items: center;
+
+  button {
+    @include flex-center;
+    @include touch-target;
+    height: 56px;
+    border: 0;
+    border-radius: $radius-lg;
+    background: $color-bg-muted;
+    color: $color-text-primary;
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-medium;
+  }
+
+  input {
+    @include input-field;
+    height: 72px;
+    border: 0;
+    background: $color-bg-muted;
+    text-align: center;
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    letter-spacing: -0.03em;
+  }
+}
+
+.active__actions {
+  display: grid;
+  gap: $space-3;
+}
+
+.active__complete {
+  @include button-solid;
+  width: 100%;
+  min-height: 56px;
+  font-size: $font-size-base;
+}
+
+.active__secondary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-2;
+
+  button {
+    @include button-ghost;
+    background: $color-bg-secondary;
+    box-shadow: $shadow-card;
+    border-radius: $radius-lg;
+  }
+}
+
+.active__abandon {
+  grid-column: 1 / -1;
+  color: $color-error !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.active__error {
+  color: $color-error;
+  text-align: center;
+  margin: 0 0 $space-3;
+  font-size: $font-size-sm;
+}
+
+.active__status {
+  @include text-caption;
+  text-align: center;
+  padding: $space-10 $space-4;
+}
+
+.active__rest {
+  position: fixed;
+  inset: 0;
+  z-index: $z-modal;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: $color-bg-overlay;
+  padding: $space-4;
+}
+
+.active__rest-sheet {
+  width: min(100%, $max-content-width);
+  background: $color-bg-secondary;
+  border-radius: $radius-2xl;
+  padding: $space-8 $space-5 $space-6;
+  text-align: center;
+  box-shadow: $shadow-lg;
+}
+
+.active__rest-label {
+  @include text-label;
+  margin: 0 0 $space-2;
+}
+
+.active__rest-time {
+  margin: 0 0 $space-6;
+  font-size: $font-size-5xl;
+  font-weight: $font-weight-bold;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.active__rest-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-2;
+  margin-bottom: $space-4;
+
+  button {
+    @include button-ghost;
+    min-height: 48px;
+    background: $color-bg-muted;
+    border-radius: $radius-lg;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.active__rest-skip {
+  @include button-solid;
+  width: 100%;
+}

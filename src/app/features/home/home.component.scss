@@ -101,3 +101,10 @@
   font-weight: $font-weight-semibold;
   margin: 0;
 }
+
+.home__error {
+  color: $color-error;
+  text-align: center;
+  font-size: $font-size-sm;
+  margin: $space-3 0 0;
+}

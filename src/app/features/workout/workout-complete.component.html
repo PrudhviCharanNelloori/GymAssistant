@@ -1,0 +1,32 @@
+<section class="complete">
+  @if (loading()) {
+    <p class="complete__status">Loading summary…</p>
+  } @else {
+    <p class="complete__eyebrow">Workout complete</p>
+    <h1 class="complete__title">{{ workoutName() }}</h1>
+    <p class="complete__subtitle">Nice work. Here’s your session snapshot.</p>
+
+    <div class="complete__stats">
+      <div class="complete__stat">
+        <p class="complete__stat-value">{{ durationMinutes() }}</p>
+        <p class="complete__stat-label">minutes</p>
+      </div>
+      <div class="complete__stat">
+        <p class="complete__stat-value">{{ completedSets() }}/{{ totalSets() }}</p>
+        <p class="complete__stat-label">sets</p>
+      </div>
+      <div class="complete__stat">
+        <p class="complete__stat-value">{{ volume().toLocaleString() }}</p>
+        <p class="complete__stat-label">kg volume</p>
+      </div>
+    </div>
+
+    <div class="complete__card">
+      <p class="complete__card-label">Completion</p>
+      <p class="complete__card-value">{{ completionRate() }}%</p>
+    </div>
+
+    <button type="button" class="complete__done" (click)="finish()">Back to home</button>
+    <a routerLink="/history" class="complete__link">View history</a>
+  }
+</section>

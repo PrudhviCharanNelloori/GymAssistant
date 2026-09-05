@@ -1,0 +1,82 @@
+@use '../../shared/styles/tokens' as *;
+@use '../../shared/styles/typography' as *;
+@use '../../shared/styles/mixins' as *;
+
+.complete {
+  min-height: 100dvh;
+  padding: $space-8 $space-4;
+  text-align: center;
+}
+
+.complete__eyebrow {
+  @include text-label;
+  margin: 0 0 $space-2;
+}
+
+.complete__title {
+  @include text-greeting;
+  margin: 0 0 $space-2;
+}
+
+.complete__subtitle {
+  @include text-caption;
+  margin: 0 0 $space-8;
+}
+
+.complete__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-3;
+  margin-bottom: $space-4;
+}
+
+.complete__stat {
+  @include card-compact;
+  padding: $space-4 $space-2;
+}
+
+.complete__stat-value {
+  margin: 0 0 $space-1;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+}
+
+.complete__stat-label {
+  @include text-caption;
+  margin: 0;
+  font-size: $font-size-xs;
+}
+
+.complete__card {
+  @include card;
+  margin-bottom: $space-8;
+}
+
+.complete__card-label {
+  @include text-label;
+  margin: 0 0 $space-2;
+}
+
+.complete__card-value {
+  margin: 0;
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-bold;
+  letter-spacing: -0.03em;
+}
+
+.complete__done {
+  @include button-solid;
+  width: 100%;
+  margin-bottom: $space-3;
+}
+
+.complete__link {
+  color: $color-text-secondary;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+}
+
+.complete__status {
+  @include text-caption;
+  padding: $space-10;
+}

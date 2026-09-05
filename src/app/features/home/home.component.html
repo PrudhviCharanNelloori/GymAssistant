@@ -31,11 +31,21 @@
       }
     </div>
     <div class="home__card-action">
-      @if (todaysWorkout(); as workout) {
-        <a class="home__start-btn" [routerLink]="['/workouts', workout.id]">
-          <span class="home__start-icon" aria-hidden="true">›</span>
-          View workout
-        </a>
+      @if (hasActiveSession()) {
+        <button type="button" class="home__start-btn" [disabled]="starting()" (click)="startOrResume()">
+          <span class="home__start-icon" aria-hidden="true">▶</span>
+          {{ starting() ? 'Opening…' : isPaused() ? 'Resume workout' : 'Continue workout' }}
+        </button>
+      } @else if (todaysWorkout(); as workout) {
+        <button
+          type="button"
+          class="home__start-btn"
+          [disabled]="starting() || workout.exercises.length === 0"
+          (click)="startOrResume()"
+        >
+          <span class="home__start-icon" aria-hidden="true">▶</span>
+          {{ starting() ? 'Starting…' : workout.exercises.length === 0 ? 'Add exercises first' : 'Start workout' }}
+        </button>
       } @else {
         <a class="home__start-btn" routerLink="/program">
           <span class="home__start-icon" aria-hidden="true">›</span>
@@ -44,6 +54,20 @@
       }
     </div>
   </div>
+
+  @if (error()) {
+    <p class="home__error">{{ error() }}</p>
+  }
+
+  @if (todaysWorkout(); as workout) {
+    <a class="home__link-card" [routerLink]="['/workouts', workout.id]">
+      <div>
+        <p class="home__link-label">Plan</p>
+        <p class="home__link-value">Edit today’s workout</p>
+      </div>
+      <span aria-hidden="true">›</span>
+    </a>
+  }
 
   <a routerLink="/workouts" class="home__link-card">
     <div>

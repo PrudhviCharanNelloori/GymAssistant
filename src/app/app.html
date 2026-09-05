@@ -1,6 +1,8 @@
-<div class="app-shell">
+<div class="app-shell" [class.app-shell--session]="hideNav()">
   <main class="app-shell__content">
     <router-outlet />
   </main>
-  <app-bottom-nav />
+  @if (!hideNav()) {
+    <app-bottom-nav />
+  }
 </div>

@@ -34,7 +34,7 @@
 - Workout program with weekly schedule
 - Assign workouts to days
 
-## Phase 5 — Active Workout
+## Phase 5 — Active Workout ✅
 
 - Today's workout resolution
 - Start/pause/resume/abandon workout
