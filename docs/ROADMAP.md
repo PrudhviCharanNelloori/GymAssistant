@@ -44,7 +44,7 @@
 - Skip sets/exercises
 - Persist active session state
 
-## Phase 6 — Workout History
+## Phase 6 — Workout History ✅
 
 - Completed workout list
 - Workout detail view

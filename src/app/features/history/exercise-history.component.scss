@@ -1,0 +1,151 @@
+@use '../../shared/styles/tokens' as *;
+@use '../../shared/styles/typography' as *;
+@use '../../shared/styles/mixins' as *;
+
+.ex-history {
+  padding: $space-6 $space-4;
+}
+
+.ex-history__header {
+  margin-bottom: $space-4;
+}
+
+.ex-history__back {
+  @include flex-center;
+  @include touch-target;
+  @include focus-ring;
+  width: 44px;
+  height: 44px;
+  margin: 0 0 $space-3 -#{$space-2};
+  border-radius: $radius-full;
+  color: inherit;
+  text-decoration: none;
+  font-size: $font-size-xl;
+}
+
+.ex-history__eyebrow {
+  @include text-label;
+  margin: 0;
+}
+
+.ex-history__title {
+  @include text-greeting;
+  margin: 0 0 $space-2;
+  font-size: $font-size-2xl;
+}
+
+.ex-history__subtitle {
+  @include text-caption;
+  margin: 0 0 $space-5;
+}
+
+.ex-history__summary {
+  @include card;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+  margin-bottom: $space-4;
+}
+
+.ex-history__summary-label {
+  @include text-label;
+  margin: 0 0 $space-1;
+}
+
+.ex-history__summary-value {
+  margin: 0;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+}
+
+.ex-history__actions {
+  margin-bottom: $space-5;
+}
+
+.ex-history__library {
+  @include button-ghost;
+  text-decoration: none;
+  color: $color-text-primary;
+  font-weight: $font-weight-semibold;
+  padding-left: 0;
+}
+
+.ex-history__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: $color-bg-secondary;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+}
+
+.ex-history__row {
+  @include focus-ring;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  min-height: 76px;
+  padding: $space-4;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid $color-border;
+}
+
+.ex-history__row-wrap--last .ex-history__row {
+  border-bottom: 0;
+}
+
+.ex-history__row-text {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.ex-history__row-name {
+  @include truncate;
+  font-weight: $font-weight-semibold;
+}
+
+.ex-history__row-meta {
+  @include truncate;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+}
+
+.ex-history__best {
+  flex-shrink: 0;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+}
+
+.ex-history__chevron {
+  color: $color-text-muted;
+  font-size: $font-size-xl;
+}
+
+.ex-history__status,
+.ex-history__empty {
+  @include text-caption;
+  text-align: center;
+  padding: $space-8 $space-4;
+}
+
+.ex-history__empty-title {
+  color: $color-text-primary;
+  font-weight: $font-weight-semibold;
+  margin: 0 0 $space-3;
+}
+
+.ex-history__link {
+  color: $color-text-primary;
+  font-weight: $font-weight-semibold;
+}
+
+.ex-history__empty-card {
+  @include card-compact;
+  text-align: center;
+  color: $color-text-secondary;
+}

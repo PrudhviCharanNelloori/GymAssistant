@@ -1,0 +1,54 @@
+<section class="ex-history">
+  <header class="ex-history__header">
+    <a routerLink="/history" class="ex-history__back" aria-label="Back">←</a>
+    <p class="ex-history__eyebrow">Exercise history</p>
+  </header>
+
+  @if (loading()) {
+    <p class="ex-history__status">Loading…</p>
+  } @else if (error() || !history()) {
+    <div class="ex-history__empty">
+      <p class="ex-history__empty-title">{{ error() || 'Not found' }}</p>
+      <a routerLink="/history" class="ex-history__link">Back to history</a>
+    </div>
+  } @else if (history(); as data) {
+    <h1 class="ex-history__title">{{ data.exercise.name }}</h1>
+    <p class="ex-history__subtitle">{{ formatLabel(data.exercise.primaryMuscleGroup) }}</p>
+
+    <div class="ex-history__summary">
+      <div>
+        <p class="ex-history__summary-label">Sessions</p>
+        <p class="ex-history__summary-value">{{ data.sessionCount }}</p>
+      </div>
+      <div>
+        <p class="ex-history__summary-label">Best set</p>
+        <p class="ex-history__summary-value">{{ data.bestSetLabel }}</p>
+      </div>
+    </div>
+
+    <div class="ex-history__actions">
+      <a class="ex-history__library" [routerLink]="['/exercises', data.exercise.id]">View in library</a>
+    </div>
+
+    @if (data.entries.length === 0) {
+      <div class="ex-history__empty-card">
+        <p>No logged sets for this exercise yet.</p>
+      </div>
+    } @else {
+      <ul class="ex-history__list">
+        @for (entry of data.entries; track entry.sessionId; let last = $last) {
+          <li [class.ex-history__row-wrap--last]="last">
+            <a class="ex-history__row" [routerLink]="['/history', entry.sessionId]">
+              <span class="ex-history__row-text">
+                <span class="ex-history__row-name">{{ entry.dateLabel }}</span>
+                <span class="ex-history__row-meta">{{ entry.workoutName }} · {{ entry.summary }}</span>
+              </span>
+              <span class="ex-history__best">{{ entry.bestSetLabel }}</span>
+              <span class="ex-history__chevron" aria-hidden="true">›</span>
+            </a>
+          </li>
+        }
+      </ul>
+    }
+  }
+</section>

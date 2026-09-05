@@ -1,0 +1,60 @@
+<section class="detail">
+  <header class="detail__header">
+    <a routerLink="/history" class="detail__back" aria-label="Back">←</a>
+    <p class="detail__eyebrow">Session</p>
+  </header>
+
+  @if (loading()) {
+    <p class="detail__status">Loading…</p>
+  } @else if (error() || !detail()) {
+    <div class="detail__empty">
+      <p class="detail__empty-title">{{ error() || 'Session not found' }}</p>
+      <a routerLink="/history" class="detail__link">Back to history</a>
+    </div>
+  } @else if (detail(); as item) {
+    <h1 class="detail__title">{{ item.workoutName }}</h1>
+    <p class="detail__subtitle">{{ dateTimeLabel() }}</p>
+
+    <div class="detail__stats">
+      <div class="detail__stat">
+        <p class="detail__stat-value">{{ item.stats.durationMinutes }}</p>
+        <p class="detail__stat-label">min</p>
+      </div>
+      <div class="detail__stat">
+        <p class="detail__stat-value">{{ item.stats.completedSets }}/{{ item.stats.totalSets }}</p>
+        <p class="detail__stat-label">sets</p>
+      </div>
+      <div class="detail__stat">
+        <p class="detail__stat-value">{{ item.stats.volumeKg.toLocaleString() }}</p>
+        <p class="detail__stat-label">kg</p>
+      </div>
+    </div>
+
+    <div class="detail__section-head">
+      <h2 class="detail__section-title">Exercises</h2>
+      <span class="detail__section-count">{{ item.exercises.length }}</span>
+    </div>
+
+    <ul class="detail__list">
+      @for (exercise of item.exercises; track exercise.exerciseId + exercise.order; let last = $last) {
+        <li [class.detail__row-wrap--last]="last">
+          <a class="detail__row" [routerLink]="['/history/exercises', exercise.exerciseId]">
+            <span class="detail__row-index">{{ exercise.order + 1 }}</span>
+            <span class="detail__row-text">
+              <span class="detail__row-name">{{ exercise.name }}</span>
+              <span class="detail__row-meta">{{ exercise.summary }}</span>
+            </span>
+            <span class="detail__chevron" aria-hidden="true">›</span>
+          </a>
+          <ul class="detail__sets">
+            @for (set of exercise.sets; track set.setNumber) {
+              <li [class.detail__set--skipped]="!set.completed">
+                Set {{ set.setNumber }} · {{ set.label }}
+              </li>
+            }
+          </ul>
+        </li>
+      }
+    </ul>
+  }
+</section>

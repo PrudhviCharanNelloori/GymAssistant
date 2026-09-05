@@ -53,6 +53,8 @@
       </div>
     }
 
+    <a class="detail__history" [routerLink]="['/history/exercises', item.id]">View history</a>
+
     @if (item.instructions?.length) {
       <div class="detail__card">
         <p class="detail__label">How to</p>

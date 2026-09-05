@@ -81,6 +81,20 @@ export const routes: Routes = [
       import('./features/history/history.component').then((m) => m.HistoryComponent),
   },
   {
+    path: 'history/exercises/:exerciseId',
+    loadComponent: () =>
+      import('./features/history/exercise-history.component').then(
+        (m) => m.ExerciseHistoryComponent,
+      ),
+  },
+  {
+    path: 'history/:sessionId',
+    loadComponent: () =>
+      import('./features/history/history-detail.component').then(
+        (m) => m.HistoryDetailComponent,
+      ),
+  },
+  {
     path: 'progress',
     loadComponent: () =>
       import('./features/progress/progress.component').then((m) => m.ProgressComponent),

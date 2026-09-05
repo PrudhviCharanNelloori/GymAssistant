@@ -1,0 +1,34 @@
+<section class="history">
+  <header class="history__header">
+    <p class="history__eyebrow">Log</p>
+    <h1 class="history__title">History</h1>
+    @if (!loading()) {
+      <p class="history__count">{{ items().length }} completed workout{{ items().length === 1 ? '' : 's' }}</p>
+    }
+  </header>
+
+  @if (loading()) {
+    <p class="history__status">Loading history…</p>
+  } @else if (items().length === 0) {
+    <div class="history__empty">
+      <p class="history__empty-title">No workouts yet</p>
+      <p class="history__empty-text">Complete a session and it will show up here.</p>
+      <a routerLink="/home" class="history__empty-cta">Go to home</a>
+    </div>
+  } @else {
+    <ul class="history__list">
+      @for (item of items(); track item.session.id; let last = $last) {
+        <li [class.history__row-wrap--last]="last">
+          <a class="history__row" [routerLink]="['/history', item.session.id]">
+            <span class="history__row-text">
+              <span class="history__row-name">{{ item.workoutName }}</span>
+              <span class="history__row-meta">{{ item.dateLabel }} · {{ meta(item) }}</span>
+            </span>
+            <span class="history__row-volume">{{ item.stats.volumeKg.toLocaleString() }} kg</span>
+            <span class="history__chevron" aria-hidden="true">›</span>
+          </a>
+        </li>
+      }
+    </ul>
+  }
+</section>
