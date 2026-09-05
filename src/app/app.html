@@ -1,4 +1,25 @@
 <div class="app-shell" [class.app-shell--session]="hideNav()">
+  @if (!pwa.online()) {
+    <div class="app-banner app-banner--offline" role="status">
+      You’re offline — workouts still save on this device.
+    </div>
+  }
+
+  @if (pwa.updateReady()) {
+    <div class="app-banner app-banner--update" role="status">
+      <span>A new version is ready.</span>
+      <button type="button" class="app-banner__action" (click)="applyUpdate()">Update</button>
+    </div>
+  } @else if (pwa.showInstallBanner() && !hideNav()) {
+    <div class="app-banner app-banner--install" role="dialog" aria-label="Install app">
+      <span>Install GymTracker for faster gym access.</span>
+      <div class="app-banner__actions">
+        <button type="button" class="app-banner__action" (click)="install()">Install</button>
+        <button type="button" class="app-banner__ghost" (click)="dismissInstall()">Not now</button>
+      </div>
+    </div>
+  }
+
   <main class="app-shell__content">
     <router-outlet />
   </main>

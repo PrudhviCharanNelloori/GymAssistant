@@ -57,6 +57,51 @@
   margin: 0;
 }
 
+.settings__card {
+  @include card;
+  margin-bottom: $space-4;
+}
+
+.settings__card-label {
+  @include text-label;
+  margin: 0 0 $space-1;
+}
+
+.settings__card-value {
+  margin: 0 0 $space-2;
+  font-weight: $font-weight-semibold;
+}
+
+.settings__card-note {
+  @include text-caption;
+  margin: 0 0 $space-4;
+  color: $color-warning;
+}
+
+.settings__card-note--ok {
+  color: $color-success;
+}
+
+.settings__actions {
+  display: grid;
+  gap: $space-2;
+}
+
+.settings__btn {
+  @include button-solid;
+  width: 100%;
+}
+
+.settings__btn--ghost {
+  @include button-ghost;
+  color: $color-text-primary;
+}
+
+.settings__toast {
+  @include text-caption;
+  margin: $space-3 0 0;
+}
+
 .settings__link {
   @include card-compact;
   @include focus-ring;

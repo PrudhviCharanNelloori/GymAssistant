@@ -28,6 +28,50 @@
       }
     </div>
 
+    <div class="settings__card">
+      <p class="settings__card-label">Device</p>
+      <p class="settings__card-value">
+        {{ pwa.online() ? 'Online' : 'Offline' }}
+        ·
+        {{ pwa.isStandalone() ? 'Installed app' : 'Browser tab' }}
+      </p>
+
+      @if (readiness(); as ready) {
+        <p class="settings__card-note" [class.settings__card-note--ok]="ready.ok">
+          {{ ready.message }}
+        </p>
+      }
+
+      <div class="settings__actions">
+        @if (pwa.canInstall()) {
+          <button type="button" class="settings__btn" [disabled]="installBusy()" (click)="installApp()">
+            {{ installBusy() ? 'Opening…' : 'Install app' }}
+          </button>
+        }
+
+        <button type="button" class="settings__btn settings__btn--ghost" [disabled]="checking()" (click)="recheckStorage()">
+          {{ checking() ? 'Checking…' : 'Verify offline data' }}
+        </button>
+
+        @if (pwa.updateReady()) {
+          <button type="button" class="settings__btn" (click)="applyUpdate()">Reload update</button>
+        } @else {
+          <button
+            type="button"
+            class="settings__btn settings__btn--ghost"
+            [disabled]="updateChecking()"
+            (click)="checkUpdates()"
+          >
+            {{ updateChecking() ? 'Checking…' : 'Check for updates' }}
+          </button>
+        }
+      </div>
+
+      @if (statusMessage()) {
+        <p class="settings__toast">{{ statusMessage() }}</p>
+      }
+    </div>
+
     <a routerLink="/progress" class="settings__link">
       <span>
         <span class="settings__link-label">Progress</span>

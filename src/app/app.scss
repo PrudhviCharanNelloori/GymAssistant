@@ -1,4 +1,6 @@
 @use './shared/styles/tokens' as *;
+@use './shared/styles/typography' as *;
+@use './shared/styles/mixins' as *;
 
 .app-shell {
   min-height: 100dvh;
@@ -14,4 +16,64 @@
 
 .app-shell--session .app-shell__content {
   padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.app-banner {
+  position: sticky;
+  top: 0;
+  z-index: $z-toast;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-3;
+  max-width: $max-content-width;
+  margin: 0 auto;
+  padding: $space-3 $space-4;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+}
+
+.app-banner--offline {
+  background: $color-bg-dark;
+  color: $color-text-inverse;
+}
+
+.app-banner--update,
+.app-banner--install {
+  background: $color-bg-achievement;
+  color: $color-text-primary;
+  border-bottom: 1px solid $color-border;
+}
+
+.app-banner__actions {
+  display: flex;
+  gap: $space-2;
+  flex-shrink: 0;
+}
+
+.app-banner__action {
+  @include focus-ring;
+  border: 0;
+  border-radius: $radius-full;
+  background: $color-bg-dark;
+  color: $color-text-inverse;
+  font: inherit;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  padding: $space-2 $space-3;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.app-banner__ghost {
+  @include focus-ring;
+  border: 0;
+  background: transparent;
+  color: $color-text-secondary;
+  font: inherit;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  padding: $space-2;
+  cursor: pointer;
+  white-space: nowrap;
 }

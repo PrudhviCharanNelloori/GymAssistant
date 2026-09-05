@@ -74,7 +74,13 @@ Derived from historical WorkoutSessions in dedicated services. No redundant prog
 
 ## Offline-First
 
-IndexedDB is primary store. Service worker caches app shell. Core workout flow works without network.
+IndexedDB is the primary store for all workout data. The Angular service worker:
+
+- Prefetches the app shell, icons, and static assets
+- Caches Google Fonts for offline typography after first load
+- Serves SPA navigation offline via `navigationUrls`
+
+`PwaService` tracks online/offline state, install prompts, service-worker updates, and verifies local data readiness (default user + exercise library).
 
 ## Future Sync
 

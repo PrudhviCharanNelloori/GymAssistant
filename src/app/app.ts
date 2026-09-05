@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map, startWith } from 'rxjs';
+import { PwaService } from './core/services';
 import { BottomNavComponent } from './shared/components/bottom-nav/bottom-nav.component';
 
 @Component({
@@ -10,8 +11,9 @@ import { BottomNavComponent } from './shared/components/bottom-nav/bottom-nav.co
   styleUrl: './app.scss',
   templateUrl: './app.html',
 })
-export class App {
+export class App implements OnInit {
   private readonly router = inject(Router);
+  readonly pwa = inject(PwaService);
 
   readonly hideNav = toSignal(
     this.router.events.pipe(
@@ -21,4 +23,20 @@ export class App {
     ),
     { initialValue: false },
   );
+
+  ngOnInit(): void {
+    void this.pwa.verifyOfflineDataAccess();
+  }
+
+  install(): void {
+    void this.pwa.promptInstall();
+  }
+
+  dismissInstall(): void {
+    this.pwa.dismissInstall();
+  }
+
+  applyUpdate(): void {
+    void this.pwa.applyUpdate();
+  }
 }
