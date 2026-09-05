@@ -1,15 +1,38 @@
 <section class="home">
-  <div class="home__top">
-    <div>
+  <header class="home__header">
+    <div class="home__intro">
       <p class="home__date">{{ today }}</p>
-      <h1 class="home__title">Good morning</h1>
-      <p class="home__level">Level {{ level() }} · {{ stars() }} ★</p>
+      <h1 class="home__title">{{ greeting() }}, {{ userName() }}</h1>
     </div>
-    <a routerLink="/progress" class="home__streak" aria-label="View streak on progress">
-      <span class="home__streak-value">{{ streak() }}</span>
-      <span class="home__streak-label">day streak</span>
+    <a routerLink="/settings" class="home__avatar" [attr.aria-label]="'Profile, ' + userName()">
+      {{ initials() }}
     </a>
-  </div>
+  </header>
+
+  <a routerLink="/progress" class="home__streak-row">
+    <span class="home__streak-text">
+      <span class="home__flame" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path
+            d="M12 21c4-1.5 6.5-4.8 6.5-8.7 0-3.4-1.8-5.7-3.7-7.3-.4 2.2-1.6 3.4-3.1 4.1C11 5.5 9.2 3 9.2 3 7 5.6 5.5 8.6 5.5 12.3 5.5 16.2 8 19.5 12 21Z"
+            fill="currentColor"
+          />
+        </svg>
+      </span>
+      <strong>{{ streak() }} day streak</strong>
+    </span>
+    <div class="home__week" aria-label="Last 7 days">
+      @for (day of weekDays(); track day.dayKey) {
+        <span
+          class="home__week-dot"
+          [class.home__week-dot--done]="day.completed"
+          [class.home__week-dot--today]="day.isToday"
+        >
+          {{ day.completed ? '✓' : day.label }}
+        </span>
+      }
+    </div>
+  </a>
 
   <div class="home__card">
     <div class="home__card-dark">
@@ -19,19 +42,10 @@
       } @else if (todaysWorkout(); as workout) {
         <p class="home__card-value">{{ workout.name }}</p>
         @if (summary(workout); as stats) {
-          <div class="home__stats">
-            <div>
-              <p class="home__stat-value">{{ stats.exerciseCount }}</p>
-              <p class="home__stat-label">exercises</p>
-            </div>
-            <div>
-              <p class="home__stat-value">{{ stats.setCount }}</p>
-              <p class="home__stat-label">sets</p>
-            </div>
-            <div>
-              <p class="home__stat-value">~{{ stats.minutes }}</p>
-              <p class="home__stat-label">min</p>
-            </div>
+          <div class="home__card-stats">
+            <span><strong>{{ stats.exerciseCount }}</strong> exercises</span>
+            <span><strong>{{ stats.setCount }}</strong> sets</span>
+            <span><strong>~{{ stats.minutes }}</strong> min</span>
           </div>
         }
       } @else {
@@ -42,7 +56,7 @@
     <div class="home__card-action">
       @if (hasActiveSession()) {
         <button type="button" class="home__start-btn" [disabled]="starting()" (click)="startOrResume()">
-          <span class="home__start-icon" aria-hidden="true">▶</span>
+          <span class="home__play" aria-hidden="true">▶</span>
           {{ starting() ? 'Opening…' : isPaused() ? 'Resume workout' : 'Continue workout' }}
         </button>
       } @else if (todaysWorkout(); as workout) {
@@ -52,12 +66,12 @@
           [disabled]="starting() || workout.exercises.length === 0"
           (click)="startOrResume()"
         >
-          <span class="home__start-icon" aria-hidden="true">▶</span>
+          <span class="home__play" aria-hidden="true">▶</span>
           {{ starting() ? 'Starting…' : workout.exercises.length === 0 ? 'Add exercises first' : 'Start workout' }}
         </button>
       } @else {
         <a class="home__start-btn" routerLink="/program">
-          <span class="home__start-icon" aria-hidden="true">›</span>
+          <span class="home__play" aria-hidden="true">›</span>
           Set up program
         </a>
       }
@@ -68,21 +82,80 @@
     <p class="home__error">{{ error() }}</p>
   }
 
-  @if (todaysWorkout(); as workout) {
-    <a class="home__link-card" [routerLink]="['/workouts', workout.id]">
-      <div>
-        <p class="home__link-label">Plan</p>
-        <p class="home__link-value">Edit today’s workout</p>
-      </div>
-      <span aria-hidden="true">›</span>
+  <div class="home__metrics">
+    <div class="home__metric">
+      <span class="home__metric-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path
+            d="M7 14.5c0 2.5 2.2 4.5 5 4.5s5-2 5-4.5S14.8 9 12 7c-2.8 2-5 5-5 7.5Z"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </span>
+      <p class="home__metric-value">{{ totalWorkouts() }}</p>
+      <p class="home__metric-label">Total Workouts</p>
+    </div>
+    <div class="home__metric">
+      <span class="home__metric-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <rect x="4" y="6" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.75" />
+          <path d="M8 4v3M16 4v3M4 11h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+        </svg>
+      </span>
+      <p class="home__metric-value">{{ weekCompleted() }}/{{ weekPlanned() }}</p>
+      <p class="home__metric-label">This Week</p>
+    </div>
+    <div class="home__metric">
+      <span class="home__metric-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path
+            d="M4 16.5 9.5 11l3.5 3.5L20 7"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path d="M15 7h5v5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+      <p class="home__metric-value">{{ totalVolumeLabel() }}</p>
+      <p class="home__metric-label">kg Volume</p>
+    </div>
+  </div>
+
+  @if (latestPr(); as pr) {
+    <a class="home__pr" [routerLink]="['/history/exercises', pr.exerciseId]">
+      <span class="home__pr-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path
+            d="M8 5h8v2.2c0 2.2-1.8 4-4 4s-4-1.8-4-4V5Z"
+            stroke="currentColor"
+            stroke-width="1.75"
+          />
+          <path d="M8 6H5.8A2.8 2.8 0 0 0 8 9.8M16 6h2.2A2.8 2.8 0 0 1 16 9.8" stroke="currentColor" stroke-width="1.75" />
+          <path d="M12 11.2V14M9.5 19h5M10.5 14h3v5h-3v-5Z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round" />
+        </svg>
+      </span>
+      <span class="home__pr-text">
+        <span class="home__pr-label">New Personal Record</span>
+        <span class="home__pr-name">{{ pr.exerciseName }}</span>
+        <span class="home__pr-detail">{{ pr.label }}</span>
+      </span>
     </a>
   }
 
-  <a routerLink="/workouts" class="home__link-card">
-    <div>
-      <p class="home__link-label">Workouts</p>
-      <p class="home__link-value">Build & schedule</p>
-    </div>
-    <span aria-hidden="true">›</span>
+  <a
+    class="home__tomorrow"
+    [routerLink]="tomorrowsWorkout() ? ['/workouts', tomorrowsWorkout()!.id] : '/program'"
+  >
+    <span>
+      <span class="home__tomorrow-label">Tomorrow</span>
+      <span class="home__tomorrow-value">
+        {{ tomorrowsWorkout()?.name ?? 'Rest day' }}
+      </span>
+    </span>
+    <span class="home__chevron" aria-hidden="true">›</span>
   </a>
 </section>

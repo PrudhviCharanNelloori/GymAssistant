@@ -23,7 +23,7 @@
   @include touch-target;
   flex: 1;
   flex-direction: column;
-  gap: $space-1;
+  gap: 4px;
   text-decoration: none;
   color: $color-text-muted;
   font-size: $font-size-xs;
@@ -38,8 +38,15 @@
 }
 
 .bottom-nav__icon {
-  font-size: 1.25rem;
-  line-height: 1;
+  @include flex-center;
+  width: 24px;
+  height: 24px;
+
+  svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+  }
 }
 
 .bottom-nav__label {

@@ -28,7 +28,7 @@ Defined in `src/app/shared/styles/_tokens.scss` and exposed as CSS custom proper
 
 ## Typography
 
-- Base font: **Inter** (400, 500, 600, 700) with system fallbacks
+- Base font: **Space Grotesk** (400, 500, 600, 700) with system fallbacks
 - Greeting: 32px bold
 - Heading: 24px bold
 - Display sizes for weight, reps, timer (40–48px)
