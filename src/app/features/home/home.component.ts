@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import type { Workout } from '../../core/models';
 import {
   ActiveWorkoutService,
+  GamificationService,
   ProgressService,
   WorkoutProgramService,
   WorkoutService,
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
   private readonly workoutService = inject(WorkoutService);
   private readonly activeWorkout = inject(ActiveWorkoutService);
   private readonly progressService = inject(ProgressService);
+  private readonly gamification = inject(GamificationService);
 
   readonly today = new Date().toLocaleDateString(undefined, {
     weekday: 'long',
@@ -34,18 +36,24 @@ export class HomeComponent implements OnInit {
   readonly starting = signal(false);
   readonly error = signal<string | null>(null);
   readonly streak = signal(0);
+  readonly level = signal(1);
+  readonly stars = signal(0);
 
   async ngOnInit(): Promise<void> {
     await Promise.all([
       this.programService.load(),
       this.activeWorkout.hydrate(),
       this.progressService.load(),
+      this.gamification.load(),
     ]);
     const workout = await this.programService.getTodaysWorkout();
     this.todaysWorkout.set(workout ?? null);
     this.hasActiveSession.set(this.activeWorkout.hasActiveSession());
     this.isPaused.set(this.activeWorkout.isPaused());
     this.streak.set(this.progressService.overview()?.streaks.current ?? 0);
+    const snap = this.gamification.snapshot();
+    this.level.set(snap?.level.level ?? 1);
+    this.stars.set(snap?.stars ?? 0);
     this.loading.set(false);
   }
 

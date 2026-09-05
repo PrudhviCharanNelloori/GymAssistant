@@ -24,6 +24,12 @@
   margin: 0;
 }
 
+.home__level {
+  @include text-caption;
+  margin: $space-2 0 0;
+  font-weight: $font-weight-semibold;
+}
+
 .home__streak {
   @include focus-ring;
   flex-shrink: 0;

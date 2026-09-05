@@ -49,6 +49,109 @@
   font-size: $font-size-xs;
 }
 
+.progress__level-card {
+  @include card;
+  margin-bottom: $space-5;
+}
+
+.progress__level-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: $space-3;
+  margin-bottom: $space-3;
+}
+
+.progress__level-label {
+  margin: 0 0 $space-1;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+}
+
+.progress__level-xp {
+  @include text-caption;
+  margin: 0;
+}
+
+.progress__level-next {
+  margin: 0;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+}
+
+.progress__level-bar {
+  height: 8px;
+  border-radius: $radius-full;
+  background: $color-bg-muted;
+  overflow: hidden;
+
+  span {
+    display: block;
+    height: 100%;
+    background: $color-streak;
+    border-radius: $radius-full;
+  }
+}
+
+.progress__milestones {
+  list-style: none;
+  margin: 0 0 $space-6;
+  padding: 0;
+  background: $color-bg-secondary;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+}
+
+.progress__milestone {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  min-height: 68px;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $color-border;
+}
+
+.progress__milestone--last {
+  border-bottom: 0;
+}
+
+.progress__milestone--locked {
+  opacity: 0.45;
+}
+
+.progress__milestone-star {
+  flex-shrink: 0;
+  color: $color-streak;
+  font-size: $font-size-lg;
+}
+
+.progress__milestone-text {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.progress__milestone-title {
+  @include truncate;
+  font-weight: $font-weight-semibold;
+}
+
+.progress__milestone-desc {
+  @include truncate;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+}
+
+.progress__milestone-points {
+  flex-shrink: 0;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+}
+
 .progress__card {
   @include card;
   margin-bottom: $space-6;

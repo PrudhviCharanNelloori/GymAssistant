@@ -1,7 +1,13 @@
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { TrackingMetric, WorkoutSessionStatus } from '../../core/models';
-import { ActiveWorkoutService, WorkoutService } from '../../core/services';
+import { WorkoutSessionStatus } from '../../core/models';
+import {
+  ActiveWorkoutService,
+  GamificationService,
+  type CelebrationView,
+  WorkoutService,
+} from '../../core/services';
+import { summarizeSession } from '../../core/utils';
 
 @Component({
   selector: 'app-workout-complete',
@@ -13,6 +19,7 @@ export class WorkoutCompleteComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly activeWorkout = inject(ActiveWorkoutService);
   private readonly workouts = inject(WorkoutService);
+  private readonly gamification = inject(GamificationService);
 
   readonly loading = signal(true);
   readonly workoutName = signal('Workout');
@@ -20,6 +27,7 @@ export class WorkoutCompleteComponent implements OnInit {
   readonly completedSets = signal(0);
   readonly totalSets = signal(0);
   readonly volume = signal(0);
+  readonly celebration = signal<CelebrationView | null>(null);
 
   readonly completionRate = computed(() => {
     const total = this.totalSets();
@@ -28,7 +36,6 @@ export class WorkoutCompleteComponent implements OnInit {
   });
 
   async ngOnInit(): Promise<void> {
-    // Use in-memory completed session (hydrate would clear COMPLETED sessions)
     const session = this.activeWorkout.activeSession();
     if (!session || session.status !== WorkoutSessionStatus.COMPLETED) {
       await this.router.navigate(['/home']);
@@ -39,30 +46,14 @@ export class WorkoutCompleteComponent implements OnInit {
     const workout = fromState ?? (await this.workouts.getById(session.workoutId));
     this.workoutName.set(workout?.name ?? 'Workout');
 
-    const started = new Date(session.startedAt).getTime();
-    const ended = new Date(session.completedAt ?? new Date()).getTime();
-    this.durationMinutes.set(Math.max(1, Math.round((ended - started) / 60000)));
+    const stats = summarizeSession(session);
+    this.durationMinutes.set(stats.durationMinutes);
+    this.completedSets.set(stats.completedSets);
+    this.totalSets.set(stats.totalSets);
+    this.volume.set(stats.volumeKg);
 
-    let completed = 0;
-    let total = 0;
-    let volume = 0;
-
-    for (const exercise of session.exercises) {
-      for (const set of exercise.sets) {
-        total += 1;
-        if (!set.completed) continue;
-        completed += 1;
-        const weight =
-          set.actualMetrics.find((metric) => metric.metric === TrackingMetric.WEIGHT)?.value ?? 0;
-        const reps =
-          set.actualMetrics.find((metric) => metric.metric === TrackingMetric.REPS)?.value ?? 0;
-        volume += weight * reps;
-      }
-    }
-
-    this.completedSets.set(completed);
-    this.totalSets.set(total);
-    this.volume.set(Math.round(volume));
+    const celebration = await this.gamification.celebrateSession(session);
+    this.celebration.set(celebration);
     this.loading.set(false);
   }
 

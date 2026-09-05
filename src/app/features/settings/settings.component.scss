@@ -1,0 +1,86 @@
+@use '../../shared/styles/tokens' as *;
+@use '../../shared/styles/typography' as *;
+@use '../../shared/styles/mixins' as *;
+
+.settings {
+  padding: $space-6 $space-4;
+}
+
+.settings__header {
+  margin-bottom: $space-5;
+}
+
+.settings__eyebrow {
+  @include text-label;
+  margin: 0 0 $space-1;
+}
+
+.settings__title {
+  @include text-greeting;
+  margin: 0;
+}
+
+.settings__profile {
+  @include card;
+  margin-bottom: $space-4;
+}
+
+.settings__name {
+  margin: 0 0 $space-2;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+}
+
+.settings__meta {
+  @include text-caption;
+  margin: 0 0 $space-3;
+  font-weight: $font-weight-semibold;
+}
+
+.settings__bar {
+  height: 8px;
+  border-radius: $radius-full;
+  background: $color-bg-muted;
+  overflow: hidden;
+  margin-bottom: $space-2;
+
+  span {
+    display: block;
+    height: 100%;
+    background: $color-streak;
+    border-radius: $radius-full;
+  }
+}
+
+.settings__next {
+  @include text-caption;
+  margin: 0;
+}
+
+.settings__link {
+  @include card-compact;
+  @include focus-ring;
+  margin-bottom: $space-3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: inherit;
+}
+
+.settings__link-label {
+  @include text-label;
+  display: block;
+  margin: 0 0 $space-1;
+}
+
+.settings__link-value {
+  display: block;
+  font-weight: $font-weight-semibold;
+}
+
+.settings__status {
+  @include text-caption;
+  text-align: center;
+  padding: $space-8;
+}

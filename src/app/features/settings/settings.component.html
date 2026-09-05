@@ -1,0 +1,47 @@
+<section class="settings">
+  <header class="settings__header">
+    <p class="settings__eyebrow">Profile</p>
+    <h1 class="settings__title">Settings</h1>
+  </header>
+
+  @if (loading()) {
+    <p class="settings__status">Loading…</p>
+  } @else {
+    <div class="settings__profile">
+      <p class="settings__name">{{ name() }}</p>
+      @if (game(); as g) {
+        <p class="settings__meta">
+          Level {{ g.level.level }} · {{ g.level.totalXp }} XP · {{ g.stars }} ★
+        </p>
+        <div
+          class="settings__bar"
+          role="progressbar"
+          [attr.aria-valuenow]="g.level.progressPercent"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <span [style.width.%]="g.level.progressPercent"></span>
+        </div>
+        <p class="settings__next">
+          {{ g.level.xpForNextLevel - g.level.xpIntoLevel }} XP to level {{ g.level.level + 1 }}
+        </p>
+      }
+    </div>
+
+    <a routerLink="/progress" class="settings__link">
+      <span>
+        <span class="settings__link-label">Progress</span>
+        <span class="settings__link-value">Milestones & records</span>
+      </span>
+      <span aria-hidden="true">›</span>
+    </a>
+
+    <a routerLink="/history" class="settings__link">
+      <span>
+        <span class="settings__link-label">History</span>
+        <span class="settings__link-value">Past workouts</span>
+      </span>
+      <span aria-hidden="true">›</span>
+    </a>
+  }
+</section>

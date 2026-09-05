@@ -29,6 +29,29 @@
         </div>
       </div>
 
+      @if (game(); as g) {
+        <div class="progress__level-card">
+          <div class="progress__level-head">
+            <div>
+              <p class="progress__level-label">Level {{ g.level.level }}</p>
+              <p class="progress__level-xp">{{ g.level.totalXp }} XP · {{ g.stars }} ★</p>
+            </div>
+            <p class="progress__level-next">
+              {{ g.level.xpIntoLevel }}/{{ g.level.xpForNextLevel }}
+            </p>
+          </div>
+          <div
+            class="progress__level-bar"
+            role="progressbar"
+            [attr.aria-valuenow]="g.level.progressPercent"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            <span [style.width.%]="g.level.progressPercent"></span>
+          </div>
+        </div>
+      }
+
       <div class="progress__card">
         <div class="progress__card-head">
           <h2 class="progress__section-title">This week</h2>
@@ -118,6 +141,30 @@
           this month · {{ data.streaks.current }} day streak
         </p>
       </div>
+
+      @if (game(); as g) {
+        <div class="progress__section-head">
+          <h2 class="progress__section-title">Milestones</h2>
+          <span class="progress__link">{{ g.unlockedCount }}/{{ g.milestones.length }}</span>
+        </div>
+
+        <ul class="progress__milestones">
+          @for (item of g.milestones; track item.id; let last = $last) {
+            <li
+              class="progress__milestone"
+              [class.progress__milestone--locked]="!item.unlocked"
+              [class.progress__milestone--last]="last"
+            >
+              <span class="progress__milestone-star" aria-hidden="true">{{ item.unlocked ? '★' : '☆' }}</span>
+              <span class="progress__milestone-text">
+                <span class="progress__milestone-title">{{ item.title }}</span>
+                <span class="progress__milestone-desc">{{ item.description }}</span>
+              </span>
+              <span class="progress__milestone-points">{{ item.stars }}★</span>
+            </li>
+          }
+        </ul>
+      }
 
       <div class="progress__section-head">
         <h2 class="progress__section-title">Personal records</h2>

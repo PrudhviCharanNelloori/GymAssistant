@@ -1,6 +1,6 @@
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ProgressService } from '../../core/services';
+import { GamificationService, ProgressService } from '../../core/services';
 import {
   buildMonthStreakCalendar,
   type ProgressionPoint,
@@ -15,9 +15,11 @@ import {
 })
 export class ProgressComponent implements OnInit {
   private readonly progressService = inject(ProgressService);
+  private readonly gamification = inject(GamificationService);
 
   readonly loading = signal(true);
   readonly overview = this.progressService.overview;
+  readonly game = this.gamification.snapshot;
   readonly selectedId = this.progressService.selectedId;
   readonly progression = this.progressService.selectedProgression;
   readonly selectedName = this.progressService.selectedExerciseName;
@@ -44,7 +46,7 @@ export class ProgressComponent implements OnInit {
   readonly chart = computed(() => buildLineChart(this.progression()));
 
   async ngOnInit(): Promise<void> {
-    await this.progressService.load();
+    await Promise.all([this.progressService.load(), this.gamification.load()]);
     this.loading.set(false);
   }
 

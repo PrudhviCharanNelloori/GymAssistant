@@ -4,7 +4,15 @@
   } @else {
     <p class="complete__eyebrow">Workout complete</p>
     <h1 class="complete__title">{{ workoutName() }}</h1>
-    <p class="complete__subtitle">Nice work. Here’s your session snapshot.</p>
+    @if (celebration(); as party) {
+      @if (party.leveledUp) {
+        <p class="complete__level-up">Level {{ party.levelAfter.level }}!</p>
+      } @else {
+        <p class="complete__subtitle">Nice work. Here’s your session snapshot.</p>
+      }
+    } @else {
+      <p class="complete__subtitle">Nice work. Here’s your session snapshot.</p>
+    }
 
     <div class="complete__stats">
       <div class="complete__stat">
@@ -21,10 +29,56 @@
       </div>
     </div>
 
-    <div class="complete__card">
-      <p class="complete__card-label">Completion</p>
-      <p class="complete__card-value">{{ completionRate() }}%</p>
-    </div>
+    @if (celebration(); as party) {
+      <div class="complete__reward">
+        <div class="complete__xp">
+          <p class="complete__xp-value">+{{ party.xp.total }} XP</p>
+          <p class="complete__xp-meta">
+            Level {{ party.levelAfter.level }} · {{ party.levelAfter.xpIntoLevel }}/{{
+              party.levelAfter.xpForNextLevel
+            }}
+            to next
+          </p>
+          <div class="complete__xp-bar" role="progressbar" [attr.aria-valuenow]="party.levelAfter.progressPercent" aria-valuemin="0" aria-valuemax="100">
+            <span [style.width.%]="party.levelAfter.progressPercent"></span>
+          </div>
+        </div>
+
+        <div class="complete__meta-row">
+          <span>{{ party.streak }} day streak</span>
+          <span>{{ party.stars }} ★</span>
+          <span>{{ completionRate() }}% done</span>
+        </div>
+      </div>
+
+      @if (party.newPersonalRecords.length) {
+        <div class="complete__celebrate">
+          <p class="complete__celebrate-title">New personal records</p>
+          <ul class="complete__celebrate-list">
+            @for (pr of party.newPersonalRecords; track pr.exerciseId) {
+              <li>
+                <span>{{ pr.name }}</span>
+                <strong>{{ pr.label }}</strong>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+
+      @if (party.newlyUnlocked.length) {
+        <div class="complete__celebrate complete__celebrate--milestone">
+          <p class="complete__celebrate-title">Milestones unlocked</p>
+          <ul class="complete__celebrate-list">
+            @for (item of party.newlyUnlocked; track item.id) {
+              <li>
+                <span>{{ item.title }}</span>
+                <strong>{{ item.stars }} ★</strong>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    }
 
     <button type="button" class="complete__done" (click)="finish()">Back to home</button>
     <a routerLink="/history" class="complete__link">View history</a>

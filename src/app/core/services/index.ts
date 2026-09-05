@@ -6,3 +6,4 @@ export * from './rest-timer.service';
 export * from './active-workout.service';
 export * from './history.service';
 export * from './progress.service';
+export * from './gamification.service';

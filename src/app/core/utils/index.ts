@@ -4,3 +4,4 @@ export * from './schedule';
 export * from './workout-plan';
 export * from './session-stats';
 export * from './progress-stats';
+export * from './gamification';

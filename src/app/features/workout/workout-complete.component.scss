@@ -64,6 +64,90 @@
   letter-spacing: -0.03em;
 }
 
+.complete__level-up {
+  margin: 0 0 $space-8;
+  color: $color-streak;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+}
+
+.complete__reward {
+  @include card;
+  margin-bottom: $space-4;
+  text-align: left;
+}
+
+.complete__xp-value {
+  margin: 0 0 $space-1;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+}
+
+.complete__xp-meta {
+  @include text-caption;
+  margin: 0 0 $space-3;
+}
+
+.complete__xp-bar {
+  height: 8px;
+  border-radius: $radius-full;
+  background: $color-bg-muted;
+  overflow: hidden;
+  margin-bottom: $space-4;
+
+  span {
+    display: block;
+    height: 100%;
+    background: $color-text-primary;
+    border-radius: $radius-full;
+  }
+}
+
+.complete__meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-3;
+  justify-content: space-between;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+}
+
+.complete__celebrate {
+  @include card;
+  background: $color-bg-achievement;
+  margin-bottom: $space-4;
+  text-align: left;
+}
+
+.complete__celebrate--milestone {
+  margin-bottom: $space-8;
+}
+
+.complete__celebrate-title {
+  @include text-label;
+  margin: 0 0 $space-3;
+}
+
+.complete__celebrate-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: $space-2;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    gap: $space-3;
+    font-size: $font-size-sm;
+
+    strong {
+      font-weight: $font-weight-bold;
+    }
+  }
+}
+
 .complete__done {
   @include button-solid;
   width: 100%;

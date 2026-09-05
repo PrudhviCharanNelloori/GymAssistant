@@ -3,6 +3,7 @@
     <div>
       <p class="home__date">{{ today }}</p>
       <h1 class="home__title">Good morning</h1>
+      <p class="home__level">Level {{ level() }} · {{ stars() }} ★</p>
     </div>
     <a routerLink="/progress" class="home__streak" aria-label="View streak on progress">
       <span class="home__streak-value">{{ streak() }}</span>
