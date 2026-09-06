@@ -12,11 +12,13 @@ import {
   normalizeSchedule,
 } from '../utils';
 import { WorkoutService } from './workout.service';
+import { SyncService } from './sync.service';
 
 @Injectable({ providedIn: 'root' })
 export class WorkoutProgramService {
   private readonly repo = inject(WorkoutProgramRepository);
   private readonly workouts = inject(WorkoutService);
+  private readonly sync = inject(SyncService);
 
   private readonly activeProgram = signal<WorkoutProgram | null>(null);
   private readonly loaded = signal(false);
@@ -66,6 +68,7 @@ export class WorkoutProgramService {
 
     const updated = await this.repo.updateProgram(current.id, { name: name.trim() || current.name });
     this.activeProgram.set(updated);
+    this.sync.scheduleSync();
     return updated;
   }
 
@@ -97,6 +100,7 @@ export class WorkoutProgramService {
 
     const updated = await this.repo.setSchedule(current.id, schedule);
     this.activeProgram.set(updated);
+    this.sync.scheduleSync();
     return updated;
   }
 

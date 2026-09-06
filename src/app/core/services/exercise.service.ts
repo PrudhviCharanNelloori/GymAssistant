@@ -10,6 +10,7 @@ import {
   type CreateExerciseInput,
   type UpdateExerciseInput,
 } from '../storage';
+import { SyncService } from './sync.service';
 
 export type ExerciseFilters = {
   query: string;
@@ -21,6 +22,7 @@ export type ExerciseFilters = {
 @Injectable({ providedIn: 'root' })
 export class ExerciseService {
   private readonly repo = inject(ExerciseRepository);
+  private readonly sync = inject(SyncService);
 
   private readonly allExercises = signal<Exercise[]>([]);
   private readonly loaded = signal(false);
@@ -93,6 +95,7 @@ export class ExerciseService {
     });
 
     this.allExercises.update((list) => [...list, exercise]);
+    this.sync.scheduleSync();
     return exercise;
   }
 
@@ -101,6 +104,7 @@ export class ExerciseService {
     this.allExercises.update((list) =>
       list.map((exercise) => (exercise.id === id ? updated : exercise)),
     );
+    this.sync.scheduleSync();
     return updated;
   }
 
@@ -115,6 +119,7 @@ export class ExerciseService {
 
     await this.repo.delete(id);
     this.allExercises.update((list) => list.filter((exercise) => exercise.id !== id));
+    this.sync.scheduleSync();
   }
 
   setSearch(query: string): void {

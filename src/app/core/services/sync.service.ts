@@ -94,7 +94,7 @@ export class SyncService {
       });
       this.lastSyncedSignal.set(state.lastSyncedAt);
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Sync failed';
+      const message = formatSyncError(err);
       this.lastErrorSignal.set(message);
       const prev = await this.getSyncState();
       await this.saveSyncState({
@@ -155,10 +155,11 @@ export class SyncService {
     const client = getSupabaseClient();
     if (client && navigator.onLine) {
       const name = (await this.users.getById(userId))?.name ?? displayName;
-      await client.from('profiles').upsert({
+      const { error } = await client.from('profiles').upsert({
         id: userId,
         display_name: name,
       });
+      if (error) throw error;
     }
   }
 
@@ -247,10 +248,11 @@ export class SyncService {
     const client = getSupabaseClient();
     const name = (await this.users.getById(userId))?.name ?? this.auth.displayName();
     if (client) {
-      await client.from('profiles').upsert({
+      const { error } = await client.from('profiles').upsert({
         id: userId,
         display_name: name,
       });
+      if (error) throw error;
     }
 
     await this.saveSyncState({
@@ -448,4 +450,28 @@ export class SyncService {
     await this.db.syncState.put(state);
     return state;
   }
+}
+
+function formatSyncError(err: unknown): string {
+  if (err instanceof Error && err.message) {
+    return err.message;
+  }
+  if (err && typeof err === 'object') {
+    const record = err as {
+      message?: unknown;
+      details?: unknown;
+      hint?: unknown;
+      code?: unknown;
+    };
+    const parts = [record.message, record.details, record.hint]
+      .filter((part): part is string => typeof part === 'string' && part.trim().length > 0)
+      .map((part) => part.trim());
+    if (parts.length) {
+      return parts.join(' — ');
+    }
+    if (typeof record.code === 'string' && record.code.trim()) {
+      return `Sync failed (${record.code})`;
+    }
+  }
+  return 'Sync failed';
 }
