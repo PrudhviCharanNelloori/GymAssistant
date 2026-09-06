@@ -69,6 +69,17 @@ export class ExerciseRepository extends BaseRepository<Exercise> {
     return this.table.filter((exercise) => !exercise.isCustom).toArray();
   }
 
+  /** All stored ids (including soft-deleted) for idempotent seeding. */
+  async getAllIds(): Promise<Set<string>> {
+    const keys = await this.table.toCollection().primaryKeys();
+    return new Set(keys.map(String));
+  }
+
+  async bulkHardDelete(ids: string[]): Promise<void> {
+    if (ids.length === 0) return;
+    await this.table.bulkDelete(ids);
+  }
+
   async filter(options: {
     muscleGroup?: MuscleGroup;
     equipment?: Equipment;

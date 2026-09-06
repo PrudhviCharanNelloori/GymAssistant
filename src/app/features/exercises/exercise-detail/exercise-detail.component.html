@@ -12,6 +12,29 @@
       <a routerLink="/exercises" class="detail__link">Back to library</a>
     </div>
   } @else if (exercise(); as item) {
+    @if (item.imageUrl) {
+      <div class="detail__gallery" aria-label="Exercise illustration">
+        @if (item.imageStartUrl) {
+          <figure class="detail__shot">
+            <img [src]="item.imageStartUrl" [alt]="item.name + ' start'" width="512" height="512" />
+            <figcaption>Start</figcaption>
+          </figure>
+        }
+        <figure class="detail__shot">
+          <img [src]="item.imageUrl" [alt]="item.name" width="512" height="512" />
+          @if (item.imageStartUrl) {
+            <figcaption>Peak</figcaption>
+          }
+        </figure>
+      </div>
+    } @else {
+      <div class="detail__visual" [attr.data-tone]="muscleTone()" aria-hidden="true">
+        <div class="detail__visual-orb"></div>
+        <div class="detail__visual-orb detail__visual-orb--2"></div>
+        <p class="detail__visual-label">{{ formatLabel(item.primaryMuscleGroup) }}</p>
+      </div>
+    }
+
     <div class="detail__hero">
       <div class="detail__title-row">
         <h1 class="detail__title">{{ item.name }}</h1>
@@ -19,41 +42,34 @@
           <span class="detail__badge">Custom</span>
         }
       </div>
-      <p class="detail__subtitle">{{ formatLabel(item.primaryMuscleGroup) }}</p>
-    </div>
-
-    <div class="detail__card">
-      <p class="detail__label">Primary muscle</p>
-      <p class="detail__value">{{ formatLabel(item.primaryMuscleGroup) }}</p>
-
-      @if (item.secondaryMuscleGroups.length) {
-        <p class="detail__label">Secondary</p>
-        <p class="detail__value">
-          {{ formatLabels(item.secondaryMuscleGroups) }}
-        </p>
-      }
-
-      <p class="detail__label">Equipment</p>
-      <p class="detail__value">
+      <p class="detail__subtitle">
+        {{ formatLabel(item.primaryMuscleGroup) }}
         @if (item.equipment.length) {
-          {{ formatLabels(item.equipment) }}
-        } @else {
-          None
+          · {{ formatLabels(item.equipment) }}
         }
       </p>
-
-      <p class="detail__label">Tracking</p>
-      <p class="detail__value">{{ formatLabels(item.trackingMetrics) }}</p>
     </div>
 
-    @if (item.description) {
-      <div class="detail__card">
-        <p class="detail__label">About</p>
-        <p class="detail__body">{{ item.description }}</p>
+    @if (embedUrl(); as embed) {
+      <div class="detail__media">
+        <iframe
+          class="detail__embed"
+          [src]="embed"
+          title="{{ item.name }} form guide"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
       </div>
+    } @else if (guideUrl(); as guide) {
+      <a class="detail__guide" [href]="guide" target="_blank" rel="noopener noreferrer">
+        <span class="detail__guide-icon" aria-hidden="true">▶</span>
+        <span>
+          <strong>Watch form on YouTube</strong>
+          <small>Optional video — illustrations above are from RepDB</small>
+        </span>
+      </a>
     }
-
-    <a class="detail__history" [routerLink]="['/history/exercises', item.id]">View history</a>
 
     @if (item.instructions?.length) {
       <div class="detail__card">
@@ -65,6 +81,25 @@
         </ol>
       </div>
     }
+
+    @if (item.description) {
+      <div class="detail__card">
+        <p class="detail__label">About</p>
+        <p class="detail__body">{{ item.description }}</p>
+      </div>
+    }
+
+    <div class="detail__card">
+      @if (item.secondaryMuscleGroups.length) {
+        <p class="detail__label">Also works</p>
+        <p class="detail__value">{{ formatLabels(item.secondaryMuscleGroups) }}</p>
+      }
+
+      <p class="detail__label">Tracking</p>
+      <p class="detail__value">{{ formatLabels(item.trackingMetrics) }}</p>
+    </div>
+
+    <a class="detail__history" [routerLink]="['/history/exercises', item.id]">View history</a>
 
     @if (error()) {
       <p class="detail__error">{{ error() }}</p>

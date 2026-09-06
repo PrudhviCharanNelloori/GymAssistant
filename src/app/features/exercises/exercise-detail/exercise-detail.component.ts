@@ -1,8 +1,9 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
+import { DomSanitizer, type SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import type { Exercise } from '../../../core/models';
+import type { Exercise, MuscleGroup } from '../../../core/models';
 import { ExerciseService } from '../../../core/services';
-import { formatEnumLabel } from '../../../core/utils';
+import { formatEnumLabel, toYouTubeEmbedUrl, youtubeFormSearchUrl } from '../../../core/utils';
 
 @Component({
   selector: 'app-exercise-detail',
@@ -14,12 +15,29 @@ export class ExerciseDetailComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly exerciseService = inject(ExerciseService);
+  private readonly sanitizer = inject(DomSanitizer);
 
   readonly formatLabel = formatEnumLabel;
   readonly exercise = signal<Exercise | null>(null);
   readonly loading = signal(true);
   readonly error = signal<string | null>(null);
   readonly deleting = signal(false);
+
+  readonly guideUrl = computed(() => {
+    const item = this.exercise();
+    if (!item) return null;
+    if (item.videoUrl?.trim()) return item.videoUrl.trim();
+    return youtubeFormSearchUrl(item.name);
+  });
+
+  readonly embedUrl = computed((): SafeResourceUrl | null => {
+    const raw = this.exercise()?.videoUrl?.trim();
+    if (!raw) return null;
+    const embed = toYouTubeEmbedUrl(raw);
+    return embed ? this.sanitizer.bypassSecurityTrustResourceUrl(embed) : null;
+  });
+
+  readonly muscleTone = computed(() => muscleTone(this.exercise()?.primaryMuscleGroup));
 
   async ngOnInit(): Promise<void> {
     const id = this.route.snapshot.paramMap.get('id');
@@ -67,5 +85,31 @@ export class ExerciseDetailComponent implements OnInit {
       this.error.set('Could not delete exercise');
       this.deleting.set(false);
     }
+  }
+}
+
+function muscleTone(group?: MuscleGroup): string {
+  switch (group) {
+    case 'CHEST':
+      return 'chest';
+    case 'BACK':
+      return 'back';
+    case 'SHOULDERS':
+      return 'shoulders';
+    case 'BICEPS':
+    case 'TRICEPS':
+    case 'FOREARMS':
+      return 'arms';
+    case 'QUADS':
+    case 'HAMSTRINGS':
+    case 'GLUTES':
+    case 'CALVES':
+      return 'legs';
+    case 'CORE':
+      return 'core';
+    case 'CARDIO':
+      return 'cardio';
+    default:
+      return 'full';
   }
 }

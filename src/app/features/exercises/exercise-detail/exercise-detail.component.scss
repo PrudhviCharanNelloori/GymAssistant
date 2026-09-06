@@ -62,6 +62,150 @@
   margin: $space-2 0 0;
 }
 
+.detail__visual {
+  position: relative;
+  overflow: hidden;
+  height: 160px;
+  margin-bottom: $space-5;
+  border-radius: $radius-2xl;
+  background: #111;
+  color: $color-text-inverse;
+}
+
+.detail__visual-orb {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  right: -24px;
+  top: -36px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.detail__visual-orb--2 {
+  width: 110px;
+  height: 110px;
+  right: 72px;
+  top: 54px;
+  background: rgba(249, 115, 22, 0.28);
+}
+
+.detail__visual-label {
+  position: absolute;
+  left: $space-5;
+  bottom: $space-5;
+  margin: 0;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-label;
+  text-transform: uppercase;
+}
+
+.detail__visual[data-tone='chest'] {
+  background: linear-gradient(145deg, #1a1a1a, #2a1810);
+}
+.detail__visual[data-tone='back'] {
+  background: linear-gradient(145deg, #12161c, #1c2a24);
+}
+.detail__visual[data-tone='shoulders'] {
+  background: linear-gradient(145deg, #17141c, #2a2030);
+}
+.detail__visual[data-tone='arms'] {
+  background: linear-gradient(145deg, #161616, #242018);
+}
+.detail__visual[data-tone='legs'] {
+  background: linear-gradient(145deg, #121816, #1c2820);
+}
+.detail__visual[data-tone='core'] {
+  background: linear-gradient(145deg, #181410, #2a2014);
+}
+.detail__visual[data-tone='cardio'] {
+  background: linear-gradient(145deg, #14181c, #102028);
+}
+.detail__visual[data-tone='full'] {
+  background: linear-gradient(145deg, #111, #222);
+}
+
+.detail__gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: $space-3;
+  margin-bottom: $space-5;
+}
+
+.detail__shot {
+  margin: 0;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  background: $color-bg-muted;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  figcaption {
+    @include text-label;
+    padding: $space-2 $space-3 $space-3;
+    color: $color-text-secondary;
+  }
+}
+
+.detail__media {
+  margin-bottom: $space-4;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  background: $color-bg-dark;
+  aspect-ratio: 16 / 9;
+}
+
+.detail__embed {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.detail__guide {
+  @include focus-ring;
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  margin-bottom: $space-4;
+  padding: $space-4;
+  border-radius: $radius-xl;
+  background: $color-bg-secondary;
+  border: 1.5px solid $color-border-strong;
+  color: inherit;
+  text-decoration: none;
+
+  strong {
+    display: block;
+    font-size: $font-size-sm;
+  }
+
+  small {
+    display: block;
+    margin-top: $space-1;
+    color: $color-text-secondary;
+    font-size: $font-size-xs;
+  }
+}
+
+.detail__guide-icon {
+  @include flex-center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-full;
+  background: $color-bg-dark;
+  color: $color-text-inverse;
+  font-size: $font-size-sm;
+}
+
 .detail__card {
   @include card;
   margin-bottom: $space-3;

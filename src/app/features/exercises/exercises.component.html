@@ -128,13 +128,24 @@
             @for (exercise of group.exercises; track exercise.id; let last = $last) {
               <li [class.exercises__row--last]="last">
                 <a class="exercises__row" [routerLink]="['/exercises', exercise.id]">
-                  <span
-                    class="exercises__mono"
-                    [class.exercises__mono--custom]="exercise.isCustom"
-                    aria-hidden="true"
-                  >
-                    {{ monogram(exercise) }}
-                  </span>
+                  @if (exercise.imageUrl) {
+                    <img
+                      class="exercises__thumb"
+                      [src]="exercise.imageUrl"
+                      [alt]="''"
+                      width="48"
+                      height="48"
+                      loading="lazy"
+                    />
+                  } @else {
+                    <span
+                      class="exercises__mono"
+                      [class.exercises__mono--custom]="exercise.isCustom"
+                      aria-hidden="true"
+                    >
+                      {{ monogram(exercise) }}
+                    </span>
+                  }
                   <span class="exercises__row-text">
                     <span class="exercises__row-name">{{ exercise.name }}</span>
                     <span class="exercises__row-meta">{{ metaLine(exercise) }}</span>

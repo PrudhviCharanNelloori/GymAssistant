@@ -227,8 +227,8 @@
 .exercises__mono {
   @include flex-center;
   flex-shrink: 0;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: $radius-md;
   background: $color-bg-muted;
   font-size: $font-size-xs;
@@ -237,6 +237,15 @@
   &--custom {
     background: $color-bg-achievement;
   }
+}
+
+.exercises__thumb {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-md;
+  object-fit: cover;
+  background: $color-bg-muted;
 }
 
 .exercises__row-text {

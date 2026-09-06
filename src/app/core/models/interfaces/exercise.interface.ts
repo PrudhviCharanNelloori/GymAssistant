@@ -12,6 +12,12 @@ export interface Exercise extends Syncable {
   equipment: Equipment[];
   trackingMetrics: TrackingMetric[];
   instructions?: string[];
+  /** Optional external form guide (usually YouTube). Not bundled media. */
+  videoUrl?: string;
+  /** In-app illustration path (e.g. RepDB WebP under /assets/exercises/). */
+  imageUrl?: string;
+  /** Optional start-pose illustration. */
+  imageStartUrl?: string;
   isCustom: boolean;
   createdAt: Date;
   updatedAt: Date;

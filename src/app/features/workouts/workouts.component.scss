@@ -42,64 +42,156 @@
   }
 }
 
-.workouts__program {
-  @include card-featured;
-  @include focus-ring;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.workouts__nav {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
   gap: $space-3;
-  padding: $space-5;
-  margin-bottom: $space-4;
+  margin-bottom: $space-5;
+}
+
+.workouts__nav-link {
+  @include focus-ring;
+  display: grid;
+  gap: $space-1;
+  padding: $space-4;
+  border-radius: $radius-xl;
   background: $color-bg-dark;
   color: $color-text-inverse;
   text-decoration: none;
+  min-height: 96px;
+  align-content: end;
 }
 
-.workouts__program-label {
+.workouts__nav-link--soft {
+  background: $color-bg-secondary;
+  color: $color-text-primary;
+  box-shadow: $shadow-card;
+}
+
+.workouts__nav-kicker {
   @include text-label;
+  margin: 0;
   color: $color-text-on-dark-muted;
-  margin: 0 0 $space-1;
 }
 
-.workouts__program-name {
-  @include text-heading;
+.workouts__nav-link--soft .workouts__nav-kicker {
+  color: $color-text-muted;
+}
+
+.workouts__nav-title {
   margin: 0;
-  font-size: $font-size-xl;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  letter-spacing: -0.02em;
+  @include truncate;
+}
+
+.workouts__nav-meta {
+  margin: 0;
+  font-size: $font-size-sm;
+  color: $color-text-on-dark-muted;
+}
+
+.workouts__nav-link--soft .workouts__nav-meta {
+  color: $color-text-secondary;
+}
+
+.workouts__week-card {
+  @include focus-ring;
+  display: block;
+  margin-bottom: $space-6;
+  padding: $space-4;
+  border-radius: $radius-2xl;
+  background: $color-bg-secondary;
+  box-shadow: $shadow-card;
+  text-decoration: none;
+  color: inherit;
+}
+
+.workouts__week-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: $space-3;
+  margin-bottom: $space-4;
+}
+
+.workouts__week-title {
+  margin: 0;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+}
+
+.workouts__week-action {
+  @include text-caption;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
 }
 
 .workouts__week {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: $space-1;
-  margin-bottom: $space-6;
 }
 
 .workouts__day {
-  @include card-compact;
-  padding: $space-2 2px;
-  text-align: center;
-  min-height: 64px;
   display: grid;
-  align-content: center;
-  gap: 2px;
+  justify-items: center;
+  gap: $space-2;
+  padding: $space-2 0;
+  border-radius: $radius-lg;
+}
+
+.workouts__day--today {
+  background: $color-bg-dark;
+  color: $color-text-inverse;
 }
 
 .workouts__day-name {
   @include text-label;
   font-size: 0.625rem;
   margin: 0;
+  color: $color-text-muted;
+}
+
+.workouts__day--today .workouts__day-name {
+  color: $color-text-on-dark-muted;
+}
+
+.workouts__day-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $color-bg-dark;
+}
+
+.workouts__day--rest .workouts__day-dot {
+  background: $color-border;
+}
+
+.workouts__day--today .workouts__day-dot {
+  background: $color-streak;
 }
 
 .workouts__day-value {
   font-size: 0.625rem;
   font-weight: $font-weight-semibold;
-  line-height: 1.2;
+  line-height: 1.15;
+  text-align: center;
   color: $color-text-secondary;
+  max-width: 100%;
   overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workouts__day--today .workouts__day-value {
+  color: $color-text-inverse;
+}
+
+.workouts__day--rest .workouts__day-value {
+  color: $color-text-muted;
+  font-weight: $font-weight-medium;
 }
 
 .workouts__section-head {
@@ -122,44 +214,74 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  background: $color-bg-secondary;
-  border-radius: $radius-xl;
-  box-shadow: $shadow-card;
-  overflow: hidden;
+  display: grid;
+  gap: $space-3;
 }
 
-.workouts__row {
+.workouts__card {
   @include focus-ring;
   display: flex;
   align-items: center;
-  gap: $space-3;
-  min-height: 72px;
-  padding: $space-4;
+  gap: $space-4;
+  min-height: 88px;
+  padding: $space-3;
+  border-radius: $radius-xl;
+  background: $color-bg-secondary;
+  box-shadow: $shadow-card;
   text-decoration: none;
   color: inherit;
-  border-bottom: 1px solid $color-border;
 }
 
-.workouts__row-wrap--last .workouts__row {
-  border-bottom: 0;
+.workouts__cover {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: $radius-lg;
+  object-fit: cover;
+  background: $color-bg-muted;
 }
 
-.workouts__row-text {
+.workouts__cover--fallback {
+  @include flex-center;
+  font-weight: $font-weight-bold;
+  background: $color-bg-dark;
+  color: $color-text-inverse;
+}
+
+.workouts__card-body {
   flex: 1;
   min-width: 0;
   display: grid;
-  gap: 2px;
+  gap: $space-2;
 }
 
-.workouts__row-name {
+.workouts__card-name {
   @include truncate;
-  font-weight: $font-weight-semibold;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  letter-spacing: -0.02em;
 }
 
-.workouts__row-meta {
-  @include truncate;
+.workouts__card-meta {
+  @include text-caption;
+}
+
+.workouts__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.workouts__pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 $space-2;
+  border-radius: $radius-sm;
+  background: $color-bg-muted;
   color: $color-text-secondary;
-  font-size: $font-size-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
 }
 
 .workouts__chevron {
@@ -178,6 +300,7 @@
   display: grid;
   gap: $space-3;
   justify-items: center;
+  padding: $space-8 $space-5;
 }
 
 .workouts__empty-title {
@@ -189,10 +312,12 @@
 
 .workouts__empty-text {
   margin: 0;
+  max-width: 28ch;
 }
 
 .workouts__empty-cta {
   @include button-solid;
   width: auto;
   padding-inline: $space-6;
+  margin-top: $space-2;
 }

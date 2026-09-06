@@ -48,6 +48,7 @@ RLS enabled on all tables. Client uses anon key only.
 ## Persistence Strategy
 
 - IndexedDB via Dexie.js as primary local store
+- Built-in exercise catalog (~45 RepDB staples + local WebP images); see `docs/THIRD-PARTY-NOTICES.md`
 - Supabase as cloud replica + Auth (direct client, no custom API)
 - Stable string IDs for all entities
 - Nested objects acceptable locally and as JSONB in cloud

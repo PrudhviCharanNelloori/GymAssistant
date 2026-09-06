@@ -1,5 +1,4 @@
 import { Injectable, inject } from '@angular/core';
-import { toBuiltInExerciseInputs } from '../data/built-in-exercises';
 import { ExerciseRepository } from '../storage';
 import { DEFAULT_USER_ID, UserRepository } from '../storage/repositories/user.repository';
 
@@ -28,12 +27,47 @@ export class BootstrapService {
     });
   }
 
+  /**
+   * Seeds curated RepDB staples; removes obsolete builtin-/exdb- catalog rows.
+   */
   private async ensureBuiltInExercises(): Promise<void> {
-    const builtInCount = (await this.exercises.getBuiltInExercises()).length;
-    if (builtInCount > 0) {
-      return;
-    }
+    const { BUILT_IN_EXERCISE_IDS, toBuiltInExerciseInputs } = await import(
+      '../data/built-in-exercises'
+    );
+    const seeds = toBuiltInExerciseInputs();
+    const existingIds = await this.exercises.getAllIds();
 
-    await this.exercises.bulkCreate(toBuiltInExerciseInputs());
+    const obsolete = [...existingIds].filter((id) => {
+      if (id.startsWith('exdb-') || id.startsWith('builtin-')) return true;
+      if (id.startsWith('repdb-') && !BUILT_IN_EXERCISE_IDS.has(id)) return true;
+      return false;
+    });
+    await this.exercises.bulkHardDelete(obsolete);
+
+    for (const seed of seeds) {
+      if (!seed.id) continue;
+      const existing = await this.exercises.getById(seed.id);
+      if (!existing) {
+        await this.exercises.bulkCreate([seed]);
+        continue;
+      }
+      await this.exercises.putSynced({
+        ...existing,
+        name: seed.name,
+        description: seed.description,
+        primaryMuscleGroup: seed.primaryMuscleGroup,
+        secondaryMuscleGroups: seed.secondaryMuscleGroups ?? [],
+        equipment: seed.equipment ?? [],
+        trackingMetrics: seed.trackingMetrics ?? [],
+        instructions: seed.instructions,
+        videoUrl: seed.videoUrl,
+        imageUrl: seed.imageUrl,
+        imageStartUrl: seed.imageStartUrl,
+        isCustom: false,
+        dirty: false,
+        syncStatus: 'synced',
+        updatedAt: new Date(),
+      });
+    }
   }
 }

@@ -101,8 +101,11 @@ describe('Storage layer', () => {
       await bootstrap.initialize();
 
       const builtIn = await exercises.getBuiltInExercises();
-      expect(builtIn.length).toBeGreaterThan(20);
+      expect(builtIn.length).toBeGreaterThan(30);
+      expect(builtIn.length).toBeLessThan(80);
       expect(builtIn.every((exercise) => !exercise.isCustom)).toBe(true);
+      expect(builtIn.some((exercise) => (exercise.instructions?.length ?? 0) > 0)).toBe(true);
+      expect(builtIn.some((exercise) => Boolean(exercise.imageUrl))).toBe(true);
     });
 
     it('is idempotent for user and exercise seeds', async () => {

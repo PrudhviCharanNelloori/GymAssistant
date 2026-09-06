@@ -82,6 +82,17 @@
   color: $color-success;
 }
 
+.settings__credits {
+  @include text-caption;
+  margin: 0;
+  color: $color-text-secondary;
+
+  a {
+    color: $color-text-primary;
+    font-weight: $font-weight-semibold;
+  }
+}
+
 .settings__actions {
   display: grid;
   gap: $space-2;

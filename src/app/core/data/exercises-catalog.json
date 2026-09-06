@@ -1,0 +1,1165 @@
+[
+  {
+    "id": "repdb-squat",
+    "name": "Barbell Back Squat",
+    "primaryMuscleGroup": "QUADS",
+    "secondaryMuscleGroups": [
+      "BACK",
+      "HAMSTRINGS"
+    ],
+    "equipment": [
+      "BARBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Position the bar on your upper traps.",
+      "Unrack and step back, feet shoulder-width apart.",
+      "Brace your core and squat down until thighs are parallel.",
+      "Drive through your heels to stand back up.",
+      "Repeat."
+    ],
+    "description": "A compound lower-body movement targeting the quadriceps, glutes, and hamstrings.",
+    "imageUrl": "/assets/exercises/squat-peak.webp",
+    "imageStartUrl": "/assets/exercises/squat-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-bench-press",
+    "name": "Barbell Bench Press",
+    "primaryMuscleGroup": "CHEST",
+    "secondaryMuscleGroups": [
+      "SHOULDERS",
+      "TRICEPS"
+    ],
+    "equipment": [
+      "BARBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Lie flat on a bench with your eyes under the bar.",
+      "Grip the bar slightly wider than shoulder-width.",
+      "Unrack the bar and lower it to your mid-chest.",
+      "Press the bar back up to full arm extension.",
+      "Repeat for the desired number of reps."
+    ],
+    "description": "A compound pushing movement that targets the chest, shoulders, and triceps.",
+    "imageUrl": "/assets/exercises/bench-press-peak.webp",
+    "imageStartUrl": "/assets/exercises/bench-press-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-barbell-curl",
+    "name": "Barbell Curl",
+    "primaryMuscleGroup": "BICEPS",
+    "secondaryMuscleGroups": [
+      "FOREARMS"
+    ],
+    "equipment": [
+      "BARBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Stand holding a barbell with a shoulder-width underhand grip.",
+      "Curl the bar up toward your shoulders.",
+      "Squeeze at the top, then lower under control.",
+      "Repeat."
+    ],
+    "description": "A classic biceps isolation exercise using a barbell for maximal loading.",
+    "imageUrl": "/assets/exercises/barbell-curl-peak.webp",
+    "imageStartUrl": "/assets/exercises/barbell-curl-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-deadlift",
+    "name": "Barbell Deadlift",
+    "primaryMuscleGroup": "BACK",
+    "secondaryMuscleGroups": [
+      "QUADS"
+    ],
+    "equipment": [
+      "BARBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Stand with feet hip-width apart, bar over mid-foot.",
+      "Hinge at the hips and grip the bar.",
+      "Brace your core and lift by extending hips and knees.",
+      "Stand tall at the top, then lower under control.",
+      "Repeat."
+    ],
+    "description": "A full-body compound lift that primarily targets the posterior chain.",
+    "imageUrl": "/assets/exercises/deadlift-peak.webp",
+    "imageStartUrl": "/assets/exercises/deadlift-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-hip-thrust",
+    "name": "Barbell Hip Thrust",
+    "primaryMuscleGroup": "GLUTES",
+    "secondaryMuscleGroups": [
+      "HAMSTRINGS"
+    ],
+    "equipment": [
+      "BARBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Sit on the floor with your upper back against a bench, barbell across your hips.",
+      "Drive your hips up until your thighs are parallel to the floor.",
+      "Squeeze your glutes at the top.",
+      "Lower your hips back down with control.",
+      "Repeat."
+    ],
+    "description": "A compound glute exercise using a barbell across the hips.",
+    "imageUrl": "/assets/exercises/hip-thrust-peak.webp",
+    "imageStartUrl": "/assets/exercises/hip-thrust-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-ohp",
+    "name": "Barbell Overhead Press",
+    "primaryMuscleGroup": "SHOULDERS",
+    "secondaryMuscleGroups": [
+      "BACK",
+      "TRICEPS"
+    ],
+    "equipment": [
+      "BARBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Stand with feet shoulder-width apart, bar at collarbone level.",
+      "Brace your core and press the bar overhead.",
+      "Lock out at the top with the bar over your mid-foot.",
+      "Lower the bar back to collarbone height.",
+      "Repeat."
+    ],
+    "description": "A compound overhead pressing movement targeting the shoulders and triceps.",
+    "imageUrl": "/assets/exercises/ohp-peak.webp",
+    "imageStartUrl": "/assets/exercises/ohp-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-barbell-row",
+    "name": "Bent-Over Barbell Row",
+    "primaryMuscleGroup": "BACK",
+    "secondaryMuscleGroups": [
+      "BICEPS",
+      "SHOULDERS"
+    ],
+    "equipment": [
+      "BARBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Hinge at the hips with a slight knee bend.",
+      "Grip the bar slightly wider than shoulder-width.",
+      "Pull the bar to your lower chest, squeezing your shoulder blades.",
+      "Lower the bar under control.",
+      "Repeat."
+    ],
+    "description": "A compound pulling movement that targets the upper and middle back.",
+    "imageUrl": "/assets/exercises/barbell-row-peak.webp",
+    "imageStartUrl": "/assets/exercises/barbell-row-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-bent-over-db-row",
+    "name": "Bent-Over Dumbbell Row",
+    "primaryMuscleGroup": "BACK",
+    "secondaryMuscleGroups": [
+      "BICEPS",
+      "SHOULDERS"
+    ],
+    "equipment": [
+      "DUMBBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Stand with feet hip-width, holding a dumbbell in each hand at the sides, palms facing in.",
+      "Hinge at the hips with a flat back until the torso is roughly 30–45 degrees from horizontal, dumbbells hanging directly below the shoulders.",
+      "Brace the core and pull both dumbbells up and slightly back, driving the elbows past the ribs.",
+      "Squeeze the upper back at the top, keeping the elbows tucked.",
+      "Lower under control to the starting position with the arms fully extended.",
+      "Repeat for the recommended number of repetitions."
+    ],
+    "description": "A two-arm bent-over row with a dumbbell in each hand. The free movement of independent dumbbells lets the elbows track natural and adds a stability demand that a barbell row hides.",
+    "imageUrl": "/assets/exercises/bent-over-db-row-peak.webp",
+    "imageStartUrl": "/assets/exercises/bent-over-db-row-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-bicycle-crunch",
+    "name": "Bicycle Crunch",
+    "primaryMuscleGroup": "CORE",
+    "secondaryMuscleGroups": [],
+    "equipment": [
+      "BODYWEIGHT"
+    ],
+    "trackingMetrics": [
+      "REPS"
+    ],
+    "instructions": [
+      "Lie on your back with hands behind your head and legs raised.",
+      "Bring one knee toward your chest while rotating your torso to meet it with the opposite elbow.",
+      "Extend that leg while bringing the other knee in.",
+      "Continue alternating in a pedaling motion.",
+      "Repeat."
+    ],
+    "description": "A dynamic crunch variation targeting both the rectus abdominis and obliques.",
+    "imageUrl": "/assets/exercises/bicycle-crunch-peak.webp",
+    "imageStartUrl": "/assets/exercises/bicycle-crunch-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-bodyweight-squat",
+    "name": "Bodyweight Squat",
+    "primaryMuscleGroup": "QUADS",
+    "secondaryMuscleGroups": [
+      "BACK",
+      "GLUTES",
+      "HAMSTRINGS"
+    ],
+    "equipment": [
+      "BODYWEIGHT"
+    ],
+    "trackingMetrics": [
+      "REPS"
+    ],
+    "instructions": [
+      "Stand with feet shoulder-width apart and arms extended forward.",
+      "Sit back and down by bending your hips and knees.",
+      "Lower until your thighs are parallel to the floor.",
+      "Drive through your heels to return to standing.",
+      "Repeat for the desired number of reps."
+    ],
+    "description": "A foundational lower-body exercise squatting with body weight only, developing the quadriceps, glutes, and basic movement mechanics.",
+    "imageUrl": "/assets/exercises/bodyweight-squat-peak.webp",
+    "imageStartUrl": "/assets/exercises/bodyweight-squat-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-bulgarian-split-squat",
+    "name": "Bulgarian Split Squat",
+    "primaryMuscleGroup": "QUADS",
+    "secondaryMuscleGroups": [
+      "HAMSTRINGS"
+    ],
+    "equipment": [
+      "DUMBBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Stand in front of a bench, place one foot behind you on the bench.",
+      "Hold dumbbells at your sides.",
+      "Lower your body until your front thigh is parallel to the floor.",
+      "Push through your front heel to stand back up.",
+      "Repeat on both sides."
+    ],
+    "description": "A single-leg squat variation with the rear foot elevated.",
+    "imageUrl": "/assets/exercises/bulgarian-split-squat-peak.webp",
+    "imageStartUrl": "/assets/exercises/bulgarian-split-squat-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-burpees",
+    "name": "Burpees",
+    "primaryMuscleGroup": "FULL_BODY",
+    "secondaryMuscleGroups": [
+      "SHOULDERS",
+      "CORE",
+      "TRICEPS"
+    ],
+    "equipment": [
+      "BODYWEIGHT"
+    ],
+    "trackingMetrics": [
+      "REPS"
+    ],
+    "instructions": [
+      "Stand with feet shoulder-width apart.",
+      "Squat down and place the hands on the floor in front of you.",
+      "Jump or step the feet back into a plank, then perform a push-up.",
+      "Jump or step the feet forward to the hands.",
+      "Stand up and jump explosively, reaching the arms overhead."
+    ],
+    "description": "A full-body conditioning movement combining a squat, plank, push-up, and jump.",
+    "imageUrl": "/assets/exercises/burpees-main.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-cable-crunch",
+    "name": "Cable Crunch",
+    "primaryMuscleGroup": "CORE",
+    "secondaryMuscleGroups": [],
+    "equipment": [
+      "CABLE"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Kneel in front of a cable machine with a rope attachment at the top.",
+      "Hold the rope near your forehead with elbows bent.",
+      "Crunch down by flexing your spine and bringing your elbows to your thighs.",
+      "Squeeze your abs hard at the bottom.",
+      "Return to the start position and repeat."
+    ],
+    "description": "A kneeling abdominal exercise flexing the spine against cable resistance, allowing progressive loading of the rectus abdominis.",
+    "imageUrl": "/assets/exercises/cable-crunch-peak.webp",
+    "imageStartUrl": "/assets/exercises/cable-crunch-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-face-pull",
+    "name": "Cable Face Pull",
+    "primaryMuscleGroup": "SHOULDERS",
+    "secondaryMuscleGroups": [
+      "BACK"
+    ],
+    "equipment": [
+      "CABLE"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Attach a rope to a high cable pulley.",
+      "Pull the rope toward your face, separating the ends.",
+      "Squeeze your rear deltoids and external rotators.",
+      "Return to the starting position with control.",
+      "Repeat."
+    ],
+    "description": "A cable exercise targeting the rear deltoids and external rotators.",
+    "imageUrl": "/assets/exercises/face-pull-peak.webp",
+    "imageStartUrl": "/assets/exercises/face-pull-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-cable-fly",
+    "name": "Cable Fly",
+    "primaryMuscleGroup": "CHEST",
+    "secondaryMuscleGroups": [
+      "SHOULDERS"
+    ],
+    "equipment": [
+      "CABLE"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Stand between two cable columns with handles attached to high pulleys.",
+      "With a slight bend in your elbows, open your arms wide.",
+      "Bring your hands together in front of your chest in a hugging motion.",
+      "Slowly return to the starting position.",
+      "Repeat."
+    ],
+    "description": "An isolation movement for the chest using cable resistance for constant tension.",
+    "imageUrl": "/assets/exercises/cable-fly-peak.webp",
+    "imageStartUrl": "/assets/exercises/cable-fly-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-tricep-pushdown",
+    "name": "Cable Tricep Pushdown",
+    "primaryMuscleGroup": "TRICEPS",
+    "secondaryMuscleGroups": [],
+    "equipment": [
+      "CABLE"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Stand facing a cable machine with a straight bar attachment.",
+      "Grip the bar and pin your elbows to your sides.",
+      "Push the bar down until your arms are fully extended.",
+      "Slowly return to the starting position.",
+      "Repeat."
+    ],
+    "description": "An isolation exercise targeting the triceps using a cable machine.",
+    "imageUrl": "/assets/exercises/tricep-pushdown-peak.webp",
+    "imageStartUrl": "/assets/exercises/tricep-pushdown-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-dips",
+    "name": "Chest Dips",
+    "primaryMuscleGroup": "CHEST",
+    "secondaryMuscleGroups": [
+      "SHOULDERS"
+    ],
+    "equipment": [
+      "BODYWEIGHT"
+    ],
+    "trackingMetrics": [
+      "REPS"
+    ],
+    "instructions": [
+      "Grip parallel dip bars and lift yourself to the top position with arms locked.",
+      "Lean your torso forward slightly.",
+      "Lower your body by bending your elbows until shoulders are below elbows.",
+      "Press back up to the starting position.",
+      "Repeat."
+    ],
+    "description": "A compound bodyweight exercise targeting the lower chest and triceps.",
+    "imageUrl": "/assets/exercises/dips-peak.webp",
+    "imageStartUrl": "/assets/exercises/dips-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-close-grip-bench-press",
+    "name": "Close-Grip Bench Press",
+    "primaryMuscleGroup": "TRICEPS",
+    "secondaryMuscleGroups": [
+      "SHOULDERS",
+      "CHEST"
+    ],
+    "equipment": [
+      "BARBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Lie on a flat bench and grip the barbell with hands shoulder-width apart.",
+      "Lower the bar to your lower chest keeping elbows close to your sides.",
+      "Press back up to full extension.",
+      "Repeat."
+    ],
+    "description": "A bench press variation with a narrow grip that shifts the emphasis to the triceps.",
+    "imageUrl": "/assets/exercises/close-grip-bench-press-peak.webp",
+    "imageStartUrl": "/assets/exercises/close-grip-bench-press-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-db-bench-press",
+    "name": "Dumbbell Bench Press",
+    "primaryMuscleGroup": "CHEST",
+    "secondaryMuscleGroups": [
+      "SHOULDERS",
+      "TRICEPS"
+    ],
+    "equipment": [
+      "DUMBBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Lie on a flat bench holding a dumbbell in each hand at chest level.",
+      "Press the dumbbells up until your arms are fully extended.",
+      "Lower them slowly back to the start.",
+      "Repeat."
+    ],
+    "description": "A compound chest exercise using dumbbells, allowing a greater range of motion than the barbell bench press.",
+    "imageUrl": "/assets/exercises/db-bench-press-peak.webp",
+    "imageStartUrl": "/assets/exercises/db-bench-press-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-dumbbell-farmers-walk",
+    "name": "Dumbbell Farmer's Walk",
+    "primaryMuscleGroup": "FOREARMS",
+    "secondaryMuscleGroups": [
+      "GLUTES",
+      "CORE",
+      "QUADS"
+    ],
+    "equipment": [
+      "DUMBBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "DURATION"
+    ],
+    "instructions": [
+      "Stand tall with a dumbbell in each hand, arms extended at your sides.",
+      "Retract your shoulder blades and brace your core, maintaining a neutral spine.",
+      "Walk slowly and deliberately for a set distance or duration, taking short, controlled steps.",
+      "Keep your chest up and avoid leaning to one side as you walk.",
+      "Focus on maintaining a strong, stable posture throughout the movement."
+    ],
+    "description": "This full-body exercise involves walking while holding heavy dumbbells, effectively building grip strength, core stability, and overall muscular endurance.",
+    "imageUrl": "/assets/exercises/dumbbell-farmers-walk-main.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-hammer-curl",
+    "name": "Dumbbell Hammer Curl",
+    "primaryMuscleGroup": "BICEPS",
+    "secondaryMuscleGroups": [
+      "FOREARMS"
+    ],
+    "equipment": [
+      "DUMBBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Stand holding dumbbells at your sides with palms facing each other.",
+      "Curl the weights up while keeping your palms facing inward.",
+      "Squeeze at the top, then lower under control.",
+      "Repeat."
+    ],
+    "description": "A bicep curl variation with a neutral grip targeting the brachioradialis.",
+    "imageUrl": "/assets/exercises/hammer-curl-peak.webp",
+    "imageStartUrl": "/assets/exercises/hammer-curl-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-lateral-raise",
+    "name": "Dumbbell Lateral Raise",
+    "primaryMuscleGroup": "SHOULDERS",
+    "secondaryMuscleGroups": [],
+    "equipment": [
+      "DUMBBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Stand holding dumbbells at your sides.",
+      "Raise the dumbbells out to the sides until arms are parallel to the floor.",
+      "Lower under control.",
+      "Repeat."
+    ],
+    "description": "An isolation movement targeting the lateral deltoid for shoulder width.",
+    "imageUrl": "/assets/exercises/lateral-raise-peak.webp",
+    "imageStartUrl": "/assets/exercises/lateral-raise-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-dumbbell-shoulder-press",
+    "name": "Dumbbell Shoulder Press",
+    "primaryMuscleGroup": "SHOULDERS",
+    "secondaryMuscleGroups": [
+      "BACK",
+      "TRICEPS"
+    ],
+    "equipment": [
+      "DUMBBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Sit or stand holding dumbbells at shoulder height, palms facing forward.",
+      "Press both dumbbells overhead until arms are fully extended.",
+      "Keep your core braced and avoid arching your lower back.",
+      "Lower the dumbbells under control back to shoulder height.",
+      "Do not let the dumbbells drift behind your head.",
+      "Repeat for the desired number of reps."
+    ],
+    "description": "An overhead press with dumbbells performed seated or standing, building the front and side delts.",
+    "imageUrl": "/assets/exercises/dumbbell-shoulder-press-peak.webp",
+    "imageStartUrl": "/assets/exercises/dumbbell-shoulder-press-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-ez-bar-lying-tricep-extension",
+    "name": "EZ-Bar Lying Triceps Extension",
+    "primaryMuscleGroup": "TRICEPS",
+    "secondaryMuscleGroups": [],
+    "equipment": [
+      "BARBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Lie on a flat bench holding an EZ bar over your chest with a narrow grip.",
+      "Lower the bar toward your forehead by bending at the elbows.",
+      "Extend your arms back to the start.",
+      "Repeat."
+    ],
+    "description": "A lying triceps extension performed with an EZ bar to isolate the triceps through a full range of motion.",
+    "imageUrl": "/assets/exercises/ez-bar-lying-tricep-extension-peak.webp",
+    "imageStartUrl": "/assets/exercises/ez-bar-lying-tricep-extension-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-front-squat",
+    "name": "Front Squat",
+    "primaryMuscleGroup": "QUADS",
+    "secondaryMuscleGroups": [
+      "BACK",
+      "HAMSTRINGS"
+    ],
+    "equipment": [
+      "BARBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Clean or rack the bar to your front deltoids with elbows high.",
+      "Squat down keeping torso upright until thighs are parallel.",
+      "Drive back up.",
+      "Repeat."
+    ],
+    "description": "A barbell squat with the bar held in front on the deltoids, emphasizing quads and core.",
+    "imageUrl": "/assets/exercises/front-squat-peak.webp",
+    "imageStartUrl": "/assets/exercises/front-squat-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-hanging-knee-raise",
+    "name": "Hanging Knee Raise",
+    "primaryMuscleGroup": "CORE",
+    "secondaryMuscleGroups": [
+      "FOREARMS"
+    ],
+    "equipment": [
+      "BODYWEIGHT"
+    ],
+    "trackingMetrics": [
+      "REPS"
+    ],
+    "instructions": [
+      "Hang from a pull-up bar with an overhand grip, arms fully extended.",
+      "Engage your core and raise your knees toward your chest.",
+      "Hold briefly at the top.",
+      "Lower your legs slowly back to the starting position.",
+      "Repeat for the desired reps."
+    ],
+    "description": "A hanging core exercise on a pull-up bar that targets the lower abs and hip flexors with bent knees.",
+    "imageUrl": "/assets/exercises/hanging-knee-raise-peak.webp",
+    "imageStartUrl": "/assets/exercises/hanging-knee-raise-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-incline-bench-press",
+    "name": "Incline Barbell Bench Press",
+    "primaryMuscleGroup": "CHEST",
+    "secondaryMuscleGroups": [
+      "SHOULDERS",
+      "TRICEPS"
+    ],
+    "equipment": [
+      "BARBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Lie on an incline bench set to 30-45 degrees.",
+      "Grip the bar slightly wider than shoulder-width and unrack.",
+      "Lower the bar to your upper chest.",
+      "Press the bar back up to full extension.",
+      "Repeat."
+    ],
+    "description": "A barbell pressing movement on an incline bench targeting the upper chest.",
+    "imageUrl": "/assets/exercises/incline-bench-press-peak.webp",
+    "imageStartUrl": "/assets/exercises/incline-bench-press-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-incline-db-curl",
+    "name": "Incline Dumbbell Curl",
+    "primaryMuscleGroup": "BICEPS",
+    "secondaryMuscleGroups": [],
+    "equipment": [
+      "DUMBBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Sit on an incline bench set to 45 degrees, holding dumbbells at your sides.",
+      "Let your arms hang straight down with palms forward.",
+      "Curl the dumbbells up toward your shoulders.",
+      "Lower with control to full extension.",
+      "Repeat."
+    ],
+    "description": "A bicep curl on an incline bench for a deeper stretch of the long head.",
+    "imageUrl": "/assets/exercises/incline-db-curl-peak.webp",
+    "imageStartUrl": "/assets/exercises/incline-db-curl-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-incline-db-press",
+    "name": "Incline Dumbbell Press",
+    "primaryMuscleGroup": "CHEST",
+    "secondaryMuscleGroups": [
+      "SHOULDERS",
+      "TRICEPS"
+    ],
+    "equipment": [
+      "DUMBBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Set bench to 30-degree incline and sit back with dumbbells at shoulder level.",
+      "Press dumbbells up and together until arms are fully extended.",
+      "Lower dumbbells back to shoulder level with control.",
+      "Repeat."
+    ],
+    "description": "An incline pressing movement emphasizing the upper chest.",
+    "imageUrl": "/assets/exercises/incline-db-press-peak.webp",
+    "imageStartUrl": "/assets/exercises/incline-db-press-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-jump-rope",
+    "name": "Jump Rope",
+    "primaryMuscleGroup": "CARDIO",
+    "secondaryMuscleGroups": [
+      "FOREARMS",
+      "QUADS"
+    ],
+    "equipment": [
+      "OTHER"
+    ],
+    "trackingMetrics": [
+      "DURATION"
+    ],
+    "instructions": [
+      "Hold a jump rope handle in each hand with the rope behind you.",
+      "Swing the rope overhead and forward in a smooth arc.",
+      "Hop just high enough for the rope to pass under your feet.",
+      "Land softly on the balls of the feet, knees slightly bent.",
+      "Keep a steady rhythm for the prescribed interval."
+    ],
+    "description": "A classic cardio drill that trains calves, ankles, and timing with a rope and rhythmic hops.",
+    "imageUrl": "/assets/exercises/jump-rope-main.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-kettlebell-swing",
+    "name": "Kettlebell Swing",
+    "primaryMuscleGroup": "GLUTES",
+    "secondaryMuscleGroups": [
+      "BACK",
+      "QUADS"
+    ],
+    "equipment": [
+      "KETTLEBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Stand with feet shoulder-width apart, kettlebell on the floor in front.",
+      "Hinge at the hips, grip the kettlebell, and hike it back between your legs.",
+      "Explosively drive your hips forward to swing the kettlebell to chest height.",
+      "Let the kettlebell swing back between your legs.",
+      "Repeat in a fluid motion."
+    ],
+    "description": "An explosive hip-hinge movement using a kettlebell for power and conditioning.",
+    "imageUrl": "/assets/exercises/kettlebell-swing-peak.webp",
+    "imageStartUrl": "/assets/exercises/kettlebell-swing-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-lat-pulldown",
+    "name": "Lat Pulldown",
+    "primaryMuscleGroup": "BACK",
+    "secondaryMuscleGroups": [
+      "BICEPS",
+      "SHOULDERS"
+    ],
+    "equipment": [
+      "CABLE"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Sit at the lat pulldown machine with thighs secured under the pads.",
+      "Grip the wide bar with an overhand grip.",
+      "Pull the bar down to your upper chest, squeezing your lats.",
+      "Slowly return the bar to the starting position.",
+      "Repeat."
+    ],
+    "description": "A cable machine exercise targeting the latissimus dorsi.",
+    "imageUrl": "/assets/exercises/lat-pulldown-peak.webp",
+    "imageStartUrl": "/assets/exercises/lat-pulldown-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-leg-extension",
+    "name": "Leg Extension",
+    "primaryMuscleGroup": "QUADS",
+    "secondaryMuscleGroups": [],
+    "equipment": [
+      "MACHINE"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Sit in the leg extension machine with ankles behind the pad.",
+      "Extend your legs until they are straight.",
+      "Squeeze your quads at the top.",
+      "Lower with control.",
+      "Repeat."
+    ],
+    "description": "An isolation exercise for the quadriceps using a machine.",
+    "imageUrl": "/assets/exercises/leg-extension-peak.webp",
+    "imageStartUrl": "/assets/exercises/leg-extension-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-leg-press",
+    "name": "Leg Press",
+    "primaryMuscleGroup": "QUADS",
+    "secondaryMuscleGroups": [
+      "HAMSTRINGS"
+    ],
+    "equipment": [
+      "MACHINE"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Sit in the leg press machine with feet shoulder-width apart on the platform.",
+      "Release the safety catches and lower the platform by bending your knees.",
+      "Push the platform back up until legs are nearly straight.",
+      "Do not lock your knees at the top.",
+      "Repeat."
+    ],
+    "description": "A machine-based compound movement for the quads and glutes.",
+    "imageUrl": "/assets/exercises/leg-press-peak.webp",
+    "imageStartUrl": "/assets/exercises/leg-press-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-leg-curl",
+    "name": "Lying Leg Curl",
+    "primaryMuscleGroup": "HAMSTRINGS",
+    "secondaryMuscleGroups": [
+      "CALVES"
+    ],
+    "equipment": [
+      "MACHINE"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Lie face down on the leg curl machine with ankles under the pad.",
+      "Curl your heels toward your glutes.",
+      "Squeeze your hamstrings at the top.",
+      "Lower with control.",
+      "Repeat."
+    ],
+    "description": "An isolation exercise for the hamstrings using a leg curl machine.",
+    "imageUrl": "/assets/exercises/leg-curl-peak.webp",
+    "imageStartUrl": "/assets/exercises/leg-curl-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-plank",
+    "name": "Plank",
+    "primaryMuscleGroup": "CORE",
+    "secondaryMuscleGroups": [
+      "BACK"
+    ],
+    "equipment": [
+      "BODYWEIGHT"
+    ],
+    "trackingMetrics": [
+      "DURATION"
+    ],
+    "instructions": [
+      "Place your forearms on the floor with elbows under your shoulders.",
+      "Extend your legs back and rise onto your toes.",
+      "Keep your body in a straight line from head to heels.",
+      "Brace your core and squeeze your glutes.",
+      "Hold the position for the desired duration.",
+      "Lower your knees to exit the hold."
+    ],
+    "description": "An isometric core exercise that strengthens the entire midsection.",
+    "imageUrl": "/assets/exercises/plank-main.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-pull-up",
+    "name": "Pull-Up",
+    "primaryMuscleGroup": "BACK",
+    "secondaryMuscleGroups": [
+      "BICEPS",
+      "SHOULDERS"
+    ],
+    "equipment": [
+      "BODYWEIGHT"
+    ],
+    "trackingMetrics": [
+      "REPS"
+    ],
+    "instructions": [
+      "Hang from a bar with an overhand grip, slightly wider than shoulder-width.",
+      "Pull yourself up until your chin is over the bar.",
+      "Lower yourself under control to a dead hang.",
+      "Repeat."
+    ],
+    "description": "A bodyweight compound pull targeting the lats and biceps.",
+    "imageUrl": "/assets/exercises/pull-up-peak.webp",
+    "imageStartUrl": "/assets/exercises/pull-up-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-push-up",
+    "name": "Push-Up",
+    "primaryMuscleGroup": "CHEST",
+    "secondaryMuscleGroups": [
+      "SHOULDERS"
+    ],
+    "equipment": [
+      "BODYWEIGHT"
+    ],
+    "trackingMetrics": [
+      "REPS"
+    ],
+    "instructions": [
+      "Start in a high plank position with hands shoulder-width apart.",
+      "Lower your body until your chest nearly touches the floor.",
+      "Push back up to the starting position.",
+      "Keep your body in a straight line throughout.",
+      "Repeat."
+    ],
+    "description": "A fundamental bodyweight exercise for the chest, shoulders, and triceps.",
+    "imageUrl": "/assets/exercises/push-up-peak.webp",
+    "imageStartUrl": "/assets/exercises/push-up-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-rear-delt-fly",
+    "name": "Rear Delt Fly",
+    "primaryMuscleGroup": "SHOULDERS",
+    "secondaryMuscleGroups": [
+      "BACK"
+    ],
+    "equipment": [
+      "DUMBBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Hold dumbbells and hinge forward at the hips.",
+      "With a slight bend in elbows, raise the dumbbells out to the sides.",
+      "Squeeze your shoulder blades at the top.",
+      "Lower with control.",
+      "Repeat."
+    ],
+    "description": "An isolation movement targeting the posterior deltoids and upper back.",
+    "imageUrl": "/assets/exercises/rear-delt-fly-peak.webp",
+    "imageStartUrl": "/assets/exercises/rear-delt-fly-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-romanian-deadlift",
+    "name": "Romanian Deadlift",
+    "primaryMuscleGroup": "HAMSTRINGS",
+    "secondaryMuscleGroups": [
+      "BACK"
+    ],
+    "equipment": [
+      "BARBELL"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Stand holding a barbell at hip level with an overhand grip.",
+      "Hinge at the hips, pushing them back while keeping legs nearly straight.",
+      "Lower the bar along your legs until you feel a hamstring stretch.",
+      "Drive your hips forward to return to standing.",
+      "Repeat."
+    ],
+    "description": "A hip-hinge movement emphasizing the hamstrings and glutes.",
+    "imageUrl": "/assets/exercises/romanian-deadlift-peak.webp",
+    "imageStartUrl": "/assets/exercises/romanian-deadlift-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-rowing-machine",
+    "name": "Rowing Machine",
+    "primaryMuscleGroup": "CARDIO",
+    "secondaryMuscleGroups": [
+      "BICEPS",
+      "BACK",
+      "GLUTES",
+      "HAMSTRINGS"
+    ],
+    "equipment": [
+      "MACHINE"
+    ],
+    "trackingMetrics": [
+      "DURATION"
+    ],
+    "instructions": [
+      "Sit on the rower, strap your feet into the footplates and take the handle with an overhand grip.",
+      "Slide forward into the catch: shins vertical, torso leaning slightly ahead of the hips, arms straight out toward the flywheel.",
+      "Drive through your legs first, pushing the seat back until your knees are almost straight.",
+      "Swing your torso back past vertical, then pull the handle in to your lower ribs with your elbows travelling past your sides.",
+      "Reverse the order on the recovery — arms away, torso forward, then bend the knees — and slide back to the catch for the next stroke.",
+      "Continue for the desired time, distance or number of strokes."
+    ],
+    "description": "A full-body cardio machine movement in which each stroke drives with the legs, swings the torso back and pulls the handle to the ribs, training the legs, back and arms in one continuous cycle.",
+    "imageUrl": "/assets/exercises/rowing-machine-peak.webp",
+    "imageStartUrl": "/assets/exercises/rowing-machine-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-seated-cable-row",
+    "name": "Seated Cable Row",
+    "primaryMuscleGroup": "BACK",
+    "secondaryMuscleGroups": [
+      "BICEPS",
+      "SHOULDERS"
+    ],
+    "equipment": [
+      "CABLE"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Sit at the cable row station and place your feet on the footrests.",
+      "Grip the handle and sit upright with a slight forward lean.",
+      "Drive your elbows back and pull the handle toward your lower abdomen.",
+      "Squeeze your shoulder blades together at the end of the pull.",
+      "Extend your arms under control back to the starting position.",
+      "Repeat for the desired number of reps."
+    ],
+    "description": "A back exercise performed on a cable row machine, pulling a handle toward the torso while seated.",
+    "imageUrl": "/assets/exercises/seated-cable-row-peak.webp",
+    "imageStartUrl": "/assets/exercises/seated-cable-row-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-standing-calf-raise",
+    "name": "Standing Calf Raise",
+    "primaryMuscleGroup": "CALVES",
+    "secondaryMuscleGroups": [],
+    "equipment": [
+      "MACHINE"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Stand on the edge of a platform or calf raise machine.",
+      "Lower heels below the platform.",
+      "Push up onto your toes.",
+      "Lower slowly.",
+      "Repeat."
+    ],
+    "description": "A calf raise performed standing to develop the gastrocnemius through a full range of motion.",
+    "imageUrl": "/assets/exercises/machine-calf-raise-peak.webp",
+    "imageStartUrl": "/assets/exercises/machine-calf-raise-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-straight-arm-pulldown",
+    "name": "Straight-Arm Pulldown",
+    "primaryMuscleGroup": "BACK",
+    "secondaryMuscleGroups": [
+      "SHOULDERS",
+      "TRICEPS"
+    ],
+    "equipment": [
+      "CABLE"
+    ],
+    "trackingMetrics": [
+      "WEIGHT",
+      "REPS"
+    ],
+    "instructions": [
+      "Stand facing a cable machine with a straight bar attached to the high pulley.",
+      "With arms nearly straight, push the bar down in an arc toward your thighs.",
+      "Squeeze your lats at the bottom.",
+      "Slowly return the bar to the starting position.",
+      "Repeat."
+    ],
+    "description": "An isolation exercise for the lats using a cable with arms kept straight.",
+    "imageUrl": "/assets/exercises/straight-arm-pulldown-peak.webp",
+    "imageStartUrl": "/assets/exercises/straight-arm-pulldown-start.webp",
+    "source": "repdb"
+  },
+  {
+    "id": "repdb-walking-lunge",
+    "name": "Walking Lunge",
+    "primaryMuscleGroup": "QUADS",
+    "secondaryMuscleGroups": [
+      "GLUTES",
+      "HAMSTRINGS"
+    ],
+    "equipment": [
+      "BODYWEIGHT"
+    ],
+    "trackingMetrics": [
+      "REPS"
+    ],
+    "instructions": [
+      "Stand tall with feet hip-width apart and hands on hips.",
+      "Step one foot forward into a long lunge.",
+      "Lower until both knees are around 90 degrees.",
+      "Drive through the front heel and step the back foot forward.",
+      "Continue alternating legs as you walk forward.",
+      "Repeat for the desired number of reps."
+    ],
+    "description": "A traveling lunge stepping forward leg over leg, training the quads and glutes with an added balance challenge.",
+    "imageUrl": "/assets/exercises/walking-lunge-peak.webp",
+    "imageStartUrl": "/assets/exercises/walking-lunge-start.webp",
+    "source": "repdb"
+  }
+]

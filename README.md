@@ -58,6 +58,7 @@ See [`docs/`](docs/) for product requirements, architecture, domain model, and r
 - Angular 22 (standalone, strict TypeScript)
 - SCSS design tokens + Space Grotesk
 - Dexie.js (IndexedDB, offline-first)
+- Built-in exercise catalog (~45 RepDB staples with WebP illustrations; attribution required — [THIRD-PARTY-NOTICES.md](docs/THIRD-PARTY-NOTICES.md))
 - Supabase Auth + Postgres (direct client, RLS)
 - Angular PWA (service worker + install/update UX)
 

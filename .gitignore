@@ -42,3 +42,7 @@ __screenshots__/
 .env
 .env.local
 *.local
+
+# Large upstream dumps (regenerate catalog from scripts/)
+scripts/_exercises_raw.json
+scripts/_repdb_exercises.json
