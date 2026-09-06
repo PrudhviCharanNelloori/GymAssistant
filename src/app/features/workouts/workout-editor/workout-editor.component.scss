@@ -17,10 +17,19 @@
   width: 44px;
   height: 44px;
   margin: 0 0 $space-3 -#{$space-2};
+  padding: 0;
+  border: 0;
   border-radius: $radius-full;
+  background: transparent;
   color: inherit;
-  text-decoration: none;
+  font: inherit;
   font-size: $font-size-xl;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
 }
 
 .editor__eyebrow {
@@ -110,11 +119,22 @@
   display: flex;
   align-items: center;
   gap: $space-3;
+  width: 100%;
   min-height: 76px;
   padding: $space-4;
-  text-decoration: none;
-  color: inherit;
+  border: 0;
   border-bottom: 1px solid $color-border;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
 }
 
 .editor__row-wrap--last .editor__row,

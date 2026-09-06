@@ -1,7 +1,12 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import type { DayOfWeek, Workout } from '../../core/models';
-import { ExerciseService, WorkoutProgramService, WorkoutService } from '../../core/services';
+import {
+  ExerciseService,
+  ToastService,
+  WorkoutProgramService,
+  WorkoutService,
+} from '../../core/services';
 import { DAY_ORDER, DAY_SHORT, dayOfWeekFromDate } from '../../core/utils';
 
 @Component({
@@ -15,6 +20,7 @@ export class WorkoutsComponent implements OnInit {
   private readonly workoutService = inject(WorkoutService);
   private readonly programService = inject(WorkoutProgramService);
   private readonly exerciseService = inject(ExerciseService);
+  private readonly toast = inject(ToastService);
 
   readonly workouts = this.workoutService.sortedWorkouts;
   readonly program = this.programService.program;
@@ -41,9 +47,13 @@ export class WorkoutsComponent implements OnInit {
     }
 
     this.creating.set(true);
+    this.toast.showBusy('Creating workout…');
     try {
       const created = await this.workoutService.createWorkout({ name: 'New Workout' });
+      this.toast.clear();
       await this.router.navigate(['/workouts', created.id]);
+    } catch {
+      this.toast.show('Could not create workout');
     } finally {
       this.creating.set(false);
     }

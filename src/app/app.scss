@@ -82,3 +82,45 @@
   cursor: pointer;
   white-space: nowrap;
 }
+
+.app-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(#{$bottom-nav-height} + env(safe-area-inset-bottom, 0px) + #{$space-4});
+  z-index: $z-toast;
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  max-width: min(420px, calc(100vw - #{$space-8}));
+  transform: translateX(-50%);
+  padding: $space-3 $space-4;
+  border-radius: $radius-full;
+  background: $color-bg-dark;
+  color: $color-text-inverse;
+  box-shadow: $shadow-lg;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  line-height: 1.3;
+  pointer-events: none;
+}
+
+.app-shell--session .app-toast,
+.app-shell--auth .app-toast {
+  bottom: calc(env(safe-area-inset-bottom, 0px) + #{$space-5});
+}
+
+.app-toast__spinner {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: $color-text-inverse;
+  border-radius: $radius-full;
+  animation: app-toast-spin 0.7s linear infinite;
+}
+
+@keyframes app-toast-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

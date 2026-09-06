@@ -10,3 +10,4 @@ export * from './gamification.service';
 export * from './pwa.service';
 export * from './auth.service';
 export * from './sync.service';
+export * from './toast.service';

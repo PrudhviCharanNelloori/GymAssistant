@@ -7,7 +7,7 @@ import {
   type SetTarget,
   type WorkoutExercise,
 } from '../../../core/models';
-import { ExerciseService, WorkoutService } from '../../../core/services';
+import { ExerciseService, ToastService, WorkoutService } from '../../../core/services';
 import {
   createDefaultSetTargets,
   createId,
@@ -26,6 +26,7 @@ export class WorkoutExerciseConfigComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly workoutService = inject(WorkoutService);
   private readonly exerciseService = inject(ExerciseService);
+  private readonly toast = inject(ToastService);
 
   readonly formatLabel = formatEnumLabel;
   readonly setTypes = Object.values(SetType);
@@ -145,6 +146,7 @@ export class WorkoutExerciseConfigComponent implements OnInit {
     if (this.saving()) return;
     this.saving.set(true);
     this.error.set(null);
+    this.toast.showBusy('Saving…');
 
     try {
       const workout = await this.workoutService.getById(this.workoutId());
@@ -161,9 +163,11 @@ export class WorkoutExerciseConfigComponent implements OnInit {
       });
 
       await this.workoutService.setExercises(this.workoutId(), exercises);
+      this.toast.done('Exercise saved');
       await this.router.navigate(['/workouts', this.workoutId()]);
     } catch {
       this.error.set('Could not save changes');
+      this.toast.show('Could not save changes');
       this.saving.set(false);
     }
   }

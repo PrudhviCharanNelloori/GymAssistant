@@ -59,7 +59,7 @@
             @if (isSelected(exercise.id)) {
               <span class="picker__badge">Added</span>
             } @else if (addingId() === exercise.id) {
-              <span class="picker__action picker__action--busy">…</span>
+              <span class="picker__action picker__action--busy">Adding…</span>
             } @else {
               <span class="picker__action" aria-hidden="true">+</span>
             }

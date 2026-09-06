@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MuscleGroup } from '../../../core/models';
-import { ExerciseService, WorkoutService } from '../../../core/services';
+import { ExerciseService, ToastService, WorkoutService } from '../../../core/services';
 import { createWorkoutExercise } from '../../../core/utils';
 
 @Component({
@@ -14,6 +14,7 @@ export class WorkoutExercisePickerComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly exerciseService = inject(ExerciseService);
   private readonly workoutService = inject(WorkoutService);
+  private readonly toast = inject(ToastService);
 
   readonly workoutId = signal('');
   readonly searchQuery = this.exerciseService.searchQuery;
@@ -90,6 +91,7 @@ export class WorkoutExercisePickerComponent implements OnInit {
     }
 
     this.addingId.set(exerciseId);
+    this.toast.showBusy('Adding…');
     try {
       const next = [
         ...workout.exercises,
@@ -97,6 +99,9 @@ export class WorkoutExercisePickerComponent implements OnInit {
       ];
       await this.workoutService.setExercises(workoutId, next);
       this.selectedIds.update((set) => new Set([...set, exerciseId]));
+      this.toast.done(`${exercise.name} added`);
+    } catch {
+      this.toast.show('Could not add exercise');
     } finally {
       this.addingId.set(null);
     }

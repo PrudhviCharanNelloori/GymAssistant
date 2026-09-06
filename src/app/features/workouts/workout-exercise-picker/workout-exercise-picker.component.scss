@@ -162,8 +162,13 @@
   line-height: 1;
 
   &--busy {
+    width: auto;
+    min-width: 40px;
+    padding-inline: $space-3;
     background: $color-bg-muted;
     color: $color-text-secondary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
   }
 }
 

@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map, startWith } from 'rxjs';
-import { PwaService } from './core/services';
+import { PwaService, ToastService } from './core/services';
 import { BottomNavComponent } from './shared/components/bottom-nav/bottom-nav.component';
 
 @Component({
@@ -14,6 +14,7 @@ import { BottomNavComponent } from './shared/components/bottom-nav/bottom-nav.co
 export class App implements OnInit {
   private readonly router = inject(Router);
   readonly pwa = inject(PwaService);
+  readonly toast = inject(ToastService);
 
   readonly hideNav = toSignal(
     this.router.events.pipe(

@@ -6,7 +6,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import type { Exercise, Workout, WorkoutExercise } from '../../../core/models';
-import { ExerciseService, WorkoutService } from '../../../core/services';
+import { ExerciseService, ToastService, WorkoutService } from '../../../core/services';
 import { summarizeWorkoutExercise } from '../../../core/utils';
 
 @Component({
@@ -20,6 +20,7 @@ export class WorkoutEditorComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly workoutService = inject(WorkoutService);
   private readonly exerciseService = inject(ExerciseService);
+  private readonly toast = inject(ToastService);
 
   readonly workoutId = signal<string | null>(null);
   readonly name = signal('');
@@ -28,8 +29,15 @@ export class WorkoutEditorComponent implements OnInit {
   readonly exerciseMap = signal<Record<string, Exercise>>({});
   readonly loading = signal(true);
   readonly saving = signal(false);
+  readonly deleting = signal(false);
+  readonly flushing = signal(false);
   readonly error = signal<string | null>(null);
   readonly rearranging = signal(false);
+
+  private lastSavedName = '';
+  private lastSavedDescription = '';
+
+  readonly busy = computed(() => this.saving() || this.deleting() || this.flushing());
 
   readonly stats = computed(() =>
     this.workoutService.summary({
@@ -46,16 +54,19 @@ export class WorkoutEditorComponent implements OnInit {
 
     if (this.isCreateRoute()) {
       try {
+        this.toast.showBusy('Creating workout…');
         if (!this.workoutService.isLoaded()) {
           await this.workoutService.load();
         }
         const created = await this.workoutService.createWorkout({ name: 'New Workout' });
         this.hydrate(created);
         this.loading.set(false);
+        this.toast.clear();
         await this.router.navigate(['/workouts', created.id], { replaceUrl: true });
       } catch {
         this.error.set('Could not create workout');
         this.loading.set(false);
+        this.toast.show('Could not create workout');
       }
       return;
     }
@@ -91,6 +102,8 @@ export class WorkoutEditorComponent implements OnInit {
     this.workoutId.set(workout.id);
     this.name.set(workout.name);
     this.description.set(workout.description ?? '');
+    this.lastSavedName = workout.name;
+    this.lastSavedDescription = workout.description ?? '';
     this.exercises.set([...workout.exercises].sort((a, b) => a.order - b.order));
     void this.resolveExerciseNames(workout.exercises);
   }
@@ -122,6 +135,85 @@ export class WorkoutEditorComponent implements OnInit {
     this.description.set((event.target as HTMLTextAreaElement).value);
   }
 
+  async saveMetadata(options: { quiet?: boolean } = {}): Promise<boolean> {
+    const id = this.workoutId();
+    const name = this.name().trim();
+    const description = this.description().trim();
+    if (!id || !name || this.busy()) {
+      return false;
+    }
+
+    if (name === this.lastSavedName && description === this.lastSavedDescription) {
+      return true;
+    }
+
+    this.flushing.set(true);
+    if (!options.quiet) {
+      this.toast.showBusy('Saving…');
+    }
+
+    try {
+      const updated = await this.workoutService.updateWorkout(id, {
+        name,
+        description: description || undefined,
+      });
+      this.lastSavedName = updated.name;
+      this.lastSavedDescription = updated.description ?? '';
+      this.name.set(updated.name);
+      this.description.set(this.lastSavedDescription);
+      if (!options.quiet) {
+        this.toast.done('Saved');
+      }
+      return true;
+    } catch {
+      this.error.set('Could not save workout name');
+      this.toast.show('Could not save');
+      return false;
+    } finally {
+      this.flushing.set(false);
+    }
+  }
+
+  async goBack(): Promise<void> {
+    if (this.busy()) return;
+    const dirty = this.isMetadataDirty();
+    if (dirty) {
+      this.toast.showBusy('Saving…');
+    }
+    await this.saveMetadata({ quiet: true });
+    this.toast.clear();
+    await this.router.navigate(['/workouts']);
+  }
+
+  async goToAdd(): Promise<void> {
+    const id = this.workoutId();
+    if (!id || this.busy()) return;
+    if (this.isMetadataDirty()) {
+      this.toast.showBusy('Saving…');
+    }
+    await this.saveMetadata({ quiet: true });
+    this.toast.clear();
+    await this.router.navigate(['/workouts', id, 'add']);
+  }
+
+  async goToExercise(exerciseItemId: string): Promise<void> {
+    const id = this.workoutId();
+    if (!id || this.busy()) return;
+    if (this.isMetadataDirty()) {
+      this.toast.showBusy('Saving…');
+    }
+    await this.saveMetadata({ quiet: true });
+    this.toast.clear();
+    await this.router.navigate(['/workouts', id, 'exercises', exerciseItemId]);
+  }
+
+  private isMetadataDirty(): boolean {
+    return (
+      this.name().trim() !== this.lastSavedName ||
+      this.description().trim() !== this.lastSavedDescription
+    );
+  }
+
   toggleRearrange(): void {
     this.rearranging.update((value) => !value);
   }
@@ -148,18 +240,20 @@ export class WorkoutEditorComponent implements OnInit {
     this.exercises.update((list) =>
       list.filter((item) => item.id !== id).map((item, order) => ({ ...item, order })),
     );
+    this.toast.show('Exercise removed — tap Save workout');
   }
 
   async save(): Promise<void> {
     const name = this.name().trim();
     const id = this.workoutId();
-    if (!name || !id || this.saving()) {
+    if (!name || !id || this.busy()) {
       this.error.set('Name is required');
       return;
     }
 
     this.saving.set(true);
     this.error.set(null);
+    this.toast.showBusy('Saving workout…');
 
     try {
       const updated = await this.workoutService.updateWorkout(id, {
@@ -169,8 +263,10 @@ export class WorkoutEditorComponent implements OnInit {
       });
       this.hydrate(updated);
       this.rearranging.set(false);
+      this.toast.done('Workout saved');
     } catch {
       this.error.set('Could not save workout');
+      this.toast.show('Could not save workout');
     } finally {
       this.saving.set(false);
     }
@@ -178,12 +274,21 @@ export class WorkoutEditorComponent implements OnInit {
 
   async deleteWorkout(): Promise<void> {
     const id = this.workoutId();
-    if (!id) return;
+    if (!id || this.busy()) return;
 
     const confirmed = window.confirm('Delete this workout?');
     if (!confirmed) return;
 
-    await this.workoutService.deleteWorkout(id);
-    await this.router.navigate(['/workouts']);
+    this.deleting.set(true);
+    this.toast.showBusy('Deleting…');
+    try {
+      await this.workoutService.deleteWorkout(id);
+      this.toast.done('Workout deleted');
+      await this.router.navigate(['/workouts']);
+    } catch {
+      this.error.set('Could not delete workout');
+      this.toast.show('Could not delete workout');
+      this.deleting.set(false);
+    }
   }
 }

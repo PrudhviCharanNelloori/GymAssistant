@@ -1,6 +1,6 @@
 <section class="editor">
   <header class="editor__header">
-    <a routerLink="/workouts" class="editor__back" aria-label="Back">←</a>
+    <button type="button" class="editor__back" aria-label="Back" [disabled]="busy()" (click)="goBack()">←</button>
     <p class="editor__eyebrow">Edit</p>
     <h1 class="editor__title">{{ name() || 'Workout' }}</h1>
     <p class="editor__stats">
@@ -22,6 +22,7 @@
         type="text"
         [value]="name()"
         (input)="onNameInput($event)"
+        (blur)="saveMetadata()"
         placeholder="e.g. Push Day"
         maxlength="60"
       />
@@ -33,6 +34,7 @@
         rows="2"
         [value]="description()"
         (input)="onDescriptionInput($event)"
+        (blur)="saveMetadata()"
         placeholder="Optional"
       ></textarea>
     </label>
@@ -50,8 +52,15 @@
             {{ rearranging() ? 'Done' : 'Reorder' }}
           </button>
         }
-        @if (workoutId(); as id) {
-          <a class="editor__add-link" [routerLink]="['/workouts', id, 'add']">Add</a>
+        @if (workoutId()) {
+          <button
+            type="button"
+            class="editor__add-link"
+            [disabled]="busy()"
+            (click)="goToAdd()"
+          >
+            Add
+          </button>
         }
       </div>
     </div>
@@ -60,8 +69,15 @@
       <div class="editor__empty">
         <p class="editor__empty-title">No exercises yet</p>
         <p class="editor__empty-text">Add movements, then tap one to set targets.</p>
-        @if (workoutId(); as id) {
-          <a [routerLink]="['/workouts', id, 'add']" class="editor__empty-cta">Add exercise</a>
+        @if (workoutId()) {
+          <button
+            type="button"
+            class="editor__empty-cta"
+            [disabled]="busy()"
+            (click)="goToAdd()"
+          >
+            Add exercise
+          </button>
         }
       </div>
     } @else if (rearranging()) {
@@ -108,9 +124,11 @@
       <ul class="editor__list">
         @for (item of exercises(); track item.id; let i = $index; let last = $last) {
           <li [class.editor__row-wrap--last]="last">
-            <a
+            <button
+              type="button"
               class="editor__row"
-              [routerLink]="['/workouts', workoutId(), 'exercises', item.id]"
+              [disabled]="busy()"
+              (click)="goToExercise(item.id)"
             >
               <span class="editor__row-index" aria-hidden="true">{{ i + 1 }}</span>
               <span class="editor__row-body">
@@ -118,7 +136,7 @@
                 <span class="editor__row-meta">{{ exerciseMeta(item) }}</span>
               </span>
               <span class="editor__chevron" aria-hidden="true">›</span>
-            </a>
+            </button>
           </li>
         }
       </ul>
@@ -130,10 +148,22 @@
     }
 
     <div class="editor__footer">
-      <button type="button" class="editor__save" [disabled]="saving() || !name().trim()" (click)="save()">
+      <button
+        type="button"
+        class="editor__save"
+        [disabled]="busy() || !name().trim()"
+        (click)="save()"
+      >
         {{ saving() ? 'Saving…' : 'Save workout' }}
       </button>
-      <button type="button" class="editor__delete" (click)="deleteWorkout()">Delete workout</button>
+      <button
+        type="button"
+        class="editor__delete"
+        [disabled]="busy()"
+        (click)="deleteWorkout()"
+      >
+        {{ deleting() ? 'Deleting…' : 'Delete workout' }}
+      </button>
     </div>
   }
 </section>

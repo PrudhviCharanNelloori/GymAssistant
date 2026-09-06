@@ -30,4 +30,18 @@
   @if (!hideNav()) {
     <app-bottom-nav />
   }
+
+  @if (toast.text(); as message) {
+    <div
+      class="app-toast"
+      [class.app-toast--busy]="toast.isBusy()"
+      role="status"
+      aria-live="polite"
+    >
+      @if (toast.isBusy()) {
+        <span class="app-toast__spinner" aria-hidden="true"></span>
+      }
+      <span>{{ message }}</span>
+    </div>
+  }
 </div>

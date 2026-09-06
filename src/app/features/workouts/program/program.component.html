@@ -31,13 +31,17 @@
           <label class="program__day">
             <span class="program__day-name">{{ dayLabel[day] }}</span>
             <select
-              [value]="workoutIdFor(day)"
               [disabled]="savingDay() === day"
               (change)="onDayAssign(day, $event)"
             >
-              <option value="">Rest day</option>
+              <option value="" [selected]="workoutIdFor(day) === ''">Rest day</option>
               @for (workout of workouts(); track workout.id) {
-                <option [value]="workout.id">{{ workout.name }}</option>
+                <option
+                  [value]="workout.id"
+                  [selected]="workoutIdFor(day) === workout.id"
+                >
+                  {{ workout.name }}
+                </option>
               }
             </select>
           </label>
