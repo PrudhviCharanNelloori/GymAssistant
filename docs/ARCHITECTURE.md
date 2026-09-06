@@ -74,7 +74,7 @@ Derived from historical WorkoutSessions in dedicated services. No redundant prog
 
 ## Offline-First
 
-IndexedDB is the primary store for all workout data. The Angular service worker:
+IndexedDB (Dexie) is the primary store for all workout data. The Angular service worker:
 
 - Prefetches the app shell, icons, and static assets
 - Caches Google Fonts for offline typography after first load
@@ -82,9 +82,18 @@ IndexedDB is the primary store for all workout data. The Angular service worker:
 
 `PwaService` tracks online/offline state, install prompts, service-worker updates, and verifies local data readiness (default user + exercise library).
 
-## Future Sync
+## Cloud Sync (Supabase)
 
-Entities use stable string IDs. Relationships via IDs. Storage abstraction allows future backend synchronization.
+No custom API. The PWA talks to Supabase Auth + Postgres via `@supabase/supabase-js` (anon key only).
+
+- **Local-first:** Dexie remains source of truth offline; dirty rows sync when online
+- **Auth:** Email/password and Google OAuth (`AuthService`); app routes require sign-in via `authGuard`
+- **RLS:** Every cloud table scoped with `auth.uid() = user_id` (built-in exercises may be `user_id null` for shared read)
+- **Conflict:** Last-write-wins on `updated_at`
+- **Claim:** On first login, anonymous local `default-user` data is reassigned to `auth.uid()`
+- **Schema:** SQL migration in `supabase/migrations/`; configure URL + anon key in `src/environments/environment.ts`
+
+`SyncService` push/pulls exercises (custom), workouts, programs, and sessions.
 
 ## Testing Priority
 

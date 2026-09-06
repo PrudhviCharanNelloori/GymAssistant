@@ -123,6 +123,29 @@ Supports planks (duration), pull-ups (reps + assistance), running (distance + du
 
 ---
 
+## Decision: Supabase direct client + local-first sync
+
+**Date:** 2026-09-06
+
+**Status:** Accepted
+
+**Decision:**
+Use `@supabase/supabase-js` from the Angular PWA with Postgres RLS. Do not introduce a custom REST API for MVP. Keep Dexie as the offline source of truth; sync dirty rows when online. Auth supports email/password and Google OAuth.
+
+**Reason:**
+Auth, database, and RLS cover backend needs for a single-user PWA. A custom API would add hosting and duplication without security benefits beyond RLS.
+
+**Alternatives considered:**
+- Custom Nest/Express API — deferred until privileged server logic is required
+- Online-only Supabase — breaks gym offline usage
+
+**Consequences:**
+- Environment must hold URL + anon key (never service_role in the client)
+- Conflict resolution is last-write-wins on `updated_at`
+- First login claims local `default-user` data
+
+---
+
 ## Decision: GitHub remote repository
 
 **Date:** 2026-03-03

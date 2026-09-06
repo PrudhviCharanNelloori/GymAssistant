@@ -1,6 +1,7 @@
 import { WorkoutExercise } from './workout-exercise.interface';
+import type { Syncable } from './sync.interface';
 
-export interface Workout {
+export interface Workout extends Syncable {
   id: string;
   name: string;
   description?: string;

@@ -90,11 +90,13 @@
 .settings__btn {
   @include button-solid;
   width: 100%;
+  text-decoration: none;
 }
 
 .settings__btn--ghost {
   @include button-ghost;
   color: $color-text-primary;
+  text-decoration: none;
 }
 
 .settings__toast {

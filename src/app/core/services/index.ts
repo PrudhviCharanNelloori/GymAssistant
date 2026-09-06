@@ -8,3 +8,5 @@ export * from './history.service';
 export * from './progress.service';
 export * from './gamification.service';
 export * from './pwa.service';
+export * from './auth.service';
+export * from './sync.service';

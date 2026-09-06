@@ -1,0 +1,9 @@
+# Supabase local / linked project config stub.
+# Run: npx supabase init   (if regenerating) then link your project.
+# Apply migrations: npx supabase db push
+
+[project]
+id = "gym-assistant"
+
+[api]
+enabled = true

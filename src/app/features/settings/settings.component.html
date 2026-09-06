@@ -29,6 +29,42 @@
     </div>
 
     <div class="settings__card">
+      <p class="settings__card-label">Account</p>
+      @if (auth.isAuthenticated()) {
+        <p class="settings__card-value">{{ auth.user()?.email }}</p>
+        <p class="settings__card-note settings__card-note--ok">
+          @if (sync.lastSyncedAt(); as at) {
+            Last sync {{ at.toLocaleString() }}
+          } @else {
+            Not synced yet
+          }
+        </p>
+        @if (sync.lastError()) {
+          <p class="settings__card-note">{{ sync.lastError() }}</p>
+        }
+        <div class="settings__actions">
+          <button type="button" class="settings__btn" [disabled]="syncBusy() || sync.syncing()" (click)="syncNow()">
+            {{ syncBusy() || sync.syncing() ? 'Syncing…' : 'Sync now' }}
+          </button>
+          <button type="button" class="settings__btn settings__btn--ghost" (click)="signOut()">Sign out</button>
+        </div>
+      } @else {
+        <p class="settings__card-value">Signed out</p>
+        <p class="settings__card-note">
+          {{
+            auth.configured
+              ? 'Sign in to sync workouts to Supabase.'
+              : 'Add Supabase keys in environment.ts to enable cloud sync.'
+          }}
+        </p>
+        <div class="settings__actions">
+          <a routerLink="/auth/login" class="settings__btn">Sign in</a>
+          <a routerLink="/auth/signup" class="settings__btn settings__btn--ghost">Create account</a>
+        </div>
+      }
+    </div>
+
+    <div class="settings__card">
       <p class="settings__card-label">Device</p>
       <p class="settings__card-value">
         {{ pwa.online() ? 'Online' : 'Offline' }}

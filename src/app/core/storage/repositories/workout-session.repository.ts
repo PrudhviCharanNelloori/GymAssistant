@@ -29,14 +29,17 @@ export class WorkoutSessionRepository extends BaseRepository<WorkoutSession> {
   }
 
   async createSession(input: CreateWorkoutSessionInput): Promise<WorkoutSession> {
+    const now = new Date();
     return this.create({
       id: input.id ?? createId(),
       workoutId: input.workoutId,
       programId: input.programId,
-      startedAt: input.startedAt ?? new Date(),
+      startedAt: input.startedAt ?? now,
       status: input.status ?? WorkoutSessionStatus.IN_PROGRESS,
       exercises: input.exercises ?? [],
       notes: input.notes,
+      createdAt: now,
+      updatedAt: now,
     });
   }
 

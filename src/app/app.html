@@ -1,4 +1,8 @@
-<div class="app-shell" [class.app-shell--session]="hideNav()">
+<div
+  class="app-shell"
+  [class.app-shell--session]="hideNav() && !isAuthRoute()"
+  [class.app-shell--auth]="isAuthRoute()"
+>
   @if (!pwa.online()) {
     <div class="app-banner app-banner--offline" role="status">
       You’re offline — workouts still save on this device.

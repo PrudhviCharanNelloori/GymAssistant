@@ -18,6 +18,11 @@
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
+.app-shell--auth .app-shell__content {
+  max-width: none;
+  padding-bottom: 0;
+}
+
 .app-banner {
   position: sticky;
   top: 0;

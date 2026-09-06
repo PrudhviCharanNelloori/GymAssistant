@@ -69,6 +69,14 @@
 - Service worker caching strategy
 - Install prompt optimization
 
+## Phase 9b — Supabase Auth + Offline Sync ✅
+
+- Postgres schema + RLS migrations (`supabase/migrations/`)
+- Email/password auth UI and `AuthService`
+- Dexie sync fields (`userId`, `dirty`, `updatedAt`, soft delete)
+- `SyncService` push/pull, online trigger, claim local `default-user` data
+- Settings account + sync status
+
 ## Phase 10 — AI Capabilities
 
 - Structured data export for analysis

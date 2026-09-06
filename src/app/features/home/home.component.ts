@@ -3,8 +3,10 @@ import { Router, RouterLink } from '@angular/router';
 import type { Workout } from '../../core/models';
 import {
   ActiveWorkoutService,
+  AuthService,
   GamificationService,
   ProgressService,
+  SyncService,
   WorkoutProgramService,
   WorkoutService,
 } from '../../core/services';
@@ -26,6 +28,8 @@ export class HomeComponent implements OnInit {
   private readonly progressService = inject(ProgressService);
   private readonly gamification = inject(GamificationService);
   private readonly users = inject(UserRepository);
+  private readonly auth = inject(AuthService);
+  private readonly sync = inject(SyncService);
 
   readonly today = new Date().toLocaleDateString(undefined, {
     weekday: 'long',
@@ -61,10 +65,14 @@ export class HomeComponent implements OnInit {
       this.activeWorkout.hydrate(),
       this.progressService.load(),
       this.gamification.load(),
+      this.sync.ensureLocalProfile(),
     ]);
 
-    const user = await this.users.getById(DEFAULT_USER_ID);
-    const name = user?.name?.trim() || 'Athlete';
+    const userId = this.auth.userId() ?? DEFAULT_USER_ID;
+    const user = await this.users.getById(userId);
+    const name =
+      user?.name?.trim() ||
+      (this.auth.isAuthenticated() ? this.auth.displayName() : 'Athlete');
     this.userName.set(name);
     this.initials.set(initialsFrom(name));
 

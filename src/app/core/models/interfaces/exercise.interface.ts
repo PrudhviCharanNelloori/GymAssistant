@@ -1,8 +1,9 @@
 import { Equipment } from '../enums/equipment.enum';
 import { MuscleGroup } from '../enums/muscle-group.enum';
 import { TrackingMetric } from '../enums/tracking-metric.enum';
+import type { Syncable } from './sync.interface';
 
-export interface Exercise {
+export interface Exercise extends Syncable {
   id: string;
   name: string;
   description?: string;

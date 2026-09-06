@@ -16,3 +16,4 @@ export * from './interfaces/workout.interface';
 export * from './interfaces/workout-exercise.interface';
 export * from './interfaces/workout-program.interface';
 export * from './interfaces/workout-session.interface';
+export * from './interfaces/sync.interface';

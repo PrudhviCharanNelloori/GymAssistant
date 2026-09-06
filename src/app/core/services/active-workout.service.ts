@@ -15,6 +15,7 @@ import { WorkoutSessionRepository } from '../storage';
 import { createId } from '../utils';
 import { ExerciseService } from './exercise.service';
 import { RestTimerService } from './rest-timer.service';
+import { SyncService } from './sync.service';
 import { WorkoutProgramService } from './workout-program.service';
 import { WorkoutService } from './workout.service';
 
@@ -41,6 +42,7 @@ export class ActiveWorkoutService {
   private readonly programs = inject(WorkoutProgramService);
   private readonly exercises = inject(ExerciseService);
   private readonly restTimer = inject(RestTimerService);
+  private readonly sync = inject(SyncService);
 
   private readonly session = signal<WorkoutSession | null>(null);
   private readonly workout = signal<Workout | null>(null);
@@ -277,6 +279,7 @@ export class ActiveWorkoutService {
     this.restTimer.stop();
     const completed = await this.sessions.completeSession(current.id);
     this.session.set(completed);
+    this.sync.scheduleSync();
     return 'completed';
   }
 
@@ -305,6 +308,7 @@ export class ActiveWorkoutService {
     const current = this.requireSession();
     const completed = await this.sessions.completeSession(current.id);
     this.session.set(completed);
+    this.sync.scheduleSync();
     return 'completed';
   }
 
@@ -327,6 +331,7 @@ export class ActiveWorkoutService {
     const current = this.requireSession();
     const completed = await this.sessions.completeSession(current.id);
     this.session.set(completed);
+    this.sync.scheduleSync();
     return 'completed';
   }
 

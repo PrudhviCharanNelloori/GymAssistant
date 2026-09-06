@@ -1,0 +1,103 @@
+<section class="auth">
+  <header class="auth__hero">
+    <div class="auth__hero-atmosphere" aria-hidden="true">
+      <span class="auth__hero-ring auth__hero-ring--lg"></span>
+      <span class="auth__hero-ring auth__hero-ring--sm"></span>
+      <span class="auth__hero-bar"></span>
+    </div>
+    <p class="auth__brand">GymTracker</p>
+    <p class="auth__tagline">Start strong. Stay consistent.</p>
+  </header>
+
+  <div class="auth__panel">
+    <h1 class="auth__title">Create account</h1>
+    <p class="auth__subtitle">Save workouts locally and sync when you’re online.</p>
+
+    @if (!configured) {
+      <p class="auth__hint">
+        Configure Supabase keys in <code>src/environments/environment.ts</code> first.
+      </p>
+    } @else {
+      <button
+        class="auth__oauth"
+        type="button"
+        [disabled]="submitting()"
+        (click)="signInWithGoogle()"
+      >
+        <svg class="auth__oauth-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            fill="#EA4335"
+            d="M12 10.2v3.6h5.1c-.2 1.2-.9 2.2-1.9 2.9l3.1 2.4c1.8-1.7 2.8-4.1 2.8-7 0-.7-.1-1.3-.2-1.9H12z"
+          />
+          <path
+            fill="#34A853"
+            d="M6.6 14.3l-.8.6-2.5 1.9C5.1 19.5 8.3 21.6 12 21.6c2.4 0 4.4-.8 5.9-2.1l-3.1-2.4c-.8.6-1.9.9-2.8.9-2.2 0-4-1.5-4.7-3.5z"
+          />
+          <path
+            fill="#4A90E2"
+            d="M3.3 7.2C2.5 8.7 2 10.3 2 12s.5 3.3 1.3 4.8l3.3-2.5C6.2 13.4 6 12.7 6 12s.2-1.4.6-2.3L3.3 7.2z"
+          />
+          <path
+            fill="#FBBC05"
+            d="M12 5.9c1.3 0 2.5.5 3.4 1.3l2.6-2.6C16.4 2.9 14.4 2 12 2 8.3 2 5.1 4.1 3.3 7.2l3.3 2.5C8 7.4 9.8 5.9 12 5.9z"
+          />
+        </svg>
+        Continue with Google
+      </button>
+
+      <div class="auth__divider" aria-hidden="true"><span>or email</span></div>
+
+      <form class="auth__form" (ngSubmit)="submit()">
+        <label class="auth__label">
+          Name
+          <input
+            class="auth__input"
+            type="text"
+            name="name"
+            [(ngModel)]="name"
+            autocomplete="name"
+            placeholder="Your name"
+          />
+        </label>
+        <label class="auth__label">
+          Email
+          <input
+            class="auth__input"
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            required
+            autocomplete="email"
+            placeholder="you@email.com"
+          />
+        </label>
+        <label class="auth__label">
+          Password
+          <input
+            class="auth__input"
+            type="password"
+            name="password"
+            [(ngModel)]="password"
+            required
+            minlength="6"
+            autocomplete="new-password"
+            placeholder="At least 6 characters"
+          />
+        </label>
+
+        @if (error()) {
+          <p class="auth__error">{{ error() }}</p>
+        }
+
+        <button class="auth__submit" type="submit" [disabled]="submitting()">
+          {{ submitting() ? 'Creating…' : 'Create account' }}
+        </button>
+      </form>
+
+      <p class="auth__footer">
+        Already have an account?
+        <a routerLink="/auth/login">Sign in</a>
+      </p>
+    }
+  </div>
+</section>
